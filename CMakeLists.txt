@@ -7,7 +7,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Add executable target (replace main.cpp with your actual source files)
 add_executable(LatentDiffusionNLP
-    main.cpp
+    ClassicalDiT/main.cpp
+    ClassicalDiT/BetaSchedule.cpp
+    ClassicalDiT/GaussianDiffusion.cpp
+    ClassicalDiT/NormalDist.cpp
     ClassicalDiT/Diffusion_model.cpp
     # Add other source files here as needed
 )

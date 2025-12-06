@@ -1,6 +1,18 @@
 // main.cpp
 #include <iostream>
 #include <fstream>
+// Helper function to append logs to CSV
+void append_log(const std::string& filename, int epoch, double beta, double mse, double time_sec) {
+    std::ofstream log_file;
+    bool file_exists = std::ifstream(filename).good();
+
+    log_file.open(filename, std::ios::app);
+    if (!file_exists) {
+        log_file << "epoch,beta,mse,epoch_time_sec\n";
+    }
+    log_file << epoch << "," << beta << "," << mse << "," << time_sec << "\n";
+    log_file.close();
+}
 #include <sstream>
 #include <vector>
 #include <map>
@@ -17,6 +29,7 @@
 #include "NormalDist.hpp"
 #include "GaussianDiffusion.hpp"
 #include "Diffusion_model.hpp"
+#include <chrono>
 
 // =====================================================
 // --- SIMPLE BPE IMPLEMENTATION (TRAIN + TOKENIZE) ---
@@ -387,6 +400,32 @@ std::vector<double> nll_batch(const std::vector<double>& y,
     return log_probs;
 }
 
+// Mean Squared Error (mse) Helper
+double compute_mse(const std::vector<double>& predicted, const std::vector<double>& target) {
+    if (predicted.size() != target.size()) {
+        throw std::invalid_argument("Vectors must be the same size for MSE");
+    }
+    double mse = 0.0;
+    for (size_t i = 0; i < predicted.size(); ++i) {
+        double diff = predicted[i] - target[i];
+        mse += diff * diff;
+    }
+    return mse / predicted.size();
+}
+
+// Fidelity Error Reporting in Batch
+double compute_batch_mse(const std::vector<std::vector<double>>& preds,
+                        const std::vector<std::vector<double>>& targets) {
+    if (preds.size() != targets.size()) {
+        throw std::invalid_argument("Batch sizes must match");
+    }
+    double total_mse = 0.0;
+    for (size_t i = 0; i < preds.size(); ++i) {
+        total_mse += compute_mse(preds[i], targets[i]);
+    }
+    return total_mse / preds.size();
+}
+
 // =====================================================
 // ---------------------- MAIN -------------------------
 // =====================================================
@@ -522,11 +561,6 @@ int main(int argc, char** argv) {
     // ===========================
     // --- DIFFUSION TRAINING ----
     // ===========================
-    const int NUM_EPOCHS = 100;
-    const double INITIAL_BETA = 0.1;
-    const int BATCH_SIZE = 64;  // unused directly but for your batching logic if needed
-
-    BetaSchedule beta_schedule(NUM_EPOCHS, INITIAL_BETA);
 
     // Prepare training data as vector<vector<double>>
     std::vector<std::vector<double>> training_data;
@@ -554,15 +588,46 @@ int main(int argc, char** argv) {
         return params;
     };
 
+    std::string log_filename = "training_log.csv";
+
     for (int epoch = 0; epoch < NUM_EPOCHS; ++epoch) {
+        auto start = std::chrono::high_resolution_clock::now();
+
         diffusion.train(training_data, 1, nll_losses, entropy_losses, model_params, model_predict_epsilon);
+
+        // Mock prediction for MSE (replace with your real predicted batch vectors)
+        std::vector<std::vector<double>> predicted_batch = training_data; // dummy: perfect prediction
+
+        double mse = compute_batch_mse(predicted_batch, training_data);
+
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsed = end - start;
 
         beta_schedule.update(nll_losses, entropy_losses, epoch);
 
         std::cout << "Epoch " << (epoch + 1) << "/" << NUM_EPOCHS
-                  << ", Beta current: " << beta_schedule.getCurrentBeta() << std::endl;
+                  << ", Beta current: " << beta_schedule.getCurrentBeta()
+                  << ", MSE: " << mse
+                  << ", Epoch time: " << elapsed.count() << "s\n";
+
+        append_log(log_filename, epoch + 1, beta_schedule.getCurrentBeta(), mse, elapsed.count());
     }
 
+    // Run a prediction on first training sample and save to file
+    std::vector<double> sample_input = training_data[0];
+
+    // Use your model_predict_epsilon function to get predicted noise
+    std::vector<double> predicted_epsilon = model_predict_epsilon(sample_input, 0, model_params);
+
+    // Save predicted epsilon vector to a CSV file for visualization
+    std::ofstream pred_out("sample_prediction.csv");
+    pred_out << "index,value\n";
+    for (size_t i = 0; i < predicted_epsilon.size(); ++i) {
+        pred_out << i << "," << predicted_epsilon[i] << "\n";
+    }
+    pred_out.close();
+
+    std::cout << "Sample prediction saved to sample_prediction.csv\n";
+
     return 0;
-
-
+}

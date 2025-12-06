@@ -1,0 +1,700 @@
+Epoch 1:
+  Beta: 0.1
+  MSE: 4450.42
+  NLL: 1.23077e+10
+  Accuracy: 0%
+  Time: 4.12683 seconds
+
+Epoch 2:
+  Beta: 0.109
+  MSE: 13636.1
+  NLL: 1.03013e+11
+  Accuracy: 0%
+  Time: 4.1542 seconds
+
+Epoch 3:
+  Beta: 0.118
+  MSE: 26769.4
+  NLL: 1.92036e+12
+  Accuracy: 0%
+  Time: 4.01088 seconds
+
+Epoch 4:
+  Beta: 0.127
+  MSE: 45106.4
+  NLL: 2.25438e+11
+  Accuracy: 0%
+  Time: 3.98852 seconds
+
+Epoch 5:
+  Beta: 0.136
+  MSE: 68000.4
+  NLL: 1.3537e+13
+  Accuracy: 0%
+  Time: 3.98764 seconds
+
+Epoch 6:
+  Beta: 0.145
+  MSE: 98845.5
+  NLL: 3.12502e+15
+  Accuracy: 0%
+  Time: 4.00094 seconds
+
+Epoch 7:
+  Beta: 0.154
+  MSE: 136316
+  NLL: 1.64365e+12
+  Accuracy: 0%
+  Time: 3.98577 seconds
+
+Epoch 8:
+  Beta: 0.163
+  MSE: 186722
+  NLL: 5.8143e+12
+  Accuracy: 0%
+  Time: 4.00175 seconds
+
+Epoch 9:
+  Beta: 0.172
+  MSE: 256671
+  NLL: 1.96666e+13
+  Accuracy: 0%
+  Time: 3.99582 seconds
+
+Epoch 10:
+  Beta: 0.181
+  MSE: 330244
+  NLL: 6.01162e+12
+  Accuracy: 0%
+  Time: 3.99745 seconds
+
+Epoch 11:
+  Beta: 0.19
+  MSE: 413349
+  NLL: 4.21138e+12
+  Accuracy: 0%
+  Time: 3.99522 seconds
+
+Epoch 12:
+  Beta: 0.199
+  MSE: 512122
+  NLL: 2.7789e+13
+  Accuracy: 0%
+  Time: 4.00431 seconds
+
+Epoch 13:
+  Beta: 0.208
+  MSE: 633139
+  NLL: 5.32401e+12
+  Accuracy: 0%
+  Time: 4.00265 seconds
+
+Epoch 14:
+  Beta: 0.217
+  MSE: 773153
+  NLL: 2.59838e+13
+  Accuracy: 0%
+  Time: 4.00783 seconds
+
+Epoch 15:
+  Beta: 0.226
+  MSE: 929521
+  NLL: 2.32341e+13
+  Accuracy: 0%
+  Time: 3.99978 seconds
+
+Epoch 16:
+  Beta: 0.235
+  MSE: 1.10762e+06
+  NLL: 3.58429e+13
+  Accuracy: 0%
+  Time: 4.00611 seconds
+
+Epoch 17:
+  Beta: 0.244
+  MSE: 1.3079e+06
+  NLL: 4.64681e+14
+  Accuracy: 0%
+  Time: 4.0136 seconds
+
+Epoch 18:
+  Beta: 0.253
+  MSE: 1.52766e+06
+  NLL: 2.10475e+14
+  Accuracy: 0%
+  Time: 4.01112 seconds
+
+Epoch 19:
+  Beta: 0.262
+  MSE: 1.77329e+06
+  NLL: 7.39926e+13
+  Accuracy: 0%
+  Time: 4.00326 seconds
+
+Epoch 20:
+  Beta: 0.271
+  MSE: 2.04703e+06
+  NLL: 2.72286e+12
+  Accuracy: 0%
+  Time: 4.0144 seconds
+
+Epoch 21:
+  Beta: 0.28
+  MSE: 2.35396e+06
+  NLL: 1.81347e+13
+  Accuracy: 0%
+  Time: 4.01231 seconds
+
+Epoch 22:
+  Beta: 0.289
+  MSE: 2.70127e+06
+  NLL: 1.9602e+13
+  Accuracy: 0%
+  Time: 4.01909 seconds
+
+Epoch 23:
+  Beta: 0.298
+  MSE: 3.07292e+06
+  NLL: 3.75477e+14
+  Accuracy: 0%
+  Time: 4.0215 seconds
+
+Epoch 24:
+  Beta: 0.307
+  MSE: 3.48326e+06
+  NLL: 2.98107e+13
+  Accuracy: 0%
+  Time: 4.02746 seconds
+
+Epoch 25:
+  Beta: 0.316
+  MSE: 3.92655e+06
+  NLL: 1.0473e+13
+  Accuracy: 0%
+  Time: 4.01752 seconds
+
+Epoch 26:
+  Beta: 0.325
+  MSE: 4.40711e+06
+  NLL: 1.46971e+13
+  Accuracy: 0%
+  Time: 4.03161 seconds
+
+Epoch 27:
+  Beta: 0.334
+  MSE: 4.92601e+06
+  NLL: 6.46958e+14
+  Accuracy: 0%
+  Time: 4.02417 seconds
+
+Epoch 28:
+  Beta: 0.343
+  MSE: 5.47951e+06
+  NLL: 2.30013e+13
+  Accuracy: 0%
+  Time: 4.03445 seconds
+
+Epoch 29:
+  Beta: 0.352
+  MSE: 6.07389e+06
+  NLL: 2.13205e+13
+  Accuracy: 0%
+  Time: 4.02929 seconds
+
+Epoch 30:
+  Beta: 0.361
+  MSE: 6.69741e+06
+  NLL: 1.17601e+13
+  Accuracy: 0%
+  Time: 4.04503 seconds
+
+Epoch 31:
+  Beta: 0.37
+  MSE: 7.36024e+06
+  NLL: 4.70185e+12
+  Accuracy: 0%
+  Time: 4.03671 seconds
+
+Epoch 32:
+  Beta: 0.379
+  MSE: 8.05974e+06
+  NLL: 6.76793e+13
+  Accuracy: 0%
+  Time: 4.04938 seconds
+
+Epoch 33:
+  Beta: 0.388
+  MSE: 8.797e+06
+  NLL: 4.27073e+12
+  Accuracy: 0%
+  Time: 4.03933 seconds
+
+Epoch 34:
+  Beta: 0.397
+  MSE: 9.57526e+06
+  NLL: 1.49908e+14
+  Accuracy: 0%
+  Time: 4.04316 seconds
+
+Epoch 35:
+  Beta: 0.406
+  MSE: 1.03969e+07
+  NLL: 3.3656e+13
+  Accuracy: 0%
+  Time: 4.04084 seconds
+
+Epoch 36:
+  Beta: 0.415
+  MSE: 1.12627e+07
+  NLL: 5.40734e+12
+  Accuracy: 0%
+  Time: 4.051 seconds
+
+Epoch 37:
+  Beta: 0.424
+  MSE: 1.21833e+07
+  NLL: 2.01622e+13
+  Accuracy: 0%
+  Time: 4.04132 seconds
+
+Epoch 38:
+  Beta: 0.433
+  MSE: 1.3134e+07
+  NLL: 1.14899e+17
+  Accuracy: 0%
+  Time: 4.0521 seconds
+
+Epoch 39:
+  Beta: 0.442
+  MSE: 1.4126e+07
+  NLL: 1.06626e+14
+  Accuracy: 0%
+  Time: 4.0461 seconds
+
+Epoch 40:
+  Beta: 0.451
+  MSE: 1.51474e+07
+  NLL: 6.44616e+14
+  Accuracy: 0%
+  Time: 4.05284 seconds
+
+Epoch 41:
+  Beta: 0.46
+  MSE: 1.62142e+07
+  NLL: 1.9558e+14
+  Accuracy: 0%
+  Time: 4.0494 seconds
+
+Epoch 42:
+  Beta: 0.469
+  MSE: 1.73313e+07
+  NLL: 1.62341e+13
+  Accuracy: 0%
+  Time: 4.06003 seconds
+
+Epoch 43:
+  Beta: 0.478
+  MSE: 1.84948e+07
+  NLL: 3.42737e+13
+  Accuracy: 0%
+  Time: 4.05009 seconds
+
+Epoch 44:
+  Beta: 0.487
+  MSE: 1.96984e+07
+  NLL: 5.51173e+13
+  Accuracy: 0%
+  Time: 4.0583 seconds
+
+Epoch 45:
+  Beta: 0.496
+  MSE: 2.0944e+07
+  NLL: 5.96649e+13
+  Accuracy: 0%
+  Time: 4.05828 seconds
+
+Epoch 46:
+  Beta: 0.505
+  MSE: 2.22423e+07
+  NLL: 6.79293e+13
+  Accuracy: 0%
+  Time: 4.05788 seconds
+
+Epoch 47:
+  Beta: 0.514
+  MSE: 2.35629e+07
+  NLL: 1.74036e+15
+  Accuracy: 0%
+  Time: 4.05593 seconds
+
+Epoch 48:
+  Beta: 0.523
+  MSE: 2.4934e+07
+  NLL: 2.91065e+13
+  Accuracy: 0%
+  Time: 4.05881 seconds
+
+Epoch 49:
+  Beta: 0.532
+  MSE: 2.63559e+07
+  NLL: 9.50159e+15
+  Accuracy: 0%
+  Time: 4.0477 seconds
+
+Epoch 50:
+  Beta: 0.541
+  MSE: 2.78159e+07
+  NLL: 2.10062e+13
+  Accuracy: 0%
+  Time: 4.07147 seconds
+
+Epoch 51:
+  Beta: 0.55
+  MSE: 2.93057e+07
+  NLL: 7.70013e+13
+  Accuracy: 0%
+  Time: 4.05465 seconds
+
+Epoch 52:
+  Beta: 0.559
+  MSE: 3.08381e+07
+  NLL: 8.34002e+13
+  Accuracy: 0%
+  Time: 4.06572 seconds
+
+Epoch 53:
+  Beta: 0.568
+  MSE: 3.24158e+07
+  NLL: 8.98191e+14
+  Accuracy: 0%
+  Time: 4.05901 seconds
+
+Epoch 54:
+  Beta: 0.577
+  MSE: 3.40192e+07
+  NLL: 4.17983e+13
+  Accuracy: 0%
+  Time: 4.06368 seconds
+
+Epoch 55:
+  Beta: 0.586
+  MSE: 3.56618e+07
+  NLL: 8.88208e+13
+  Accuracy: 0%
+  Time: 4.04908 seconds
+
+Epoch 56:
+  Beta: 0.595
+  MSE: 3.73575e+07
+  NLL: 4.00027e+13
+  Accuracy: 0%
+  Time: 4.05854 seconds
+
+Epoch 57:
+  Beta: 0.604
+  MSE: 3.91039e+07
+  NLL: 1.57078e+13
+  Accuracy: 0%
+  Time: 4.0528 seconds
+
+Epoch 58:
+  Beta: 0.613
+  MSE: 4.08803e+07
+  NLL: 2.16214e+14
+  Accuracy: 0%
+  Time: 4.05308 seconds
+
+Epoch 59:
+  Beta: 0.622
+  MSE: 4.26967e+07
+  NLL: 7.78357e+13
+  Accuracy: 0%
+  Time: 4.04798 seconds
+
+Epoch 60:
+  Beta: 0.631
+  MSE: 4.45721e+07
+  NLL: 3.60962e+13
+  Accuracy: 0%
+  Time: 4.04892 seconds
+
+Epoch 61:
+  Beta: 0.64
+  MSE: 4.6504e+07
+  NLL: 2.10893e+14
+  Accuracy: 0%
+  Time: 4.04266 seconds
+
+Epoch 62:
+  Beta: 0.649
+  MSE: 4.84735e+07
+  NLL: 1.67385e+13
+  Accuracy: 0%
+  Time: 4.04741 seconds
+
+Epoch 63:
+  Beta: 0.658
+  MSE: 5.04692e+07
+  NLL: 3.12865e+13
+  Accuracy: 0%
+  Time: 4.04036 seconds
+
+Epoch 64:
+  Beta: 0.667
+  MSE: 5.25102e+07
+  NLL: 2.25898e+14
+  Accuracy: 0%
+  Time: 4.04376 seconds
+
+Epoch 65:
+  Beta: 0.676
+  MSE: 5.45916e+07
+  NLL: 4.51291e+15
+  Accuracy: 0%
+  Time: 4.03932 seconds
+
+Epoch 66:
+  Beta: 0.685
+  MSE: 5.67204e+07
+  NLL: 1.53342e+13
+  Accuracy: 0%
+  Time: 4.04635 seconds
+
+Epoch 67:
+  Beta: 0.694
+  MSE: 5.88966e+07
+  NLL: 5.17314e+13
+  Accuracy: 0%
+  Time: 4.02906 seconds
+
+Epoch 68:
+  Beta: 0.703
+  MSE: 6.11119e+07
+  NLL: 2.36427e+14
+  Accuracy: 0%
+  Time: 4.04257 seconds
+
+Epoch 69:
+  Beta: 0.712
+  MSE: 6.33859e+07
+  NLL: 1.22302e+17
+  Accuracy: 0%
+  Time: 4.03474 seconds
+
+Epoch 70:
+  Beta: 0.721
+  MSE: 6.57127e+07
+  NLL: 4.87008e+13
+  Accuracy: 0%
+  Time: 4.03538 seconds
+
+Epoch 71:
+  Beta: 0.73
+  MSE: 6.80691e+07
+  NLL: 2.1016e+15
+  Accuracy: 0%
+  Time: 4.03417 seconds
+
+Epoch 72:
+  Beta: 0.739
+  MSE: 7.04772e+07
+  NLL: 1.22122e+15
+  Accuracy: 0%
+  Time: 4.03697 seconds
+
+Epoch 73:
+  Beta: 0.748
+  MSE: 7.29216e+07
+  NLL: 8.07482e+13
+  Accuracy: 0%
+  Time: 4.02943 seconds
+
+Epoch 74:
+  Beta: 0.757
+  MSE: 7.54085e+07
+  NLL: 2.7735e+14
+  Accuracy: 0%
+  Time: 4.0362 seconds
+
+Epoch 75:
+  Beta: 0.766
+  MSE: 7.79239e+07
+  NLL: 4.85278e+13
+  Accuracy: 0%
+  Time: 4.03226 seconds
+
+Epoch 76:
+  Beta: 0.775
+  MSE: 8.04718e+07
+  NLL: 1.49217e+14
+  Accuracy: 0%
+  Time: 4.03097 seconds
+
+Epoch 77:
+  Beta: 0.784
+  MSE: 8.30715e+07
+  NLL: 3.32128e+15
+  Accuracy: 0%
+  Time: 4.02837 seconds
+
+Epoch 78:
+  Beta: 0.793
+  MSE: 8.57077e+07
+  NLL: 2.17957e+14
+  Accuracy: 0%
+  Time: 4.03623 seconds
+
+Epoch 79:
+  Beta: 0.802
+  MSE: 8.83921e+07
+  NLL: 1.67835e+14
+  Accuracy: 0%
+  Time: 4.02729 seconds
+
+Epoch 80:
+  Beta: 0.811
+  MSE: 9.11236e+07
+  NLL: 5.00685e+13
+  Accuracy: 0%
+  Time: 4.03506 seconds
+
+Epoch 81:
+  Beta: 0.82
+  MSE: 9.38893e+07
+  NLL: 5.73786e+14
+  Accuracy: 0%
+  Time: 4.03214 seconds
+
+Epoch 82:
+  Beta: 0.829
+  MSE: 9.67078e+07
+  NLL: 5.13599e+13
+  Accuracy: 0%
+  Time: 4.03184 seconds
+
+Epoch 83:
+  Beta: 0.838
+  MSE: 9.95804e+07
+  NLL: 1.6577e+15
+  Accuracy: 0%
+  Time: 4.03612 seconds
+
+Epoch 84:
+  Beta: 0.847
+  MSE: 1.02479e+08
+  NLL: 3.48702e+13
+  Accuracy: 0%
+  Time: 4.03697 seconds
+
+Epoch 85:
+  Beta: 0.856
+  MSE: 1.05404e+08
+  NLL: 4.76564e+14
+  Accuracy: 0%
+  Time: 4.02609 seconds
+
+Epoch 86:
+  Beta: 0.865
+  MSE: 1.08395e+08
+  NLL: 2.7196e+16
+  Accuracy: 0%
+  Time: 4.03343 seconds
+
+Epoch 87:
+  Beta: 0.874
+  MSE: 1.11448e+08
+  NLL: 1.35644e+15
+  Accuracy: 0%
+  Time: 4.03354 seconds
+
+Epoch 88:
+  Beta: 0.883
+  MSE: 1.14529e+08
+  NLL: 3.26849e+14
+  Accuracy: 0%
+  Time: 4.03536 seconds
+
+Epoch 89:
+  Beta: 0.892
+  MSE: 1.17657e+08
+  NLL: 2.0946e+14
+  Accuracy: 0%
+  Time: 4.02819 seconds
+
+Epoch 90:
+  Beta: 0.901
+  MSE: 1.20805e+08
+  NLL: 5.37147e+13
+  Accuracy: 0%
+  Time: 4.03579 seconds
+
+Epoch 91:
+  Beta: 0.91
+  MSE: 1.24e+08
+  NLL: 3.05616e+13
+  Accuracy: 0%
+  Time: 4.02984 seconds
+
+Epoch 92:
+  Beta: 0.919
+  MSE: 1.27237e+08
+  NLL: 1.12765e+15
+  Accuracy: 0%
+  Time: 4.03962 seconds
+
+Epoch 93:
+  Beta: 0.928
+  MSE: 1.3051e+08
+  NLL: 4.92287e+14
+  Accuracy: 0%
+  Time: 4.03014 seconds
+
+Epoch 94:
+  Beta: 0.937
+  MSE: 1.3385e+08
+  NLL: 3.23459e+14
+  Accuracy: 0%
+  Time: 4.03826 seconds
+
+Epoch 95:
+  Beta: 0.946
+  MSE: 1.37222e+08
+  NLL: 9.45753e+13
+  Accuracy: 0%
+  Time: 4.03287 seconds
+
+Epoch 96:
+  Beta: 0.955
+  MSE: 1.40656e+08
+  NLL: 4.21483e+13
+  Accuracy: 0%
+  Time: 4.04138 seconds
+
+Epoch 97:
+  Beta: 0.964
+  MSE: 1.44127e+08
+  NLL: 2.70858e+14
+  Accuracy: 0%
+  Time: 4.02862 seconds
+
+Epoch 98:
+  Beta: 0.973
+  MSE: 1.47618e+08
+  NLL: 2.91688e+14
+  Accuracy: 0%
+  Time: 4.04098 seconds
+
+Epoch 99:
+  Beta: 0.982
+  MSE: 1.5115e+08
+  NLL: 1.69648e+15
+  Accuracy: 0%
+  Time: 4.0295 seconds
+
+Epoch 100:
+  Beta: 0.991
+  MSE: 1.54704e+08
+  NLL: 1.16165e+15
+  Accuracy: 0%
+  Time: 4.04336 seconds
+

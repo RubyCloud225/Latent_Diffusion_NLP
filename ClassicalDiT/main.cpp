@@ -1,18 +1,6 @@
 // main.cpp
 #include <iostream>
 #include <fstream>
-// Helper function to append logs to CSV
-void append_log(const std::string& filename, int epoch, double beta, double mse, double time_sec) {
-    std::ofstream log_file;
-    bool file_exists = std::ifstream(filename).good();
-
-    log_file.open(filename, std::ios::app);
-    if (!file_exists) {
-        log_file << "epoch,beta,mse,epoch_time_sec\n";
-    }
-    log_file << epoch << "," << beta << "," << mse << "," << time_sec << "\n";
-    log_file.close();
-}
 #include <sstream>
 #include <vector>
 #include <map>
@@ -426,6 +414,57 @@ double compute_batch_mse(const std::vector<std::vector<double>>& preds,
     return total_mse / preds.size();
 }
 
+// Helper function to append logs to a human-readable TXT file
+void append_log_txt(const std::string& filename, int epoch, double beta, double mse, double nll, double accuracy, double time_sec) {
+    std::ofstream log_file(filename, std::ios::app);
+    if (!log_file) {
+        std::cerr << "Failed to open log file: " << filename << std::endl;
+        return;
+    }
+    log_file << "Epoch " << epoch << ":\n";
+    log_file << "  Beta: " << beta << "\n";
+    log_file << "  MSE: " << mse << "\n";
+    log_file << "  NLL: " << nll << "\n";
+    log_file << "  Accuracy: " << accuracy << "%\n";
+    log_file << "  Time: " << time_sec << " seconds\n\n";
+    log_file.close();
+}
+
+// predict epsilion noise for the whole batch at timestep
+std::vector<std::vector<double>> predict_batch(
+    const std::vector<std::vector<double>>& batch, 
+    int t, 
+    const std::vector<double>& model_params, 
+    std::function<std::vector<double>(const std::vector<double>&, 
+    int, 
+    const std::vector<double>&)> predict_fn
+) {
+    std::vector<std::vector<double>> preds;
+    for (const auto& sample : batch) {
+        preds.push_back(predict_fn(sample, t, model_params));
+    }
+    return preds;
+}
+
+double compute_accuracy(
+    const std::vector<std::vector<double>>& predicted,
+    const std::vector<std::vector<double>>& target,
+    double threshold = 0.1
+) {
+    size_t total = 0;
+    size_t correct = 0;
+    for (size_t i = 0; i < predicted.size(); ++i) {
+        for (size_t j = 0; j < predicted[i].size(); ++j) {  // <-- fix here
+            total++;
+            if (std::abs(predicted[i][j] - target[i][j]) < threshold) {
+                correct++;
+            }
+        }
+    }
+    return total > 0 ? (100.0 * correct / total) : 0.0;
+}
+
+
 // =====================================================
 // ---------------------- MAIN -------------------------
 // =====================================================
@@ -588,29 +627,42 @@ int main(int argc, char** argv) {
         return params;
     };
 
-    std::string log_filename = "training_log.csv";
+    std::string log_filename = "training_log.txt";
 
     for (int epoch = 0; epoch < NUM_EPOCHS; ++epoch) {
-        auto start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::high_resolution_clock::now();
 
-        diffusion.train(training_data, 1, nll_losses, entropy_losses, model_params, model_predict_epsilon);
+    diffusion.train(training_data, 1, nll_losses, entropy_losses, model_params, model_predict_epsilon);
 
-        // Mock prediction for MSE (replace with your real predicted batch vectors)
-        std::vector<std::vector<double>> predicted_batch = training_data; // dummy: perfect prediction
+    // Compute mean NLL
+    double mean_nll = 0.0;
+    if (!nll_losses.empty()) {
+        mean_nll = std::accumulate(nll_losses.begin(), nll_losses.end(), 0.0) / nll_losses.size();
+    }
 
-        double mse = compute_batch_mse(predicted_batch, training_data);
+    // Predict batch epsilon/noise at current timestep (you can set t = epoch or fixed timestep)
+    int current_t = 0; // or epoch or any timestep you want
+    std::vector<std::vector<double>> predicted_batch = predict_batch(training_data, current_t, model_params, model_predict_epsilon);
 
-        auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> elapsed = end - start;
+    // Compute MSE between predicted and ground truth
+    double mse = compute_batch_mse(predicted_batch, training_data);
 
-        beta_schedule.update(nll_losses, entropy_losses, epoch);
+    // Compute accuracy
+    double accuracy = compute_accuracy(predicted_batch, training_data, 0.1);  // threshold 0.1
 
-        std::cout << "Epoch " << (epoch + 1) << "/" << NUM_EPOCHS
-                  << ", Beta current: " << beta_schedule.getCurrentBeta()
-                  << ", MSE: " << mse
-                  << ", Epoch time: " << elapsed.count() << "s\n";
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = end - start;
 
-        append_log(log_filename, epoch + 1, beta_schedule.getCurrentBeta(), mse, elapsed.count());
+    beta_schedule.update(nll_losses, entropy_losses, epoch);
+
+    std::cout << "Epoch " << (epoch + 1) << "/" << NUM_EPOCHS
+              << ", Beta current: " << beta_schedule.getCurrentBeta()
+              << ", MSE: " << mse
+              << ", NLL: " << mean_nll
+              << ", Accuracy: " << accuracy << "%"
+              << ", Epoch time: " << elapsed.count() << "s\n";
+
+    append_log_txt("Logs_Results/training_log.txt", epoch + 1, beta_schedule.getCurrentBeta(), mse, mean_nll, accuracy, elapsed.count());
     }
 
     // Run a prediction on first training sample and save to file
@@ -620,7 +672,7 @@ int main(int argc, char** argv) {
     std::vector<double> predicted_epsilon = model_predict_epsilon(sample_input, 0, model_params);
 
     // Save predicted epsilon vector to a CSV file for visualization
-    std::ofstream pred_out("sample_prediction.csv");
+    std::ofstream pred_out("Logs_Results/sample_prediction.csv");
     pred_out << "index,value\n";
     for (size_t i = 0; i < predicted_epsilon.size(); ++i) {
         pred_out << i << "," << predicted_epsilon[i] << "\n";

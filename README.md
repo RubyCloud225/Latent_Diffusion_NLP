@@ -1,114 +1,61 @@
-# Latent Diffusion NLP
+# Latent Diffusion NLP: Clifford-Optimized Generative Modeling (C++)
 
-A high-performance latent diffusion pipeline for natural language processing tasks, combining tokenization, embedding, compression, and advanced diffusion-based generative modeling. This project demonstrates a full end-to-end approach from raw text data through learned latent representations to probabilistic diffusion training and compression.
-
----
-
-## Overview
-
-This project implements a modern latent diffusion framework designed to:
-
-- Tokenize raw textual data with a **Byte-Pair Encoding (BPE)** tokenizer.
-- Embed tokens into dense vector representations.
-- Compress embeddings using **Clifford Algebra-based compression** followed by **Huffman coding** for efficient storage.
-- Train a **Gaussian diffusion model** to learn noise-aware latent representations with adaptive noise scheduling.
-- Use a **BetaSchedule** to dynamically control noise parameters across training epochs, balancing reconstruction and noise regularization.
-- Model noise predictions through a neural network embedded in the diffusion framework.
-- Leverage probabilistic modeling via the **normal distribution** for likelihood-based training and gradient estimation.
+A high-performance latent diffusion pipeline for natural language processing, combining tokenization, geometric embedding compression, and CNN-based noise prediction. This project demonstrates an end-to-end approach optimized for hardware efficiency.
 
 ---
 
-## Architecture
+## Execution Logic: `Main.cpp`
+
+The core of the framework is orchestrated in `Main.cpp`, which manages the lifecycle of the latent representations through four distinct phases:
 
 ### 1. Tokenization & Embedding
+The pipeline begins by processing raw text into a compact vocabulary using a custom **BPE Tokenizer**. Tokens are then mapped into a 64-dimensional latent space:
+- **Learned Embeddings:** Hash-based dense vector initialization.
+- **Clifford Compression:** Embeddings are projected into a Clifford Manifold $C\ell_{p,q}(\mathbb{R})$ to retain multilinear relationships at a reduced memory footprint.
 
-The input raw text is first tokenized using a **simple BPE tokenizer**, merging common character pairs to create a compact vocabulary.  
-Each token is embedded into a 64-dimensional vector space through a **learned embedding layer** that hashes tokens to dense vectors.
+### 2. Gaussian Diffusion Process
+The forward diffusion process gradually injects Gaussian noise into the latent embeddings according to the variance schedule $\beta_t$:
 
-### 2. Clifford Compression & Huffman Coding
+$$x_t = \sqrt{1 - \beta_t} x_{t-1} + \sqrt{\beta_t} \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)$$
 
-Token embeddings are compressed into multivectors via a novel **Clifford algebra compression** technique, retaining geometric properties in a compact form.  
-The compressed data is serialized and further compressed using a **Huffman encoding** scheme to reduce storage size while maintaining lossless fidelity.
 
-### 3. Gaussian Diffusion Model
 
-A **Gaussian Diffusion** process is applied in latent space, gradually adding Gaussian noise to latent embeddings over a sequence of timesteps.
+### 3. CNN $\epsilon$-Prediction Network
+Instead of a standard MLP, a **Convolutional Neural Network (CNN)** is utilized to predict the added noise $\epsilon$. This captures the local spatial dependencies of the token sequence:
+- **Objective:** Minimize the Negative Log-Likelihood (NLL) of the noise distribution.
+- **Optimization:** Gradients are computed via the `NormalDist` module to update the CNN kernels.
 
-\[
-x_t = \sqrt{1 - \beta_t} x_{t-1} + \sqrt{\beta_t} \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
-\]
+$$\mathcal{L} = -\log p_\theta(y \mid \mu, \sigma) = \frac{1}{2} \left( \frac{y - \mu}{\sigma} \right)^2 + \log(\sigma) + \frac{1}{2} \log(2\pi)$$
 
-The reverse denoising process learns to predict the noise \(\epsilon\) added at each step, enabling reconstruction of clean latent embeddings from noisy inputs.
 
-### 4. Beta Schedule
 
-A **BetaSchedule** dynamically updates the noise variance \(\beta_t\) during training epochs using loss statistics:
+### 4. Adaptive BetaSchedule & Training Loop
+The `Main.cpp` training loop utilizes a dynamic **BetaSchedule** that anneals the noise variance based on epoch progress and loss statistics:
 
-\[
-\beta_{epoch} = \beta_0 \left(1 - \frac{epoch}{total\_epochs}\right) + \frac{epoch}{total\_epochs}
-\]
+$$\beta_{epoch} = \beta_0 \left(1 - \frac{epoch}{T}\right) + \frac{epoch}{T}$$
 
-This annealing balances noise injection and reconstruction fidelity.
+The reverse diffusion estimate $\mu_{t-1}$ is then used to reconstruct clean latent states:
 
-### 5. Noise Prediction Network
-
-A neural network predicts the noise component \(\epsilon\) given a noisy latent vector and timestep. The network is trained to minimize the negative log likelihood under a normal distribution:
-
-\[
-\mathcal{L} = -\log p_\theta(y \mid \mu, \sigma) = -\log \mathcal{N}(y; \mu, \sigma^2)
-\]
-
-where \(\mu\) and \(\sigma\) are derived from the model’s predictions and diffusion schedule.
-
-### 6. Training Loop
-
-Training iterates over epochs, applying the forward diffusion and noise prediction. Losses computed via the **NormalDist** module are used to update the BetaSchedule. Model parameters are optimized with an **Adam optimizer**.
+$$\mu_{t-1} = \frac{x_t - \beta_t \epsilon_\theta(x_t, t)}{\sqrt{1 - \beta_t}}$$
 
 ---
 
-## Key Mathematical Components
-
-### Normal Distribution Log Probability
-
-\[
-\log p(y \mid \mu, \sigma) = -\frac{1}{2} \left( \frac{y - \mu}{\sigma} \right)^2 - \log(\sigma) - \frac{1}{2} \log(2\pi)
-\]
-
-### Gradient Computation for Training
-
-Gradients with respect to \(y, \mu, \sigma\) guide model parameter updates through backpropagation.
-
-### Forward Diffusion Step
-
-\[
-x_t = x_{t-1} + \mathcal{N}\left(0, \beta_t I\right)
-\]
-
-### Reverse Diffusion Mean Estimate
-
-\[
-\mu_{t-1} = \frac{x_t - \beta_t \epsilon_\theta(x_t, t)}{\sqrt{1 - \beta_t}}
-\]
-
----
-
-## Architectural Diagrams
-
-### Overall Pipeline
+## Overall Pipeline Architecture
 
 ```mermaid
 graph TD
-    A[Raw Text Dataset]
-    B[BPE Tokenizer]
-    C[Embedding Layer]
-    D[Clifford Compression]
-    E[Huffman Coding]
-    F[Compressed Dataset Storage]
-    G[Gaussian Diffusion Training]
-    H[Noise Prediction Neural Network]
-    I[Beta Schedule]
-    J[Model Parameters & Adam Optimizer]
-    K[Trained Diffusion Model]
+    A[Raw Text Dataset] --> B[BPE Tokenizer]
+    B --> C[Embedding Layer]
+    C --> D[Clifford Compression]
+    D --> E[Huffman Coding]
+    E --> F[Compressed Dataset Storage]
+    F --> G[Gaussian Diffusion Training]
+    G --> H[CNN Noise Prediction Network]
+    H --> J[Model Parameters & Adam Optimizer]
+    J --> G
+    G --> I[Beta Schedule]
+    I --> G
+    G --> K[Trained Diffusion Model]
 
     A --> B --> C --> D --> E --> F
     F --> G
@@ -143,7 +90,7 @@ graph LR
     BetaEnd --> Beta_t
     Losses --> Beta_t
     Beta_t --> Epoch
-
+```
 ## Usage
 
 Build and run the project using CMake. Supply a text dataset file and specify an output file for compressed Huffman encoded embeddings. Training runs for a configurable number of epochs with beta scheduling dynamically adjusting noise levels.

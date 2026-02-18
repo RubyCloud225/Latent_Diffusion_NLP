@@ -67,17 +67,18 @@ graph LR
 ````
 ```mermaid
 graph LR
-    Epoch[Epoch]
-    BetaStart[\u03B2_0]
-    BetaEnd[1.0]
-    Beta_t[\u03B2_{epoch}]
-    Losses[NLL, Entropy Loss]
+    X_prev[x t-1] --> |Add noise| X_t[x t]
+    Beta_t[Noise Variance Beta_t] --> X_t
+    Noise[Epsilon ~ N,0,I] --> X_t
+    X_t --> |Predict Eps_theta| PredictedEps[Predicted Noise]
+    PredictedEps --> |Reverse mean Mu t-1| X_recon[x t-1 reconstructed]
 ````
 ```mermaid
-    Epoch --> Beta_t
-    BetaStart --> Beta_t
-    BetaEnd --> Beta_t
-    Losses --> Beta_t
+graph LR
+    Epoch[Epoch] --> Beta_t[Beta_epoch]
+    BetaStart[Beta_0] --> Beta_t
+    BetaEnd[1.0] --> Beta_t
+    Losses[NLL / Entropy Loss] --> Beta_t
     Beta_t --> Epoch
 `````
 ## Usage

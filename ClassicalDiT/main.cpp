@@ -1,4 +1,19 @@
 // main.cpp
+
+/**
+ * @file main.cpp
+ * @brief System Entry Point & Pipeline Orchestrator.
+ * * This file facilitates the end-to-end execution of the Latent Diffusion NLP pipeline.
+ * It manages the integration of BPE-tokenized text, Clifford-manifold embeddings, 
+ * and the Gaussian Diffusion training loop.
+ *
+ * EXECUTION WORKFLOW:
+ * 1. Data Ingestion: Loading and compressing tokenized text sequences.
+ * 2. Model Initialization: Bootstrapping the CNN Epsilon-Predictor and Adam Optimizer.
+ * 3. Training Loop: Iterative Likelihood Maximization via the Forward/Reverse SDE.
+ * 4. Inference/Sampling: Generating reconstructed latents from pure Gaussian noise.
+ */
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -18,6 +33,14 @@
 #include "GaussianDiffusion.hpp"
 #include "Diffusion_model.hpp"
 #include <chrono>
+
+/**
+ * @brief Component Initialization.
+ * * Configures the latent space dimensions (Input/Output sizes) to match the 
+ * Clifford-compressed embedding vectors.
+ * * Sets up the hyper-parameters for the Diffusion Schedule ($\beta_{start}, \beta_{end}$) 
+ * and the Optimizer learning rate.
+ */
 
 // =====================================================
 // --- SIMPLE BPE IMPLEMENTATION (TRAIN + TOKENIZE) ---
@@ -619,14 +642,26 @@ int main(int argc, char** argv) {
 
     std::vector<double> nll_losses;
     std::vector<double> entropy_losses;
-
+    /**
+     * @brief Component Initialization.
+     * * Configures the latent space dimensions (Input/Output sizes) to match the 
+     * Clifford-compressed embedding vectors.
+     * * Sets up the hyper-parameters for the Diffusion Schedule ($\beta_{start}, \beta_{end}$) 
+     * and the Optimizer learning rate.
+     */
     // Define model epsilon prediction lambda for train function
     auto model_predict_epsilon = [](const std::vector<double>& x_t, int t, const std::vector<double>& params) -> std::vector<double> {
         // TODO: Replace with your real model prediction logic
         // For now, dummy prediction: just return params as epsilon prediction vector
         return params;
     };
-
+    /**
+     * @brief Pipeline Execution: Inference Phase.
+     * * Post-training, the main loop executes a reverse diffusion sampling pass.
+     * * Starts with a standard normal distribution $\mathcal{N}(0, I)$ and 
+     * iteratively applies the learned transition kernels to synthesize 
+     * new latent sequences.
+     */
     std::string log_filename = "training_log.txt";
 
     for (int epoch = 0; epoch < NUM_EPOCHS; ++epoch) {

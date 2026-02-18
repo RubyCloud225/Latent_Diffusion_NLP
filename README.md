@@ -86,7 +86,7 @@ graph LR
     BetaEnd --> Beta_t
     Losses --> Beta_t
     Beta_t --> Epoch
-```
+`````
 ## Usage
 
 Build and run the project using CMake. Supply a text dataset file and specify an output file for compressed Huffman encoded embeddings. Training runs for a configurable number of epochs with beta scheduling dynamically adjusting noise levels.

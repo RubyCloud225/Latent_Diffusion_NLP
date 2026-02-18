@@ -1,5 +1,17 @@
 #include "BetaSchedule.hpp"
 
+/**
+ * @file BetaSchedule.cpp
+ * @brief Dynamic Variance Controller for Gaussian Diffusion.
+ * * This module manages the noise variance schedule (β_t), which governs the 
+ * rate of entropy injection during the forward diffusion process. 
+ * * DESIGN RATIONALE:
+ * Proper noise scheduling is the key to balancing the "Exploration vs. Reconstruction" 
+ * trade-off. This implementation allows for adaptive annealing, ensuring that 
+ * the model focuses on coarse-grained features in early epochs and fine-grained 
+ * structural details in later stages.
+ */
+
 //Constructor
 BetaSchedule::BetaSchedule(int total_epochs, double initial_beta) : total_epochs_(total_epochs), initial_beta_(initial_beta), current_beta_(initial_beta) {}
 

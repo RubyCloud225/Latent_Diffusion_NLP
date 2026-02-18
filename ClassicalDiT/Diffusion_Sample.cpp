@@ -5,8 +5,32 @@
 #include <unordered_map>
 #include <algorithm>
 
+/**
+ * @file Diffusion_Sample.cpp
+ * @brief Ancestral Sampling Engine for Latent Reconstruction.
+ * * This module implements the reverse diffusion probability $p_\theta(x_{t-1} | x_t)$ 
+ * using direct buffer manipulation. It facilitates the transition from pure Gaussian 
+ * noise back to the structured Clifford-space manifold.
+ * * DESIGN RATIONALE:
+ * - Direct Buffer Arithmetic: Operates on flattened `std::vector` to minimize pointer indirection.
+ * - Thread-Local RNG: Utilizes `std::random_device` per-sample to ensure statistical independence.
+ * - Hardware Agnostic: Validation for 'cpu' and 'gpu' targets, optimized for contiguous cache access.
+ */
+
+
 DiffusionSample::DiffusionSample(DiffusionModel& model, const std::vector<double>& noise_schedule)
     : model_(model), noise_schedule_(noise_schedule), generator_(std::random_device{}()), normal_dist_(0.0, 1.0) {}
+
+/**
+ * @brief Performs a complete reverse diffusion trajectory for a batch.
+ * @param shape Tensor dimensions [Batch, Channels, Height, Width].
+ * @param clip_denoised Boolean flag to enforce $x \in [-1, 1]$ stability.
+ * @param denoised_fn Functional hook for external manifold correction.
+ * * MATH:
+ * Iteratively samples $x_{t-1} \sim p_\theta(x_{t-1} | x_t)$:
+ * $$x_{t-1} = \mu_\theta(x_t, t) + \sigma_t \cdot \epsilon$$
+ * where $\epsilon \sim \mathcal{N}(0, I)$.
+ */
 
 std::vector<std::vector<double> > DiffusionSample::p_sample(
     const std::vector<int>& shape,
@@ -27,7 +51,7 @@ std::vector<std::vector<double> > DiffusionSample::p_sample(
             model_.compute_mean_variance(x_t, t, mean, variance);
             for (size_t i = 0; i < x_t.size(); ++i) {
                 double noise = thread_normal_dist(thread_generator) * std::sqrt(variance[i]);
-                x_t[i] = mean[i] + noise;
+                x_t[i] = mean[i] + noise; // x_t[i] = mean[i] + (z * sqrt(variance[i]))
             }
         }
 
@@ -44,6 +68,17 @@ std::vector<std::vector<double> > DiffusionSample::p_sample(
     }
     return samples;
 }
+
+/**
+ * @brief Generates samples with metadata preservation for progressive analysis.
+ * * Implements rigorous error checking for N-dimensional shape validation and 
+ * device-specific constraints.
+ * * TECHNICAL INNOVATIONS:
+ * - Dynamic Variance Weighting: Applies $\sqrt{\text{variance}[i]}$ scaling to 
+ * Gaussian noise to satisfy the Langevin dynamics of the denoising process.
+ * - Manifold Clipping: Prevents numerical divergence in deep latent spaces 
+ * via a deterministic `clamp` operation.
+ */
 
 std::vector<std::unordered_map<std::string, std::vector<double>>> DiffusionSample::p_sample_loop_progressive(
     const std::vector<int>& shape,

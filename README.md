@@ -37,22 +37,14 @@ $$\mu_{t-1} = \frac{x_t - \beta_t \epsilon_\theta(x_t, t)}{\sqrt{1 - \beta_t}}$$
 ---
 
 ## Architecture Flow
+### 1. High-Performance Tokenization & Geometric Embedding
+The pipeline initiates with a custom-engineered preprocessing layer designed for hardware-aware efficiency:
 
-```mermaid
-graph TD
-    A[Raw Text Dataset] --> B[BPE Tokenizer]
-    B --> C[Embedding Layer]
-    C --> D[Clifford Compression]
-    D --> E[Huffman Coding]
-    E --> F[Compressed Dataset Storage]
-    F --> G[Gaussian Diffusion Training]
-    G --> H[CNN Noise Prediction Network]
-    H --> J[Model Parameters & Adam Optimizer]
-    J --> G
-    G --> I[Beta Schedule]
-    I --> G
-    G --> K[Trained Diffusion Model]
-````
+- **Adaptive BPE Tokenizer:** A from-scratch Byte-Pair Encoding implementation that optimizes vocabulary entropy. Unlike standard libraries, this is designed for minimal overhead during the C++ inference lifecycle.
+- **Clifford Algebra-Based Compression ($C\ell_{p,q}$):** Token embeddings are projected into a Clifford Manifold. By utilizing the geometric product:
+  $$uv = u \cdot v + u \wedge v$$
+  we preserve the multilinear and rotational relationships between tokens. This allows for a **geometric representation** that retains high-dimensional semantic integrity at a significantly reduced parameter count compared to traditional Euclidean embeddings.
+- **Deterministic Hashing:** Dense vector initialization uses a deterministic hashing scheme to ensure consistent latent mapping across distributed silicon clusters.
 ```mermaid
 graph LR
     X_prev[x t-1] --> |Add noise| X_t[x t]

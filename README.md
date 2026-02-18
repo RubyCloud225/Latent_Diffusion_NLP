@@ -53,7 +53,7 @@ graph TD
     I --> G
     G --> K[Trained Diffusion Model]
 ````
-```
+```mermaid
 graph LR
     X_{t-1}[x_{t-1}]
     Beta_t[Noise Variance \u03B2_t]
@@ -65,15 +65,15 @@ graph LR
     X_t --> |Predict \u03B5_\u03B8(x_t,t)| PredictedEps
     PredictedEps --> |Reverse mean \u03BC_{t-1}| X_{t-1}'
 ````
-```
+```mermaid
 graph LR
     Epoch[Epoch]
     BetaStart[\u03B2_0]
     BetaEnd[1.0]
     Beta_t[\u03B2_{epoch}]
     Losses[NLL, Entropy Loss]
-```
-```
+````
+```mermaid
     Epoch --> Beta_t
     BetaStart --> Beta_t
     BetaEnd --> Beta_t

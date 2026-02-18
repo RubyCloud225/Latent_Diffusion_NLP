@@ -1,6 +1,20 @@
 #include "NeuralNetwork.hpp"
 #include <iostream>
 
+/**
+ * @file NeuralNetwork.cpp
+ * @brief Core Neural Engine for the Latent Diffusion Pipeline.
+ * * This module provides the structural backbone for the noise prediction network.
+ * It implements a modular architecture allowing for the stacking of linear, 
+ * convolutional, and normalization layers while maintaining a centralized 
+ * parameter registry for optimization.
+ * * KEY DESIGN FEATURES:
+ * - Deterministic Parameter Initialization: Uses He-initialization for deep ReLU networks.
+ * - Efficient Backprop: Manual gradient accumulation and DAG-based weight updates.
+ * - Hardware-Centric: Optimized memory layout for contiguous weight access.
+ */
+
+
 // Constructor
 NeuralNetwork::NeuralNetwork() {
     // You can initialize any parameters or settings here if needed

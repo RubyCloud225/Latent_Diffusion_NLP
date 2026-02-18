@@ -52,7 +52,6 @@ graph TD
     G --> I[Beta Schedule]
     I --> G
     G --> K[Trained Diffusion Model]
-
     A --> B --> C --> D --> E --> F
     F --> G
     G --> H
@@ -61,19 +60,16 @@ graph TD
     G --> I
     I --> G
     G --> K
-
 graph LR
     X_{t-1}[x_{t-1}]
     Beta_t[Noise Variance \u03B2_t]
     Noise[\u03B5 \sim \mathcal{N}(0,I)]
     X_t[x_t]
-
     X_{t-1} --> |Add noise| X_t
     Beta_t --> X_t
     Noise --> X_t
     X_t --> |Predict \u03B5_\u03B8(x_t,t)| PredictedEps
     PredictedEps --> |Reverse mean \u03BC_{t-1}| X_{t-1}'
-
 graph LR
     Epoch[Epoch]
     BetaStart[\u03B2_0]

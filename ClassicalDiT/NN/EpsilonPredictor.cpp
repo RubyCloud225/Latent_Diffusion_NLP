@@ -1,6 +1,17 @@
 #include "EpsilonPredictor.hpp"
 #include <vector>
 
+/**
+ * @file EpsilonPredictor.cpp
+ * @brief CNN-based Noise Prediction Kernel for Latent Diffusion.
+ * * This module implements the epsilon-prediction network (ε-theta) using 
+ * convolutional layers to extract spatial dependencies from token embeddings.
+ * * DESIGN RATIONALE:
+ * Unlike standard Transformer-based noise predictors, this CNN implementation
+ * offers O(N) complexity relative to sequence length and maintains 
+ * high-frequency spatial features crucial for reconstructing compressed 
+ * Clifford-space manifolds.
+ */
 
 EpsilonPredictor::EpsilonPredictor(int input_channels, int output_size) {
     // Constructor left empty to avoid persistent nn_ member causing thread safety issues

@@ -120,6 +120,15 @@ Build and run the project using CMake. Supply a text dataset file and specify an
 chmod +x build_and_run.sh
 ./build_and_run.sh input_data.txt output_compressed.huff
 ```
+## Citation & Acknowledgement
+
+This repository represents original research and engineering work developed independently from first principles. if this codebase, architecture, or any of its components, including CNN epsilon predictor, adaptive beta schedule, Clifford manifold, compression, zero dependency diffusion pipeline, or thresholding, influences your research, product, or implementation, please cite or acknowledge this work. 
+
+### Suggested acknowledgement 
+
+```txt
+This work references or was informed by the Latent Diffusion NLP architecture developed by Catherine Earl (github.com/RubyCloud225/Latent_Diffusion_NLP, 2026).
+```
 
 ⸻
 Catherine Earl

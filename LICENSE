@@ -1,21 +1,23 @@
-MIT License
+Creative Commons Attribution-NonCommercial 4.0 International License
 
-Copyright (c) 2025 Catherine Earl
+Copyright (c) 2026 Catherine Earl
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
+You are free to share and adapt this work for non-commercial purposes, provided appropriate credit is given. Commercial use of this work, in whole or in part, requires explicit written permission from the author.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+© 2026 Catherine Earl. All rights reserved for commercial use.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+
+ADDITIONAL NOTICE — ORIGINAL AUTHORSHIP AND DEVELOPMENT LINEAGE
+This repository represents original independent research by Catherine Earl, developed from first principles as foundational work in the development of quantum hybrid inference methodology subsequently implemented under OmniHenos Ltd (2023–present).
+The Clifford algebra compression pipeline, zero-dependency C++ diffusion architecture, custom Adam optimiser implementation, BPE tokenisation pipeline, and Gaussian diffusion training loop contained herein constitute original research work predating and informing proprietary systems under active IP protection.
+Timestamped authorship is established via GitHub commit history and development documentation. This repository forms part of a documented research lineage connecting classical diffusion methodology to quantum hybrid inference architecture.
+Unauthorised commercial use, reproduction, or appropriation of this framework, its architecture, or its methodology — in whole or in part — without explicit written permission from the author will be pursued.
+
+COMMERCIAL LICENSING
+For commercial licensing enquiries please contact:
+Catherine Earl
+catherineearl8@gmail.com
+
+Full license text available at:
+https://creativecommons.org/licenses/by-nc/4.0/legalcode

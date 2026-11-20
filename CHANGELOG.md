@@ -12,10 +12,11 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
-### NN.1.07B local regression report (20 November 2026, source verification pending)
+### NN.1.07B deterministic initialisation (20 November 2026, CPU validated)
 
 - User reports full CPU test suite PASS (18/18), versus the previous 17/17 baseline.
-- The proposed initialisation header, implementation and test files were not present on the GitHub default branch when checked. This is recorded as user-reported local evidence only; no repository implementation sign-off or Doxygen/Release/Metal validation is claimed.
+- Verified the pushed `latent/nn/training/Initialisation.hpp`, `src/nn/training/Initialisation.cpp`, `tests/nn/test_initialisation.cpp` and CMake registration on the GitHub default branch. The core implementation is CPU validated; Doxygen/Release/Metal/clean-clone checks remain unverified.
+- Follow-up: remove redundant direct compilation of `Initialisation.cpp` in the test target (already included in `latent_core`); retain reproducibility metadata integration with the NN.1.07E lifecycle as a separate ticket.
 
 
 ### NN.1.07A TrainingPolicy C++17 implementation (20 November 2026, CPU regression validated)

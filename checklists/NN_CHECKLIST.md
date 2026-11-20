@@ -88,16 +88,17 @@ gradient and optimiser tests.
 
 #### NN.1.07A — Training policy specification and schema (first)
 - [x] Document proposed training system architecture, model boundaries, geometric metric and lifecycle (design only; [architecture](../docs/TRAINING_ARCHITECTURE.md)).
-- [x] Implement versioned `TrainingPolicy` schema and validation rules (NN.1.07A; local tests pending).
+- [x] Implement versioned `TrainingPolicy` schema and validation rules (NN.1.07A; CPU regression passed 17/17).
 - [ ] Specify objectives for autoencoder reconstruction versus diffusion epsilon prediction, with distinct training and validation metrics.
 - [ ] Specify dataset manifests, provenance, train/validation/test isolation, preprocessing, deterministic shuffling and random seeds.
 - [ ] Specify optimisation policy: FP64 precision, AdamFP64 hyperparameters, schedules, accumulation steps, invalid-step rejection and stopping limits.
 - [ ] Specify explicit independent modes for gradient constraints (`none`, `euclidean`, `metric_radial`) and optimiser-update constraints (`none`, `trust_region`); default to disabled until reviewed.
 - [ ] Specify run logging, checkpoint contents, resume guarantees, failure recovery and promotion/acceptance criteria; record code revision and policy version.
-- [ ] Confirm on-device `nn_training_policy` parser/serialization/invalid-config regression, documented defaults and optional Doxygen generation (test and API committed; sign-off pending).
+- [x] Confirm user-reported 17/17 full CPU regression including `nn_training_policy` parser/serialization/invalid-config tests (20 November 2026).
+- [ ] Confirm optional Doxygen generation separately (not included in regression evidence).
 - [ ] Review and approve policy **before** introducing training execution or geometric clipping.
 
-**Implementation evidence (pending validation):** `latent/nn/training/TrainingPolicy.hpp`, `src/nn/training/TrainingPolicy.cpp`, `tests/nn/test_training_policy.cpp`, and CMake registration added on 20 November 2026. Configuration only: no trainer, geometric clipping or checkpoint I/O has been implemented. NN, P0 and full CPU test suites must pass before NN.1.07A sign-off.
+**Implementation evidence (CPU regression validated; full policy scope remains open):** `latent/nn/training/TrainingPolicy.hpp`, `src/nn/training/TrainingPolicy.cpp`, `tests/nn/test_training_policy.cpp`, and CMake registration added on 20 November 2026. Configuration only: no trainer, geometric clipping or checkpoint I/O has been implemented. User reports full CPU regression PASS 17/17; individual NN/P0 suite counts and Doxygen generation not separately supplied. Broader policy features still unchecked above require separate design/implementation, including update-constraint selection and complete runtime/checkpoint requirements.
 
 **Exit:** A reviewed, testable training-policy contract independent of any particular dataset or model architecture.
 

@@ -72,18 +72,20 @@ tests are required under P0.6–P0.9. The `latent_core` target has since been de
 
 ## P0.6 — Noise Schedule
 
-- [ ] Implement linear schedule configuration
-- [ ] Validate timestep count
-- [ ] Validate beta range
-- [ ] Validate beta start/end ordering
-- [ ] Precompute beta values
-- [ ] Precompute alpha values
-- [ ] Precompute cumulative alpha-bar values
-- [ ] Precompute `sqrt(alpha_bar)`
-- [ ] Precompute `sqrt(1 - alpha_bar)`
-- [ ] Add timestep bounds validation
-- [ ] Add finite-value validation
-- [ ] Add NoiseSchedule unit tests
+- [x] Implement linear schedule configuration
+- [x] Validate timestep count
+- [x] Validate beta range
+- [x] Validate beta start/end ordering
+- [x] Precompute beta values
+- [x] Precompute alpha values
+- [x] Precompute cumulative alpha-bar values
+- [x] Precompute `sqrt(alpha_bar)`
+- [x] Precompute `sqrt(1 - alpha_bar)`
+- [x] Add timestep bounds validation
+- [x] Add finite-value validation
+- [x] Add NoiseSchedule unit tests
+
+**Validation (20 November 2026, macOS, Debug):** user-reported `bash scripts/test.sh --p0` PASS (5/5; 0.41 s) and `bash scripts/test.sh --all` PASS (6/6; 0.03 s). Production noise-schedule header, implementation, unit tests, and CMake registration verified on GitHub. Release, Metal and clean-clone not validated.
 
 ## P0.7 — Forward Diffusion
 

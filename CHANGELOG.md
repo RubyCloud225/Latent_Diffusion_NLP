@@ -12,6 +12,12 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### NN.1.01 Layer and Parameter interfaces (20 November 2026)
+
+- Verified production FP64 `Layer` and `Parameter` interfaces, test-only ScaleLayer coverage, `test_nn_layer` CMake registration (`nn;core`) and `scripts/test.sh --nn` support on GitHub.
+- User confirmed macOS Debug CPU results: `bash scripts/test.sh --nn` PASS, `--p0` PASS and `--all` PASS. Exact counts and timings not supplied for this run; no Release or Metal validation claimed.
+- Signed off the Layer interface and parameter/gradient/zero-grad interfaces only. NN.1 Conv2D, Linear, activation, optimiser integration and full training remain pending.
+
 ### Documentation workflow and contributor guidance (20 November 2026)
 
 - Added `scripts/run_documentation.sh` for optional Doxygen generation in isolated `build-docs/` with `--open`, `--help`, and `DOCS_BUILD_DIR` override.

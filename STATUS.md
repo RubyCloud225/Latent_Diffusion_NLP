@@ -42,6 +42,7 @@ Productionisation has now begun.
 
 ## Neural-network foundation
 
+- [x] NN.1.03A: FP64 ReLU forward/backward, shape and validation tests. User confirms NN/P0/full CPU regression suites passed (20 November 2026); Doxygen generation separately unverified.
 - [x] NN.1.01: FP64 Layer/Parameter interfaces, gradient accumulation and zero-grad, with a test-only ScaleLayer.
 - [x] NN.1.01 user-confirmed macOS CPU Debug `--nn`, `--p0` and `--all` tests passed (20 November 2026); exact counts and timings not supplied.
 - [x] NN.1.02 FP64 Linear Layer: rank-1/batched forward, backward and finite-difference gradient checks; user-reported NN, P0 and full CPU regression suites passed (20 November 2026).

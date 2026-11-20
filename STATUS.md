@@ -42,6 +42,7 @@ Productionisation has now begun.
 
 ## Neural-network foundation
 
+- [x] NN.1.06: Production AdamFP64 optimiser with deterministic updates, atomic failure validation, reset, parameter integration; user confirms full CPU suite PASS (16/16, 20 November 2026).
 - [x] NN.1.05: Conv2D input/weight/bias backpropagation, finite-difference gradients, batched accumulation and zero_grad() validated in user-reported NN/P0/full CPU test runs (20 November 2026).
 - [x] NN.1.04 FP64 NCHW Conv2D forward, stride/padding/channel/batch validation and corrected header name; user confirms NN/P0/full CPU suites passed (20 November 2026).
 - [x] NN.1.03C: ReLU/SiLU central finite-difference gradients, boundary conditions, shape and cache validation. User-reported full CPU regression PASS (13/13, 20 November 2026).
@@ -50,7 +51,7 @@ Productionisation has now begun.
 - [x] NN.1.01: FP64 Layer/Parameter interfaces, gradient accumulation and zero-grad, with a test-only ScaleLayer.
 - [x] NN.1.01 user-confirmed macOS CPU Debug `--nn`, `--p0` and `--all` tests passed (20 November 2026); exact counts and timings not supplied.
 - [x] NN.1.02 FP64 Linear Layer: rank-1/batched forward, backward and finite-difference gradient checks; user-reported NN, P0 and full CPU regression suites passed (20 November 2026).
-- [ ] NN.1 FP64 Adam optimisation (NN.1.06) and reproducible trainable network validation remain pending. Doxygen, Release and Metal separately unverified.
+- [ ] NN.1.07 deterministic parameter initialisation, gradient clipping and reproducible training-loss validation remain pending. Doxygen, Release and Metal separately unverified.
 
 ## NLP preprocessing
 

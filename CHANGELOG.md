@@ -12,6 +12,12 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### NN.1.07B local regression report (20 November 2026, source verification pending)
+
+- User reports full CPU test suite PASS (18/18), versus the previous 17/17 baseline.
+- The proposed initialisation header, implementation and test files were not present on the GitHub default branch when checked. This is recorded as user-reported local evidence only; no repository implementation sign-off or Doxygen/Release/Metal validation is claimed.
+
+
 ### NN.1.07A TrainingPolicy C++17 implementation (20 November 2026, CPU regression validated)
 
 - Added Doxygen-documented `TrainingPolicy` typed schema under `latent/nn/training/` with explicit reconstruction/epsilon objectives, provenance identifiers, deterministic batching, AdamFP64 settings and optional geometric control identifier.

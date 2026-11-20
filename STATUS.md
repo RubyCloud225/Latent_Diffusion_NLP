@@ -36,7 +36,9 @@ Productionisation has now begun.
 
 - [x] P0.4 contiguous FP64 Tensor, shape/rank management, checked indexing, fill, shape comparison, and finite-value validation.
 - [x] P0.4 unit tests and CPU Debug regression (3/3 P0, 4/4 full).
-- [ ] Seeded RNG and validated production diffusion mathematics (P0.5 onward).
+- [x] P0.5 deterministic seeded RNG, P0.6 validated noise schedule, and P0.7 forward `q_sample` with explicit noise, shape/numerical validation and deterministic results.
+- [x] macOS Debug CPU P0.7 validation: 6/6 P0 and 7/7 full suite passed (20 November 2026).
+- [ ] P0.8 reverse diffusion mathematics and P0.9 sampler remain outstanding.
 
 ## NLP preprocessing
 

@@ -103,6 +103,8 @@ gradient and optimiser tests.
 **Exit:** A reviewed, testable training-policy contract independent of any particular dataset or model architecture.
 
 #### NN.1.07B — Deterministic parameter initialisation
+**Local validation reported (20 November 2026):** User confirms full CPU regression PASS (18/18), one test beyond NN.1.07A's 17/17 baseline. The proposed NN.1.07B header, source and test were not present on the GitHub default branch when checked; repository implementation and test contents cannot yet be signed off. Doxygen, Release and Metal checks are separately unverified.
+
 - [ ] Define seeded FP64 initialisers appropriate for Linear and Conv2D (fan-in/fan-out, explicit biases) with nonzero symmetry-breaking weights.
 - [ ] Validate reproducibility, expected tensor shapes, finiteness, layer-by-layer seed handling and statistical sanity checks.
 - [ ] Record the initialisation scheme and RNG state in run/checkpoint metadata.

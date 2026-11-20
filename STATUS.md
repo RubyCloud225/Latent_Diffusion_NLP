@@ -26,10 +26,17 @@ Productionisation has now begun.
 
 ## Build
 
+- [x] Production `latent_core` target builds with FP64 Tensor; macOS Debug P0 tests 3/3 and full CPU tests 4/4 passed on 20 November 2026.
 - [x] CMake build exists.
 - [x] C++17 configuration exists.
 - [x] Main executable can be compiled.
 - [x] Shell build/run helper exists.
+
+## Production numerical core
+
+- [x] P0.4 contiguous FP64 Tensor, shape/rank management, checked indexing, fill, shape comparison, and finite-value validation.
+- [x] P0.4 unit tests and CPU Debug regression (3/3 P0, 4/4 full).
+- [ ] Seeded RNG and validated production diffusion mathematics (P0.5 onward).
 
 ## NLP preprocessing
 

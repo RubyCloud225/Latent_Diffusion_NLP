@@ -17,7 +17,7 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 - Implemented `GaussianDiffusion::q_sample` in the production `latent_core` library using P0.6 precomputed cumulative-alpha square-root coefficients and caller-supplied noise.
 - Added timestep bounds, exact-shape and finite-value checks; rejects non-finite results; preserves input and noise Tensors.
 - Added `forward_diffusion` CTest target labelled `p0;diffusion`, with known-answer, zero-noise, zero-input, shape, determinism, boundary and invalid-input tests.
-- CPU compilation and test execution **pending**: run `bash scripts/test.sh --p0` and `bash scripts/test.sh --all` on macOS before signing off P0.7.
+- macOS Debug CPU validation (20 November 2026), user-provided output: `bash scripts/test.sh --p0` PASS (6/6, 0.53 s); `bash scripts/test.sh --all` PASS (7/7, 0.03 s), including the new forward-diffusion test and Clifford regression. Release, Metal and clean-clone remain unverified.
 
 ### P0.6 Noise Schedule validation (20 November 2026)
 

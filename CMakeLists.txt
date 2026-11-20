@@ -24,6 +24,15 @@ if(BUILD_TESTING)
         ${PROJECT_SOURCE_DIR}/latent
     )
     add_test(NAME fp16 COMMAND test_fp16)
+    set_tests_properties(fp16 PROPERTIES LABELS "p0;core")
+
+    # P0.3: reference fixture and runner only. The production diffusion API
+    # is implemented and tested in P0.6-P0.9.
+    add_executable(test_diffusion_harness
+        tests/diffusion/test_diffusion_harness.cpp
+    )
+    add_test(NAME diffusion_harness COMMAND test_diffusion_harness)
+    set_tests_properties(diffusion_harness PROPERTIES LABELS "p0;diffusion")
 
     add_executable(test_clifford_projection
         tests/experimental/test_clifford_projection.cpp
@@ -32,6 +41,7 @@ if(BUILD_TESTING)
         latent_experimental
     )
     add_test(NAME clifford_projection COMMAND test_clifford_projection)
+    set_tests_properties(clifford_projection PROPERTIES LABELS "experimental")
 endif()
 
 option(BUILD_METAL_TESTS "Build tests requiring the Xcode Metal Toolchain" ${APPLE})
@@ -97,4 +107,5 @@ if(APPLE AND BUILD_TESTING AND BUILD_METAL_TESTS)
     add_test(NAME clifford_projection_metal
         COMMAND test_clifford_projection_metal
     )
+    set_tests_properties(clifford_projection_metal PROPERTIES LABELS "experimental;metal")
 endif()

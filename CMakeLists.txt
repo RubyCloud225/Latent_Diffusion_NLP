@@ -7,17 +7,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(CTest)
 
+# P0.4: the production Tensor implementation belongs to latent_core,
+# not to the isolated experimental Clifford library.
+add_library(latent_core STATIC
+    src/core/Tensor.cpp
+)
+target_include_directories(latent_core PUBLIC
+    ${PROJECT_SOURCE_DIR}
+)
+target_compile_features(latent_core PUBLIC cxx_std_17)
+
 add_library(latent_experimental STATIC
     src/experimental/CliffordProjection.cpp
     src/nn/Adam.cpp
-    src/core/Tensor.cpp
 )
-
 target_include_directories(latent_experimental PUBLIC
     ${PROJECT_SOURCE_DIR}/latent
 )
-
-target_compile_features(latent_core PUBLIC cxx_std_17)
 target_compile_features(latent_experimental PUBLIC cxx_std_17)
 
 if(BUILD_TESTING)
@@ -47,20 +53,13 @@ if(BUILD_TESTING)
     add_test(NAME clifford_projection COMMAND test_clifford_projection)
     set_tests_properties(clifford_projection PROPERTIES LABELS "experimental")
 
-    # P0.4 — Production Tensor tests.
-add_executable(test_tensor
-    tests/core/test_tensor.cpp
-)
-
-target_link_libraries(test_tensor PRIVATE
-    latent_core
-)
-
-add_test(NAME tensor COMMAND test_tensor)
-
-set_tests_properties(tensor PROPERTIES
-    LABELS "p0;core"
-)
+    # P0.4: validate the production Tensor through the core library.
+    add_executable(test_tensor
+        tests/core/test_tensor.cpp
+    )
+    target_link_libraries(test_tensor PRIVATE latent_core)
+    add_test(NAME tensor COMMAND test_tensor)
+    set_tests_properties(tensor PROPERTIES LABELS "p0;core")
 
 endif()
 

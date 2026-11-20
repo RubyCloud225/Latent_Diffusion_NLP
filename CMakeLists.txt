@@ -18,6 +18,7 @@ add_library(latent_core STATIC
     src/nn/Activation.cpp
     src/nn/Conv2D.cpp
     src/nn/AdamFP64.cpp
+    src/nn/training/TrainingPolicy.cpp
 )
 target_include_directories(latent_core PUBLIC
     ${PROJECT_SOURCE_DIR}
@@ -226,6 +227,15 @@ if(BUILD_TESTING)
         nn_adam_fp64
         PROPERTIES LABELS "nn"
     )
+
+
+    # NN.1.07A — Versioned FP64 training policy.
+    add_executable(test_nn_training_policy
+        tests/nn/test_training_policy.cpp
+    )
+    target_link_libraries(test_nn_training_policy PRIVATE latent_core)
+    add_test(NAME nn_training_policy COMMAND test_nn_training_policy)
+    set_tests_properties(nn_training_policy PROPERTIES LABELS "nn")
 
 endif()
 

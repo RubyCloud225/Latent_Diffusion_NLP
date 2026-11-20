@@ -12,6 +12,14 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### NN.1.06 AdamFP64 production optimiser (20 November 2026, CPU validated)
+
+- Verified new `latent/nn/AdamFP64.hpp`, `src/nn/AdamFP64.cpp`, and `tests/nn/test_adam_fp64.cpp` integrated with `latent_core` and registered as `nn_adam_fp64` in CMake.
+- Production FP64 Adam uses non-owning `Parameter*` registration, bias-corrected moments and staged, validated updates. Existing experimental FP32 Adam remains separately maintained.
+- Tests cover first/multiple update steps, deterministic replay, multiple tensors, reset, zero-grad, bad inputs, atomic failed-step recovery and Linear integration.
+- User reports 16/16 full CPU suite PASS. Exact test logs/timings, Doxygen generation, Release, Metal and clean-clone results were not supplied.
+
+
 ### NN.1.05 Conv2D backward (20 November 2026, CPU tests passed)
 
 - Verified committed NCHW FP64 backward propagation for input, kernel and bias gradients, cached forward input, and accumulation into production Parameters.

@@ -36,25 +36,26 @@
 **Validation (20 November 2026, macOS, Debug):** `bash scripts/test.sh --p0` PASS (2/2, 0.27 s); `bash scripts/test.sh --all` PASS (3/3, 0.13 s). Metal excluded owing to missing optional Metal toolchain.
 `diffusion_harness` tests reference fixtures and test-runner wiring only; it
 does not test an implementation of forward/reverse diffusion. Production API
-tests are required under P0.6–P0.9. The P0.2 `latent_core` checklist entry
-also requires reconciliation with the currently committed root CMake file.
+tests are required under P0.6–P0.9. The `latent_core` target has since been defined under P0.4; P0.2's older record predates that correction.
 
 ## P0.4 — Tensor
 
-- [ ] Implement Tensor constructor
-- [ ] Implement contiguous storage
-- [ ] Implement shape storage
-- [ ] Implement rank
-- [ ] Implement total size calculation
-- [ ] Implement mutable indexing
-- [ ] Implement const indexing
-- [ ] Implement bounds validation
-- [ ] Implement raw data access
-- [ ] Implement fill operation
-- [ ] Implement shape comparison
-- [ ] Implement finite-value validation
-- [ ] Reject invalid dimensions
-- [ ] Add Tensor unit tests
+- [x] Implement Tensor constructor
+- [x] Implement contiguous storage
+- [x] Implement shape storage
+- [x] Implement rank
+- [x] Implement total size calculation
+- [x] Implement mutable indexing
+- [x] Implement const indexing
+- [x] Implement bounds validation
+- [x] Implement raw data access
+- [x] Implement fill operation
+- [x] Implement shape comparison
+- [x] Implement finite-value validation
+- [x] Reject invalid dimensions
+- [x] Add Tensor unit tests
+
+**Validation (20 November 2026, macOS, Debug):** `bash scripts/test.sh --p0` PASS (3/3; 0.16 s), including `tensor`; `bash scripts/test.sh --all` PASS (4/4; 0.02 s), including `clifford_projection`. Tensor tested for construction, ranks, contiguous storage, indexing, copy isolation, shape comparison, fill, invalid dimensions, overflow, and finite values. Release, Metal, and clean-clone validation not part of this sign-off.
 
 ## P0.5 — Random Generator
 

@@ -18,7 +18,7 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 - Removed `Tensor.cpp` from `latent_experimental` so the production and experimental libraries remain separate.
 - Added the repository-root public include directory, matching the existing `latent/core/Tensor.hpp` header location.
 - Linked `test_tensor` to `latent_core` and retained its `p0;core` CTest labels.
-- Awaiting Mac Debug test execution and full CPU regression validation.
+- Validated on macOS Debug (20 November 2026): `bash scripts/test.sh --p0` PASS (3/3, 0.16 s) and `bash scripts/test.sh --all` PASS (4/4, 0.02 s); `tensor`, FP16, diffusion harness and experimental Clifford projection passed. Release, Metal, and clean clone not tested.
 
 
 ### P0.3 test harness (20 November 2026)

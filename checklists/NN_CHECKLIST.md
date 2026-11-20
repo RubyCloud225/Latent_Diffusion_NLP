@@ -26,12 +26,14 @@ gradient and optimiser tests.
 
 ### NN.1.03–NN.1.07 — Small-ticket implementation plan
 
-#### NN.1.03A — ReLU forward and backward (implemented, awaiting validation)
-- [ ] Verify ReLU known-answer forward and backward for negative, zero, positive inputs.
-- [ ] Verify Tensor shape preservation, no parameters and input immutability.
-- [ ] Verify invalid-shape, missing-forward, NaN/Inf rejection.
-- [ ] Run `bash scripts/test.sh --nn`, `--p0`, and `--all`.
-- [ ] Record Doxygen generation and regression results when run.
+#### NN.1.03A — ReLU forward and backward (signed off 20 November 2026)
+- [x] Verify ReLU known-answer forward and backward for negative, zero, positive inputs.
+- [x] Verify Tensor shape preservation, no parameters and input immutability.
+- [x] Verify invalid-shape, missing-forward, NaN/Inf rejection.
+- [x] Run `bash scripts/test.sh --nn`, `--p0`, and `--all`.
+- [x] Record Doxygen generation and regression results when run.
+
+**Validation:** User reports `bash scripts/test.sh --nn`, `--p0`, and `--all` passed after the ReLU integration. Expected registered test counts: 3 NN / 7 P0 / 11 total CPU; exact test output and timings not supplied. Doxygen generation was not separately confirmed.
 
 #### NN.1.03B — SiLU (Swish)
 - [ ] Implement stable SiLU forward and backward.

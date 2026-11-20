@@ -12,6 +12,13 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### NN.1.03A ReLU activation (20 November 2026, awaiting validation)
+
+- Added Doxygen-documented FP64 ReLU implementation in `latent/nn/Activation.hpp` and `src/nn/Activation.cpp`, using cached forward inputs and a zero derivative at x=0.
+- Added `tests/nn/test_relu.cpp` covering forward/backward known answers, Tensor shapes, immutability, parameterlessness and invalid input/gradient cases.
+- Registered `nn_relu` under the `nn` CTest label, linked activation to `latent_core`, and included `latent/nn` in the optional Doxygen target.
+- Split NN.1.03A–NN.1.07 into individual checklist tickets. No CPU, Release, Metal or Doxygen test outcome is claimed yet.
+
 ### NN.1.02 FP64 Linear Layer sign-off (20 November 2026)
 
 - Verified committed `Linear.hpp`, `Linear.cpp`, `test_linear.cpp` and `latent_core`/CTest integration on GitHub.

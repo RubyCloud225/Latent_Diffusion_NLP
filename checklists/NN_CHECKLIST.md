@@ -84,7 +84,10 @@ gradient and optimiser tests.
 
 **Design principle:** Define the training policy first, then separately implement initialisation, gradient geometry, update constraints, lifecycle and empirical validation. A toy loss-reduction test is an engineering diagnostic, **not** the training policy or evidence of a trained image generator. No clipping mode is enabled implicitly.
 
+**Architecture reference:** [Training Architecture — NN.1.07A Design v0.1](../docs/TRAINING_ARCHITECTURE.md). The architecture is documented; all implementation and validation tasks remain open.
+
 #### NN.1.07A — Training policy specification and schema (first)
+- [x] Document proposed training system architecture, model boundaries, geometric metric and lifecycle (design only; [architecture](../docs/TRAINING_ARCHITECTURE.md)).
 - [ ] Define a versioned `TrainingPolicy` schema and validation rules; reject unsupported combinations and invalid/non-finite limits.
 - [ ] Specify objectives for autoencoder reconstruction versus diffusion epsilon prediction, with distinct training and validation metrics.
 - [ ] Specify dataset manifests, provenance, train/validation/test isolation, preprocessing, deterministic shuffling and random seeds.

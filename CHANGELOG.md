@@ -12,6 +12,13 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### P0.6 Noise Schedule validation (20 November 2026)
+
+- Verified pushed `NoiseSchedule.hpp`, `NoiseSchedule.cpp`, `test_noise_schedule.cpp`, and CMake test registration.
+- User-reported macOS Debug: `bash scripts/test.sh --p0` PASS (5/5, 0.41 s); `bash scripts/test.sh --all` PASS (6/6, 0.03 s).
+- Tests cover beta interpolation, cumulative alpha, square-root coefficients, finite values, invalid configurations, timestep bounds, and deterministic construction.
+- Release, Metal and clean-clone validation remain outstanding.
+
 ### P0.5 local validation (20 November 2026)
 
 - User-reported macOS Debug run: `bash scripts/test.sh --p0` PASS (4/4; 0.28 s), including `random`.

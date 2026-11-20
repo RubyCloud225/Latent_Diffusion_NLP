@@ -142,6 +142,14 @@ if(BUILD_TESTING)
     add_test(NAME nn_silu COMMAND test_nn_silu)
     set_tests_properties(nn_silu PROPERTIES LABELS "nn")
 
+    # NN.1.03C — Independent ReLU / SiLU numerical-gradient validation.
+    add_executable(test_nn_activation_validation
+        tests/nn/test_activation_validation.cpp
+    )
+    target_link_libraries(test_nn_activation_validation PRIVATE latent_core)
+    add_test(NAME nn_activation_validation COMMAND test_nn_activation_validation)
+    set_tests_properties(nn_activation_validation PROPERTIES LABELS "nn")
+
     # NN.1.02 — FP64 Linear Layer.
     add_executable(test_nn_linear
         tests/nn/test_linear.cpp

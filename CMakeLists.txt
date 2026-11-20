@@ -12,6 +12,7 @@ include(CTest)
 add_library(latent_core STATIC
     src/core/Tensor.cpp
     src/core/Random.cpp
+    src/diffusion/NoiseSchedule.cpp
 )
 target_include_directories(latent_core PUBLIC
     ${PROJECT_SOURCE_DIR}
@@ -77,6 +78,23 @@ if(BUILD_TESTING)
         LABELS "p0;core"
     )
 
+    # P0.6 — Production diffusion noise schedule.
+    add_executable(test_noise_schedule
+        tests/diffusion/test_noise_schedule.cpp
+    )
+
+    target_link_libraries(test_noise_schedule PRIVATE
+        latent_core
+    )
+
+    add_test(
+        NAME noise_schedule
+        COMMAND test_noise_schedule
+    )
+
+    set_tests_properties(noise_schedule PROPERTIES
+        LABELS "p0;diffusion"
+    )
 
 endif()
 

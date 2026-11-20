@@ -136,6 +136,12 @@ if(BUILD_TESTING)
     add_test(NAME nn_relu COMMAND test_nn_relu)
     set_tests_properties(nn_relu PROPERTIES LABELS "nn")
 
+    # NN.1.03B — FP64 SiLU activation.
+    add_executable(test_nn_silu tests/nn/test_silu.cpp)
+    target_link_libraries(test_nn_silu PRIVATE latent_core)
+    add_test(NAME nn_silu COMMAND test_nn_silu)
+    set_tests_properties(nn_silu PROPERTIES LABELS "nn")
+
     # NN.1.02 — FP64 Linear Layer.
     add_executable(test_nn_linear
         tests/nn/test_linear.cpp

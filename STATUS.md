@@ -40,6 +40,12 @@ Productionisation has now begun.
 - [x] macOS Debug CPU P0.7 validation: 6/6 P0 and 7/7 full suite passed (20 November 2026).
 - [ ] P0.8 reverse diffusion mathematics and P0.9 sampler remain outstanding.
 
+## Neural-network foundation
+
+- [x] NN.1.01: FP64 Layer/Parameter interfaces, gradient accumulation and zero-grad, with a test-only ScaleLayer.
+- [x] NN.1.01 user-confirmed macOS CPU Debug `--nn`, `--p0` and `--all` tests passed (20 November 2026); exact counts and timings not supplied.
+- [ ] NN.1 Linear, activation, Conv2D, optimisation and trainable network validation remain pending. Release/Metal separately unverified.
+
 ## NLP preprocessing
 
 - [x] Basic BPE implementation.

@@ -185,6 +185,26 @@ if(BUILD_TESTING)
         nn_conv2d_forward
         PROPERTIES LABELS "nn"
     )
+
+    # NN.1.05 — Conv2D backward propagation.
+    add_executable(test_nn_conv2d_backward
+        tests/nn/test_conv2d_backward.cpp
+    )
+
+    target_link_libraries(
+        test_nn_conv2d_backward
+        PRIVATE latent_core
+    )
+
+    add_test(
+        NAME nn_conv2d_backward
+        COMMAND test_nn_conv2d_backward
+    )
+
+    set_tests_properties(
+        nn_conv2d_backward
+        PROPERTIES LABELS "nn"
+    )
 endif()
 
 option(BUILD_METAL_TESTS "Build tests requiring the Xcode Metal Toolchain" ${APPLE})

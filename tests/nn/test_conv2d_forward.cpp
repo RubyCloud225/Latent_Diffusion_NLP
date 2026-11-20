@@ -231,8 +231,10 @@ void test_validation()
         (void)conv.forward(valid);
     });
 
+    Conv2D not_forwarded(1, 1, 3, 3);
+
     expect_throw<std::logic_error>([&] {
-        (void)conv.backward(valid);
+        (void)not_forwarded.backward(valid);
     });
 }
 

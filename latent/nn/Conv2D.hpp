@@ -70,10 +70,25 @@ public:
         const latent::core::Tensor& input
     ) override;
 
+    
     /**
-     * @brief Backward propagation placeholder.
+     * @brief Backpropagate through the last successful convolution.
      *
-     * @throws std::logic_error Always, until NN.1.05.
+     * @details Computes the loss gradients for the input,
+     * kernel weights and channel biases using the cached
+     * NCHW forward input.
+     *
+     * Weight and bias gradients accumulate across backward
+     * calls until zero_grad() is invoked.
+     *
+     * @param grad_output Finite rank-4 upstream gradient
+     *        matching the previous convolution output.
+     * @return Gradient with respect to the input, in NCHW order.
+     *
+     * @throws std::logic_error If forward has not succeeded.
+     * @throws std::invalid_argument If gradient shape or
+     *         values are invalid.
+     * @throws std::overflow_error If gradients overflow FP64.
      */
     latent::core::Tensor backward(
         const latent::core::Tensor& grad_output
@@ -89,6 +104,14 @@ public:
     Parameter& bias() noexcept;
 
 private:
+
+    // Last successfully validated forward input.
+    // Used to calculate weight gradients during backward.
+    latent::core::Tensor cached_input_{{1}};
+    // Output shape corresponding to cached_input_.
+    latent::core::Tensor::Shape cached_output_shape_;
+    // True only after a successful forward calculation.
+    bool has_forward_ = false;
     std::size_t in_channels_;
     std::size_t out_channels_;
     std::size_t kernel_h_;

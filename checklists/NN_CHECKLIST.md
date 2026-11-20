@@ -31,7 +31,7 @@ gradient and optimiser tests.
 - [x] Verify Tensor shape preservation, no parameters and input immutability.
 - [x] Verify invalid-shape, missing-forward, NaN/Inf rejection.
 - [x] Run `bash scripts/test.sh --nn`, `--p0`, and `--all`.
-- [x] Record Doxygen generation and regression results when run.
+- [ ] Verify Doxygen generation separately (not reported in this run).
 
 **Validation:** User reports `bash scripts/test.sh --nn`, `--p0`, and `--all` passed after the ReLU integration. Expected registered test counts: 3 NN / 7 P0 / 11 total CPU; exact test output and timings not supplied. Doxygen generation was not separately confirmed.
 

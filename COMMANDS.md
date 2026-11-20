@@ -34,6 +34,7 @@ bash scripts/test.sh --all
 bash scripts/test.sh --core
 bash scripts/test.sh --diffusion
 bash scripts/test.sh --experimental
+bash scripts/test.sh --nn
 ```
 
 For optional Metal validation (requires an installed Apple Metal Toolchain):

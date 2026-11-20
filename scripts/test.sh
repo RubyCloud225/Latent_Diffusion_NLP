@@ -14,7 +14,8 @@ case "${mode}" in
     --diffusion) label="diffusion" ;;
     --experimental) label="experimental" ;;
     --metal) label="metal" ;;
-    *) echo "Usage: $0 [--all|--p0|--core|--diffusion|--experimental|--metal]" >&2; exit 2 ;;
+    --nn) label="nn" ;;
+    *) echo "Usage: $0 [--all|--p0|--core|--diffusion|--experimental|--metal|--nn]" >&2; exit 2 ;;
 esac
 if [[ $# -gt 1 ]]; then
     echo "Only one test selection option is supported" >&2

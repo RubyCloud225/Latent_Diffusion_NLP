@@ -62,9 +62,14 @@ gradient and optimiser tests.
 
 **Validation:** User confirms all three CPU test suites passed after correcting the header filename. Expected registered counts were 6 NN, 7 P0 and 14 total CPU; exact output/timings were not supplied. Doxygen generation, Release and Metal remain separately unverified. Backpropagation is tracked in NN.1.05.
 
-#### NN.1.05 — Conv2D backward
-- [ ] Implement gradients for input, kernel and bias.
-- [ ] Add known-answer and finite-difference `nn_conv2d_backward` test.
+#### NN.1.05 — Conv2D backward (CPU tests passed, 20 November 2026)
+- [x] Implement gradients for input, kernel and bias.
+- [x] Add known-answer and finite-difference `nn_conv2d_backward` test.
+- [x] Verify batched gradient accumulation and `zero_grad()`.
+- [x] Verify invalid backward inputs are rejected without corrupting stored gradients.
+- [x] Confirm NN, P0 and full CPU regressions pass.
+
+**Validation:** User reports all test suites passed after the NN.1.05 implementation. Verified `Conv2D.hpp`, `Conv2D.cpp`, the new test and CMake/CTest registration on GitHub. Registered test counts expected: 7 NN, 7 P0 and 15 full CPU; exact output/timings not supplied. Release, Metal, Doxygen and clean-clone validation not separately confirmed.
 
 #### NN.1.06 — FP64 Adam
 - [ ] Adapt or replace isolated FP32 Adam to work with production FP64 Parameters.

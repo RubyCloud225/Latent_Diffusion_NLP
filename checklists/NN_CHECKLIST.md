@@ -80,9 +80,64 @@ gradient and optimiser tests.
 
 **Validation:** User reports all 16 registered CPU tests passed after integrating NN.1.06. Verified the production header, source, independent test and CMake registration in GitHub. Individual test logs, run times, Doxygen generation, Release, Metal and clean-clone validation were not supplied.
 
-#### NN.1.07 — Initialisation and training
-- [ ] Implement reproducible nonzero parameter initialisation and gradient clipping.
-- [ ] Show a deterministic tiny NN learns a toy mapping and add `nn_training` test.
+### NN.1.07 — Policy-governed training and geometric optimisation (design planned, not implemented)
+
+**Design principle:** Define the training policy first, then separately implement initialisation, gradient geometry, update constraints, lifecycle and empirical validation. A toy loss-reduction test is an engineering diagnostic, **not** the training policy or evidence of a trained image generator. No clipping mode is enabled implicitly.
+
+#### NN.1.07A — Training policy specification and schema (first)
+- [ ] Define a versioned `TrainingPolicy` schema and validation rules; reject unsupported combinations and invalid/non-finite limits.
+- [ ] Specify objectives for autoencoder reconstruction versus diffusion epsilon prediction, with distinct training and validation metrics.
+- [ ] Specify dataset manifests, provenance, train/validation/test isolation, preprocessing, deterministic shuffling and random seeds.
+- [ ] Specify optimisation policy: FP64 precision, AdamFP64 hyperparameters, schedules, accumulation steps, invalid-step rejection and stopping limits.
+- [ ] Specify explicit independent modes for gradient constraints (`none`, `euclidean`, `metric_radial`) and optimiser-update constraints (`none`, `trust_region`); default to disabled until reviewed.
+- [ ] Specify run logging, checkpoint contents, resume guarantees, failure recovery and promotion/acceptance criteria; record code revision and policy version.
+- [ ] Validate policy parsing, deterministic serialisation/round-trip, invalid configurations, documented defaults and Doxygen API contracts.
+- [ ] Review and approve policy **before** introducing training execution or geometric clipping.
+
+**Exit:** A reviewed, testable training-policy contract independent of any particular dataset or model architecture.
+
+#### NN.1.07B — Deterministic parameter initialisation
+- [ ] Define seeded FP64 initialisers appropriate for Linear and Conv2D (fan-in/fan-out, explicit biases) with nonzero symmetry-breaking weights.
+- [ ] Validate reproducibility, expected tensor shapes, finiteness, layer-by-layer seed handling and statistical sanity checks.
+- [ ] Record the initialisation scheme and RNG state in run/checkpoint metadata.
+
+#### NN.1.07C — Gradient geometry interface and Euclidean reference
+- [ ] Implement a gradient measurement and constraint interface for registered `Parameter` tensors; measure the global norm without altering gradients.
+- [ ] Implement FP64 Euclidean global-norm radial clipping as an opt-in baseline, with zero-norm and non-finite safeguards.
+- [ ] Validate direction preservation, threshold boundary, no-op behaviour, deterministic results and no partial mutation on error.
+- [ ] Log pre/post gradient norms, clipping scale, clipping frequency and rejected steps.
+
+#### NN.1.07D — Diagonal and block-metric gradient controller
+- [ ] Define and validate positive-definite diagonal/block metrics, parameter ownership/order, weights and metric versioning.
+- [ ] Implement opt-in metric-norm radial scaling using `sqrt(g^T M g)` with FP64 overflow/underflow protection.
+- [ ] Document that radial scaling is **not generally the Euclidean closest-point projection onto an ellipsoid**.
+- [ ] Compare with the Euclidean baseline using identical parameters, batches, RNG seeds and optimisation settings.
+- [ ] Keep approximate Fisher/natural-gradient methods out of scope until separately designed and empirically justified.
+
+#### NN.1.07E — Training execution lifecycle and checkpoints
+- [ ] Define batch/epoch/step state transitions: zero_grad, forward, objective, backward, gradient controller, optimiser, validation and checkpoint.
+- [ ] Ensure invalid loss/gradients/metrics/updates reject an entire step without partially changing model or optimiser state.
+- [ ] Store model parameters, optimiser moments and step count, policy/schema version, data manifest, RNG state and code revision.
+- [ ] Test checkpoint integrity, incompatible-version rejection, deterministic resume and interrupted-step recovery.
+- [ ] Keep dataset-specific autoencoder and denoiser objectives in their own tracks; use this shared execution policy for both.
+
+#### NN.1.07F — Reproducible training and validation experiments
+- [ ] Demonstrate deterministic loss reduction on a small controlled mapping as a **smoke test only**.
+- [ ] Define fixed data splits, baseline initialisation, validation schedule, early stopping and model promotion criteria.
+- [ ] Compare unclipped, Euclidean-clipped and metric-radial-clipped optimisation under matched experimental conditions.
+- [ ] Measure training/validation loss, step rejection, clipping frequency, gradient/update norms, computational cost and reproducibility.
+- [ ] Do not claim autoencoder or diffusion training complete until their separate dataset/quality milestones pass.
+
+#### NN.1.07G — Experimental optimiser-update trust region
+- [ ] Specify an inspectable, pre-commit AdamFP64 proposed update; preserve the current validated atomic-update path.
+- [ ] Define a separate positive-definite parameter-space metric and enforce `delta_theta^T M_theta delta_theta <= r^2` on the **actual proposed displacement**.
+- [ ] Document handling of Adam moment-state updates, rejection versus rescaling and rollback/transaction semantics before implementation.
+- [ ] Test trust-region boundaries, non-finite proposals, multi-parameter atomicity and deterministic replay.
+- [ ] Compare no constraints, gradient clipping, update trust regions and both controls; treat this mode as experimental until validated.
+
+**Dependencies:** NN.1.07A precedes B–G. NN.1.07C is the reference for D. NN.1.07G requires an explicit extension of AdamFP64's proposal/commit interface; gradient clipping alone does not bound Adam's actual parameter step.
+
+**Sign-off:** Each ticket remains unchecked until its design/implementation is reviewed and independently validated. Record CPU, Doxygen, Release and Metal evidence separately. Related autoencoder training and checkpoint milestones are in [AE.5–AE.6](AUTOENCODER_CHECKLIST.md); epsilon predictor training and sampler integration remain in NN.2–NN.3.
 
 **NN.1.02 — FP64 Linear Layer (signed off 20 November 2026)**
 

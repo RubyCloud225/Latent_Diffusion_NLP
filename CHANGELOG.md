@@ -12,13 +12,21 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### Documentation workflow and contributor guidance (20 November 2026)
+
+- Added `scripts/run_documentation.sh` for optional Doxygen generation in isolated `build-docs/` with `--open`, `--help`, and `DOCS_BUILD_DIR` override.
+- Added root `COMMANDS.md` with supported build, CTest, documentation and Git commands.
+- Added root `CONTRIBUTION.md` outlining licensing, API documentation, numerical test standards and pull-request workflow.
+- Updated README and `docs/DOXYGEN.md` with the canonical script; ignored documentation build output in `.gitignore`.
+- Documentation script/HTML generation still require execution on a host with Doxygen installed; not independently validated here.
+
 ### P0.8 reverse diffusion and Doxygen (20 November 2026)
 
 - Added deterministic reverse diffusion coefficients, posterior variance, clean-latent reconstruction and reverse mean to the existing production GaussianDiffusion class.
 - Added `reverse_diffusion` CTest target (`p0;diffusion`) covering analytical coefficients, known answers, t=0, shape checks, finiteness, deterministic repeatability and forward/reverse consistency.
 - Added Doxygen-compatible public API comments to Tensor, RandomGenerator, NoiseSchedule and GaussianDiffusion headers.
 - Added optional `BUILD_DOCS=ON` CMake `docs` target and `docs/DOXYGEN.md` instructions; normal builds do not require Doxygen.
-- **Pending validation:** run macOS Debug P0 and full CPU test suites (expected 7/7 and 8/8), then independently build documentation with Doxygen installed. Checklist remains open until verification.
+- User confirmed macOS Debug P0 and full CPU regression suites passed following P0.8 implementation (expected registrations: 7 P0, 8 total). Exact output and timings were not provided. P0.8 CPU sign-off recorded; documentation generation, Release, Metal and clean-clone validation remain outstanding.
 
 ### P0.7 Forward Diffusion implementation (20 November 2026)
 

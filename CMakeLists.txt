@@ -113,6 +113,22 @@ if(BUILD_TESTING)
     add_test(NAME reverse_diffusion COMMAND test_reverse_diffusion)
     set_tests_properties(reverse_diffusion PROPERTIES LABELS "p0;diffusion")
 
+    # NN.1.01 — Neural-network Layer and Parameter interfaces.
+    add_executable(test_nn_layer
+        tests/nn/test_layer.cpp
+    )
+
+    target_link_libraries(test_nn_layer PRIVATE
+        latent_core
+    )
+
+    add_test(NAME nn_layer COMMAND test_nn_layer)
+
+    set_tests_properties(nn_layer PROPERTIES
+        LABELS "nn;core"
+)
+
+
 endif()
 
 option(BUILD_METAL_TESTS "Build tests requiring the Xcode Metal Toolchain" ${APPLE})

@@ -35,14 +35,14 @@ gradient and optimiser tests.
 
 **Validation:** User reports `bash scripts/test.sh --nn`, `--p0`, and `--all` passed after the ReLU integration. Expected registered test counts: 3 NN / 7 P0 / 11 total CPU; exact test output and timings not supplied. Doxygen generation was not separately confirmed.
 
-#### NN.1.03B — SiLU (Swish) (implemented, awaiting validation)
-- [ ] Validate stable FP64 SiLU forward and backward against known answers.
-- [ ] Validate output and gradient shapes and preservation of input.
-- [ ] Validate extreme-value and invalid-input behaviour.
-- [ ] Run independent `nn_silu` plus `--nn`, `--p0`, and `--all` suites.
+#### NN.1.03B — SiLU (Swish) (CPU Debug signed off 20 November 2026)
+- [x] Validate stable FP64 SiLU forward and backward against known answers.
+- [x] Validate output and gradient shapes and preservation of input.
+- [x] Validate extreme-value and invalid-input behaviour.
+- [x] Run independent `nn_silu` plus `--nn`, `--p0`, and `--all` suites.
 - [ ] Confirm optional Doxygen generation separately.
 
-**Implementation:** Added SiLU to `Activation.hpp`/`Activation.cpp`, with Doxygen public API documentation and `tests/nn/test_silu.cpp` registered under the `nn` CTest label. No user-confirmed test results yet.
+**Validation:** User reports all NN, P0 and full CPU regression suites passed after integration of `nn_silu`. The expected registered counts are 4 NN, 7 P0 and 12 total CPU; exact logs/timings were not supplied. Doxygen generation, Release, Metal and clean-clone validation remain unverified.
 
 #### NN.1.03C — Activation numerical validation
 - [ ] Add finite-difference activation gradients away from ReLU's nondifferentiable zero.

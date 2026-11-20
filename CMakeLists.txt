@@ -13,6 +13,7 @@ add_library(latent_core STATIC
     src/core/Tensor.cpp
     src/core/Random.cpp
     src/diffusion/NoiseSchedule.cpp
+    src/diffusion/GaussianDiffusion.cpp
 )
 target_include_directories(latent_core PUBLIC
     ${PROJECT_SOURCE_DIR}
@@ -95,6 +96,14 @@ if(BUILD_TESTING)
     set_tests_properties(noise_schedule PROPERTIES
         LABELS "p0;diffusion"
     )
+
+    # P0.7 — Production forward diffusion.
+    add_executable(test_forward_diffusion
+        tests/diffusion/test_forward_diffusion.cpp
+    )
+    target_link_libraries(test_forward_diffusion PRIVATE latent_core)
+    add_test(NAME forward_diffusion COMMAND test_forward_diffusion)
+    set_tests_properties(forward_diffusion PROPERTIES LABELS "p0;diffusion")
 
 endif()
 

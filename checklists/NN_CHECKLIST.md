@@ -71,9 +71,14 @@ gradient and optimiser tests.
 
 **Validation:** User reports all test suites passed after the NN.1.05 implementation. Verified `Conv2D.hpp`, `Conv2D.cpp`, the new test and CMake/CTest registration on GitHub. Registered test counts expected: 7 NN, 7 P0 and 15 full CPU; exact output/timings not supplied. Release, Metal, Doxygen and clean-clone validation not separately confirmed.
 
-#### NN.1.06 — FP64 Adam
-- [ ] Adapt or replace isolated FP32 Adam to work with production FP64 Parameters.
-- [ ] Add seeded/known-answer, optimiser-state and validation tests.
+#### NN.1.06 — FP64 Adam (CPU signed off 20 November 2026)
+- [x] Add production `AdamFP64` for FP64 `Parameter` tensors while retaining experimental FP32 Adam separately.
+- [x] Validate first-step known answers, multiple steps, deterministic replay and multiple parameter tensors.
+- [x] Validate optimiser reset, `zero_grad()`, invalid hyperparameters and non-finite gradients.
+- [x] Validate all-or-nothing failed updates and subsequent recovery, and integration with `Linear`.
+- [x] Record full CPU regression PASS (16/16).
+
+**Validation:** User reports all 16 registered CPU tests passed after integrating NN.1.06. Verified the production header, source, independent test and CMake registration in GitHub. Individual test logs, run times, Doxygen generation, Release, Metal and clean-clone validation were not supplied.
 
 #### NN.1.07 — Initialisation and training
 - [ ] Implement reproducible nonzero parameter initialisation and gradient clipping.

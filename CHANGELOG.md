@@ -12,6 +12,14 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### P0.8 reverse diffusion and Doxygen (20 November 2026)
+
+- Added deterministic reverse diffusion coefficients, posterior variance, clean-latent reconstruction and reverse mean to the existing production GaussianDiffusion class.
+- Added `reverse_diffusion` CTest target (`p0;diffusion`) covering analytical coefficients, known answers, t=0, shape checks, finiteness, deterministic repeatability and forward/reverse consistency.
+- Added Doxygen-compatible public API comments to Tensor, RandomGenerator, NoiseSchedule and GaussianDiffusion headers.
+- Added optional `BUILD_DOCS=ON` CMake `docs` target and `docs/DOXYGEN.md` instructions; normal builds do not require Doxygen.
+- **Pending validation:** run macOS Debug P0 and full CPU test suites (expected 7/7 and 8/8), then independently build documentation with Doxygen installed. Checklist remains open until verification.
+
 ### P0.7 Forward Diffusion implementation (20 November 2026)
 
 - Implemented `GaussianDiffusion::q_sample` in the production `latent_core` library using P0.6 precomputed cumulative-alpha square-root coefficients and caller-supplied noise.

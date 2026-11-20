@@ -44,7 +44,8 @@ Productionisation has now begun.
 
 - [x] NN.1.01: FP64 Layer/Parameter interfaces, gradient accumulation and zero-grad, with a test-only ScaleLayer.
 - [x] NN.1.01 user-confirmed macOS CPU Debug `--nn`, `--p0` and `--all` tests passed (20 November 2026); exact counts and timings not supplied.
-- [ ] NN.1 Linear, activation, Conv2D, optimisation and trainable network validation remain pending. Release/Metal separately unverified.
+- [x] NN.1.02 FP64 Linear Layer: rank-1/batched forward, backward and finite-difference gradient checks; user-reported NN, P0 and full CPU regression suites passed (20 November 2026).
+- [ ] NN.1 activation, Conv2D, optimisation and trainable network validation remain pending. Release/Metal separately unverified.
 
 ## NLP preprocessing
 

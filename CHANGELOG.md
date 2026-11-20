@@ -18,6 +18,7 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 - Added a diffusion reference-fixture executable under `tests/diffusion` and registered it as `p0;diffusion`.
 - Labelled Clifford tests `experimental` and Apple Metal tests `experimental;metal` to keep them out of the P0-only selection.
 - Added `ctest --test-dir build -L p0 --output-on-failure` as the P0-only test invocation.
+- Implemented existing `scripts/build.sh` and extended `scripts/test.sh` to select `--all`, `--p0`, `--core`, `--diffusion`, `--experimental`, or `--metal`; `BUILD_TYPE`, `BUILD_DIR`, and `BUILD_METAL_TESTS` are configurable.
 - Reference fixtures are **not** production diffusion API validation; tests for the actual implementation remain P0.6–P0.9.
 - CMake/CTest integration remains unverified until a fresh clone is built and tested. The checked-in CMake also lacks the `latent_core` target ticked under P0.2, which needs separate reconciliation.
 

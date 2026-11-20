@@ -12,6 +12,14 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### NN.1.07A TrainingPolicy C++17 implementation (20 November 2026, pending CPU validation)
+
+- Added Doxygen-documented `TrainingPolicy` typed schema under `latent/nn/training/` with explicit reconstruction/epsilon objectives, provenance identifiers, deterministic batching, AdamFP64 settings and optional geometric control identifier.
+- Added strict policy-v1 parser and canonical FP64 serialization, invalid-value checks, effective-batch overflow protection and disabled-until-implemented execution.
+- Added `nn_training_policy` tests for configuration, deterministic round-trips, invalid enums, numeric extremes, malformed records and unsupported modes, registered with `latent_core` under the `nn` CTest label.
+- Implementation is committed but user CPU regression, optional Doxygen build, Release and Metal validation are **not yet confirmed**. No training, clipping or checkpoint execution implemented.
+
+
 ### NN.1.07 training-policy and geometric-control ticket redesign (20 November 2026)
 
 - Replaced the original combined initialisation/clipping/toy-training ticket with NN.1.07A–G: policy schema, seeded initialisation, Euclidean reference clipping, diagonal/block metric-radial clipping, training/checkpoint lifecycle, controlled training evaluations and experimental Adam update trust region.

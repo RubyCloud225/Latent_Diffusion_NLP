@@ -89,20 +89,22 @@ tests are required under P0.6–P0.9. The `latent_core` target has since been de
 
 ## P0.7 — Forward Diffusion
 
-- [ ] Implement `q_sample`
-- [ ] Accept explicit input Tensor
-- [ ] Accept explicit timestep
-- [ ] Accept explicit noise Tensor
-- [ ] Validate input/noise shapes
-- [ ] Implement cumulative-alpha forward equation
-- [ ] Preserve input Tensor
-- [ ] Preserve supplied noise Tensor
-- [ ] Add known-answer test
-- [ ] Add zero-noise test
-- [ ] Add zero-input test
-- [ ] Add timestep boundary tests
-- [ ] Add deterministic repeat test
-- [ ] Add NaN/Inf validation tests
+- [x] Implement `q_sample`
+- [x] Accept explicit input Tensor
+- [x] Accept explicit timestep
+- [x] Accept explicit noise Tensor
+- [x] Validate input/noise shapes
+- [x] Implement cumulative-alpha forward equation
+- [x] Preserve input Tensor
+- [x] Preserve supplied noise Tensor
+- [x] Add known-answer test
+- [x] Add zero-noise test
+- [x] Add zero-input test
+- [x] Add timestep boundary tests
+- [x] Add deterministic repeat test
+- [x] Add NaN/Inf validation tests
+
+**Validation (20 November 2026, macOS, Debug):** user-reported `bash scripts/test.sh --p0` PASS (6/6; 0.53 s) and `bash scripts/test.sh --all` PASS (7/7; 0.03 s). This includes production `forward_diffusion` tests and Clifford regression. Release, Metal, and clean-clone not tested.
 
 ## P0.8 — Reverse Diffusion Mathematics
 

@@ -12,6 +12,13 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### NN.1.02 FP64 Linear Layer sign-off (20 November 2026)
+
+- Verified committed `Linear.hpp`, `Linear.cpp`, `test_linear.cpp` and `latent_core`/CTest integration on GitHub.
+- User reports NN, P0 and full CPU regressions passed following implementation; exact counts and timings not supplied for this run.
+- Linear tests cover rank-1 and batched forward propagation, backpropagation, gradients of weights/bias/inputs, finite differences, accumulation, zero-grad and validation.
+- Doxygen source comments present; generated documentation, Release and Metal not independently verified.
+
 ### NN.1.01 Layer and Parameter interfaces (20 November 2026)
 
 - Verified production FP64 `Layer` and `Parameter` interfaces, test-only ScaleLayer coverage, `test_nn_layer` CMake registration (`nn;core`) and `scripts/test.sh --nn` support on GitHub.

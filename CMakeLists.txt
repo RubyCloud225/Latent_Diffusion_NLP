@@ -10,11 +10,15 @@ include(CTest)
 add_library(latent_experimental STATIC
     src/experimental/CliffordProjection.cpp
     src/nn/Adam.cpp
+    src/core/Tensor.cpp
 )
 
 target_include_directories(latent_experimental PUBLIC
     ${PROJECT_SOURCE_DIR}/latent
 )
+
+target_compile_features(latent_core PUBLIC cxx_std_17)
+target_compile_features(latent_experimental PUBLIC cxx_std_17)
 
 if(BUILD_TESTING)
     add_executable(test_fp16
@@ -42,6 +46,22 @@ if(BUILD_TESTING)
     )
     add_test(NAME clifford_projection COMMAND test_clifford_projection)
     set_tests_properties(clifford_projection PROPERTIES LABELS "experimental")
+
+    # P0.4 — Production Tensor tests.
+add_executable(test_tensor
+    tests/core/test_tensor.cpp
+)
+
+target_link_libraries(test_tensor PRIVATE
+    latent_core
+)
+
+add_test(NAME tensor COMMAND test_tensor)
+
+set_tests_properties(tensor PROPERTIES
+    LABELS "p0;core"
+)
+
 endif()
 
 option(BUILD_METAL_TESTS "Build tests requiring the Xcode Metal Toolchain" ${APPLE})

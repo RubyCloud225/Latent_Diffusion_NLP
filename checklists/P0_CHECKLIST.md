@@ -108,16 +108,18 @@ tests are required under P0.6–P0.9. The `latent_core` target has since been de
 
 ## P0.8 — Reverse Diffusion Mathematics
 
-- [ ] Implement posterior variance coefficients
-- [ ] Implement reverse-process coefficients
-- [ ] Implement reverse mean calculation
-- [ ] Accept externally supplied predicted epsilon
-- [ ] Validate predicted-epsilon shape
-- [ ] Handle final reverse timestep correctly
-- [ ] Add known-answer reverse test
-- [ ] Add deterministic reverse-mean test
-- [ ] Add finite-value tests
-- [ ] Add posterior variance tests
+- [x] Implement posterior variance coefficients
+- [x] Implement reverse-process coefficients
+- [x] Implement reverse mean calculation
+- [x] Accept externally supplied predicted epsilon
+- [x] Validate predicted-epsilon shape
+- [x] Handle final reverse timestep correctly
+- [x] Add known-answer reverse test
+- [x] Add deterministic reverse-mean test
+- [x] Add finite-value tests
+- [x] Add posterior variance tests
+
+**Validation (20 November 2026, macOS, Debug):** user confirms P0 and full CPU regression suites both passed after P0.8 integration. Expected registered counts are 7 P0 and 8 total CPU tests; exact output/timing not supplied for this run. Release, Metal, clean-clone and Doxygen generation remain separately unverified.
 
 ## P0.9 — Sampler
 

@@ -12,6 +12,13 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### P0.7 Forward Diffusion implementation (20 November 2026)
+
+- Implemented `GaussianDiffusion::q_sample` in the production `latent_core` library using P0.6 precomputed cumulative-alpha square-root coefficients and caller-supplied noise.
+- Added timestep bounds, exact-shape and finite-value checks; rejects non-finite results; preserves input and noise Tensors.
+- Added `forward_diffusion` CTest target labelled `p0;diffusion`, with known-answer, zero-noise, zero-input, shape, determinism, boundary and invalid-input tests.
+- CPU compilation and test execution **pending**: run `bash scripts/test.sh --p0` and `bash scripts/test.sh --all` on macOS before signing off P0.7.
+
 ### P0.6 Noise Schedule validation (20 November 2026)
 
 - Verified pushed `NoiseSchedule.hpp`, `NoiseSchedule.cpp`, `test_noise_schedule.cpp`, and CMake test registration.

@@ -12,6 +12,15 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### P0.4 CMake fix (20 November 2026)
+
+- Created the missing production `latent_core` static-library target with `src/core/Tensor.cpp`.
+- Removed `Tensor.cpp` from `latent_experimental` so the production and experimental libraries remain separate.
+- Added the repository-root public include directory, matching the existing `latent/core/Tensor.hpp` header location.
+- Linked `test_tensor` to `latent_core` and retained its `p0;core` CTest labels.
+- Awaiting Mac Debug test execution and full CPU regression validation.
+
+
 ### P0.3 test harness (20 November 2026)
 
 - Fixed CPU-only script builds to default `BUILD_METAL_TESTS=OFF` explicitly, preventing cached or Apple-default Metal targets from breaking P0 validation when the optional Metal toolchain is absent. The `--metal` test selection enables Metal explicitly.

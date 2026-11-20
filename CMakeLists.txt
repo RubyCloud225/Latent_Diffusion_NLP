@@ -11,6 +11,7 @@ include(CTest)
 # not to the isolated experimental Clifford library.
 add_library(latent_core STATIC
     src/core/Tensor.cpp
+    src/core/Random.cpp
 )
 target_include_directories(latent_core PUBLIC
     ${PROJECT_SOURCE_DIR}
@@ -60,6 +61,22 @@ if(BUILD_TESTING)
     target_link_libraries(test_tensor PRIVATE latent_core)
     add_test(NAME tensor COMMAND test_tensor)
     set_tests_properties(tensor PROPERTIES LABELS "p0;core")
+
+    # P0.5 — Seeded random-number generator.
+    add_executable(test_random
+        tests/core/test_random.cpp
+    )
+
+    target_link_libraries(test_random PRIVATE
+        latent_core
+    )
+
+    add_test(NAME random COMMAND test_random)
+
+    set_tests_properties(random PROPERTIES
+        LABELS "p0;core"
+    )
+
 
 endif()
 

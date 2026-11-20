@@ -2,7 +2,7 @@
 
 ## Production C++ API documentation
 
-Doxygen documentation for the production Tensor, RNG and diffusion APIs is available through the optional CMake `docs` target. See [docs/DOXYGEN.md](docs/DOXYGEN.md) for installation, generation and viewing instructions.
+Doxygen documentation for the production Tensor, RNG and diffusion APIs is available with `bash scripts/run_documentation.sh --open`. See [docs/DOXYGEN.md](docs/DOXYGEN.md) for details, [COMMANDS.md](COMMANDS.md) for build/test commands, and [CONTRIBUTION.md](CONTRIBUTION.md) for contribution guidelines.
 
 
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)

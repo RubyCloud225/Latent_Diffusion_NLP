@@ -21,7 +21,7 @@ if [[ $# -gt 1 ]]; then
     exit 2
 fi
 
-"${ROOT_DIR}/scripts/build.sh"
+bash "${ROOT_DIR}/scripts/build.sh"
 echo "==> Running ${mode} tests"
 ctest_args=(--test-dir "${BUILD_DIR}" --output-on-failure --no-tests=error)
 if [[ -n "${label}" ]]; then

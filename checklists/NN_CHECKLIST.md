@@ -9,11 +9,11 @@ Aligned with [ROADMAP.md](../ROADMAP.md), especially Milestones 3, 4, 5, 6 and 7
 
 ## NN.1 — Trainable neural operations (Roadmap Milestone 3)
 
-- [ ] Define a production `Layer` interface with shape contracts.
+- [x] Define a production `Layer` interface with shape contracts.
 - [ ] Implement or port Conv2D with forward and backward propagation.
 - [ ] Implement activation and linear layers with correct backward passes.
 - [ ] Implement spatial upsampling/transposed convolution as required.
-- [ ] Define parameter, gradient and zero-grad interfaces.
+- [x] Define parameter, gradient and zero-grad interfaces.
 - [ ] Integrate Adam with model parameters and deterministic initialisation.
 - [ ] Add gradient clipping and finite-value checks.
 - [ ] Test layer shapes, invalid inputs and input immutability as applicable.
@@ -23,6 +23,8 @@ Aligned with [ROADMAP.md](../ROADMAP.md), especially Milestones 3, 4, 5, 6 and 7
 
 **Exit criterion:** A small CPU network trains reproducibly and passes numerical
 gradient and optimiser tests.
+
+**NN.1.01 validation (20 November 2026, macOS CPU Debug):** User confirmed `bash scripts/test.sh --nn`, `--p0` and `--all` passed. The Layer/Parameter headers, `test_nn_layer` registration and `--nn` runner option were verified on GitHub. Counts, times, Release and Metal validation were not supplied; NN.1 remains in progress.
 
 ## NN.2 — Spatial epsilon-prediction network (Roadmap Milestone 5)
 

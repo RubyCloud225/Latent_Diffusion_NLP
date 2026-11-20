@@ -12,6 +12,14 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### NN.1.07 training-policy and geometric-control ticket redesign (20 November 2026)
+
+- Replaced the original combined initialisation/clipping/toy-training ticket with NN.1.07A–G: policy schema, seeded initialisation, Euclidean reference clipping, diagonal/block metric-radial clipping, training/checkpoint lifecycle, controlled training evaluations and experimental Adam update trust region.
+- Explicitly separated raw-gradient magnitude constraints from constraints on actual proposed Adam parameter displacements; clipping remains opt-in and all geometric methods require independent validation.
+- Aligned AE.5/AE.6 and NN.3 checklist dependencies with the shared policy and checkpoint framework; updated high-level NN.1 completed foundations.
+- Planning/documentation only. No training implementation or additional test outcome is claimed.
+
+
 ### NN.1.06 AdamFP64 production optimiser (20 November 2026, CPU validated)
 
 - Verified new `latent/nn/AdamFP64.hpp`, `src/nn/AdamFP64.cpp`, and `tests/nn/test_adam_fp64.cpp` integrated with `latent_core` and registered as `nn_adam_fp64` in CMake.

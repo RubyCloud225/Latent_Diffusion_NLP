@@ -12,6 +12,13 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### P0.5 local validation (20 November 2026)
+
+- User-reported macOS Debug run: `bash scripts/test.sh --p0` PASS (4/4; 0.28 s), including `random`.
+- User-reported full CPU regression: `bash scripts/test.sh --all` PASS (5/5; 0.02 s), including `tensor`, `fp16`, `diffusion_harness`, `clifford_projection`, and `random`.
+- **Repository sync pending:** as checked on GitHub, `latent/core/Random.hpp` and `src/core/Random.cpp` are still empty placeholders, `tests/core/test_random.cpp` is not committed, and the default-branch CMake does not register `test_random`. The passing implementation exists in the user's local working tree and must be committed/pushed before P0.5 repository sign-off.
+- Metal, Release, and clean-clone validation not performed in this run.
+
 ### P0.4 CMake fix (20 November 2026)
 
 - Created the missing production `latent_core` static-library target with `src/core/Tensor.cpp`.

@@ -12,12 +12,19 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### NN.1.05 Conv2D backward (20 November 2026, CPU tests passed)
+
+- Verified committed NCHW FP64 backward propagation for input, kernel and bias gradients, cached forward input, and accumulation into production Parameters.
+- Independent `nn_conv2d_backward` tests cover known answers, batched accumulation, zero_grad(), numerical finite differences and invalid-gradient rejection. CMake registers the test under `nn`.
+- User reports NN, P0 and full CPU suites all passed; registered counts expected 7 NN, 7 P0 and 15 overall, with exact output/timings not provided. Doxygen generation, Release and Metal remain unverified.
+
+
 ### NN.1.04 Conv2D forward (20 November 2026, CPU Debug validated)
 
 - Added FP64 NCHW Conv2D reference forward implementation, supporting batch/channel dimensions, stride, symmetric padding, learnable kernel and bias storage; added independent `nn_conv2d_forward` CTest coverage.
 - Fixed misnamed header `latent/nn/Cov2D.hpp` to `latent/nn/Conv2D.hpp` after compilation detected the wrong filename.
 - User reports `--nn`, `--p0`, and `--all` CPU test suites pass after the correction; registered counts expected 6 NN, 7 P0 and 14 total (actual counts/timings not supplied).
-- Backward pass remains unimplemented until NN.1.05. Doxygen generation, Release and Metal are unverified.
+- Backward propagation was subsequently added in NN.1.05. Doxygen generation, Release and Metal are unverified.
 
 
 ### NN.1.03C Activation numerical validation (20 November 2026, CPU validated)

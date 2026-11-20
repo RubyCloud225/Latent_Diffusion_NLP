@@ -102,12 +102,15 @@ gradient and optimiser tests.
 
 **Exit:** A reviewed, testable training-policy contract independent of any particular dataset or model architecture.
 
-#### NN.1.07B — Deterministic parameter initialisation
-**Local validation reported (20 November 2026):** User confirms full CPU regression PASS (18/18), one test beyond NN.1.07A's 17/17 baseline. The proposed NN.1.07B header, source and test were not present on the GitHub default branch when checked; repository implementation and test contents cannot yet be signed off. Doxygen, Release and Metal checks are separately unverified.
+#### NN.1.07B — Deterministic parameter initialisation (CPU validated 20 November 2026)
+- [x] Implement seeded FP64 He/Xavier initialisers for Linear and Conv2D, with fan-in/fan-out scaling and zero biases.
+- [x] Verify seed/layer-ID reproducibility, order independence, finite nonzero weights, statistics, gradient reset and invalid-input safety in the registered `nn_initialisation` test.
+- [x] Record initialisation metadata (master/derived seed, layer identifier, method, fan-in/out, standard deviation) in `InitialisationRecord`.
+- [ ] Wire initialisation metadata and RNG/checkpoint state into the future training lifecycle (NN.1.07E).
+- [ ] Remove duplicate `Initialisation.cpp` compilation from the `test_initialisation` executable CMake target (already included in `latent_core`); review before modification.
+- [ ] Verify optional Doxygen generation, Release, Metal and clean-clone separately.
 
-- [ ] Define seeded FP64 initialisers appropriate for Linear and Conv2D (fan-in/fan-out, explicit biases) with nonzero symmetry-breaking weights.
-- [ ] Validate reproducibility, expected tensor shapes, finiteness, layer-by-layer seed handling and statistical sanity checks.
-- [ ] Record the initialisation scheme and RNG state in run/checkpoint metadata.
+**Validation:** User reports full CPU regression PASS (18/18, 20 November 2026). Header `latent/nn/training/Initialisation.hpp`, implementation `src/nn/training/Initialisation.cpp`, test `tests/nn/test_initialisation.cpp`, and CMake registration were verified present on the GitHub default branch. NN.1.07B core implementation is CPU validated; checkpoint integration and the CMake cleanup remain open. The full suite was user-run; no independent CI evidence was supplied.
 
 #### NN.1.07C — Gradient geometry interface and Euclidean reference
 - [ ] Implement a gradient measurement and constraint interface for registered `Parameter` tensors; measure the global norm without altering gradients.

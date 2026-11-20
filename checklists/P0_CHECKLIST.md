@@ -123,6 +123,12 @@ tests are required under P0.6–P0.9. The `latent_core` target has since been de
 
 ## P0.9 — Sampler
 
+**Scope:** implement and validate one reverse step using an externally
+supplied predicted epsilon. This ticket does **not** implement the network that
+predicts epsilon, train a denoiser or produce an image. Those explicit
+dependencies are tracked in [NN_CHECKLIST.md](NN_CHECKLIST.md), aligned with
+Roadmap Milestones 3, 5, 6 and 7.
+
 - [ ] Implement one reverse sampling step
 - [ ] Integrate `RandomGenerator`
 - [ ] Accept predicted epsilon explicitly

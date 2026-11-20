@@ -93,9 +93,9 @@ shape and finite values.
 - [ ] Implement documented reconstruction loss (begin with mean squared error).
 - [ ] Validate loss against an independent small known-answer fixture.
 - [ ] Propagate gradients through decoder and encoder.
-- [ ] Integrate the validated NN.1 optimiser, zero-grad and gradient clipping.
-- [ ] Implement a deterministic, seeded CPU mini-batch training loop.
-- [ ] Establish a train/validation split with no example leakage.
+- [ ] Integrate AdamFP64 and zero-grad under the approved NN.1.07A training policy; gradient controls remain explicitly opt-in via NN.1.07C/D.
+- [ ] Implement a deterministic, seeded CPU mini-batch training loop using the shared NN.1.07E lifecycle and policy.
+- [ ] Establish a train/validation/test split with no example leakage, according to NN.1.07A.
 - [ ] Log train and validation reconstruction loss per epoch.
 - [ ] Test a tiny overfitting case to confirm the network can learn.
 - [ ] Verify improvement over an untrained baseline.
@@ -106,10 +106,10 @@ loss; independent validation metrics are recorded.
 
 ## AE.6 — Checkpoints and reproducibility
 
-- [ ] Save encoder, decoder and optimiser parameters with model metadata.
+- [ ] Save encoder, decoder and AdamFP64 moment/step state with NN.1.07A policy version and model metadata.
 - [ ] Record architecture, latent shape, scaling, seed and training step.
 - [ ] Implement checkpoint load and schema/version validation.
-- [ ] Support deterministic resume, including RNG and optimiser state.
+- [ ] Support deterministic resume, including RNG, optimiser and NN.1.07E training lifecycle state.
 - [ ] Reject corrupt/incompatible checkpoints with clear errors.
 - [ ] Test checkpoint round-trip and resumed-training equivalence.
 
@@ -146,6 +146,8 @@ contract are ready for NN.2 epsilon-predictor training and NN.3 image generation
 
 ## Dependencies and sign-off rules
 
+- The shared NN.1.07A training policy is a prerequisite for AE.5 execution and AE.6 checkpoint design; NN.1.07B covers deterministic initialisation, C/D geometric gradient controls, E lifecycle, F controlled training evidence, and G experimental update trust regions.
+- Euclidean clipping, metric-radial clipping and update trust regions must be independently enabled and validated; no method is mandatory for the AE baseline merely because it is available.
 - NN.1 trainable operations and gradients are prerequisites to meaningful
   AE training; image I/O and architecture design can proceed independently.
 - AE.1–AE.7 can be developed in parallel with NN.2 on synthetic latent data,

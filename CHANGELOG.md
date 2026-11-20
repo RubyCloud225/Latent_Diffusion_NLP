@@ -15,7 +15,7 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 ### P0.3 test harness (20 November 2026)
 
 - Fixed CPU-only script builds to default `BUILD_METAL_TESTS=OFF` explicitly, preventing cached or Apple-default Metal targets from breaking P0 validation when the optional Metal toolchain is absent. The `--metal` test selection enables Metal explicitly.
-- Observed user's C++ CPU targets build, but the optional shader compilation failed because the Apple Metal toolchain was missing; P0 CTest execution still pending.
+- Observed user's C++ CPU targets build, but the optional shader compilation failed because the Apple Metal toolchain was missing; P0 CTest subsequently passed (2/2), and full CPU regression passed (3/3).
 
 - Registered existing FP16 test as `p0;core` in CTest.
 - Added a diffusion reference-fixture executable under `tests/diffusion` and registered it as `p0;diffusion`.
@@ -23,7 +23,7 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 - Added `ctest --test-dir build -L p0 --output-on-failure` as the P0-only test invocation.
 - Implemented existing `scripts/build.sh` and extended `scripts/test.sh` to select `--all`, `--p0`, `--core`, `--diffusion`, `--experimental`, or `--metal`; `BUILD_TYPE`, `BUILD_DIR`, and `BUILD_METAL_TESTS` are configurable.
 - Reference fixtures are **not** production diffusion API validation; tests for the actual implementation remain P0.6–P0.9.
-- CMake/CTest integration remains unverified until a fresh clone is built and tested. The checked-in CMake also lacks the `latent_core` target ticked under P0.2, which needs separate reconciliation.
+- macOS Debug validation (20 November 2026): `bash scripts/test.sh --p0` PASS (2/2, 0.27 s); `bash scripts/test.sh --all` PASS (3/3, 0.13 s). Metal excluded because its optional compiler is unavailable. Clean-clone, Release and full production diffusion validation remain outstanding. The checked-in CMake also lacks the `latent_core` target ticked under P0.2, which needs separate reconciliation.
 
 ### Added
 

@@ -16,6 +16,7 @@ add_library(latent_core STATIC
     src/diffusion/GaussianDiffusion.cpp
     src/nn/Linear.cpp
     src/nn/Activation.cpp
+    src/nn/Conv2D.cpp
 )
 target_include_directories(latent_core PUBLIC
     ${PROJECT_SOURCE_DIR}
@@ -165,7 +166,25 @@ if(BUILD_TESTING)
         LABELS "nn;core"
     )
 
+    # NN.1.04 — Conv2D forward propagation.
+    add_executable(test_nn_conv2d_forward
+        tests/nn/test_conv2d_forward.cpp
+    )
 
+    target_link_libraries(
+        test_nn_conv2d_forward
+        PRIVATE latent_core
+    )
+
+    add_test(
+        NAME nn_conv2d_forward
+        COMMAND test_nn_conv2d_forward
+    )
+
+    set_tests_properties(
+        nn_conv2d_forward
+        PROPERTIES LABELS "nn"
+    )
 endif()
 
 option(BUILD_METAL_TESTS "Build tests requiring the Xcode Metal Toolchain" ${APPLE})

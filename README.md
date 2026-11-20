@@ -1,5 +1,10 @@
 # Latent Diffusion NLP: Clifford-Optimized Generative Modeling (C++)
 
+## Production C++ API documentation
+
+Doxygen documentation for the production Tensor, RNG and diffusion APIs is available through the optional CMake `docs` target. See [docs/DOXYGEN.md](docs/DOXYGEN.md) for installation, generation and viewing instructions.
+
+
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 
 A high-performance latent diffusion pipeline for natural language processing, combining tokenization, geometric embedding compression, and CNN-based noise prediction. This project demonstrates an end-to-end approach to generative modeling optimized for hardware efficiency.

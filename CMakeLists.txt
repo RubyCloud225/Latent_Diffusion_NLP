@@ -14,6 +14,7 @@ add_library(latent_core STATIC
     src/core/Random.cpp
     src/diffusion/NoiseSchedule.cpp
     src/diffusion/GaussianDiffusion.cpp
+    src/nn/Linear.cpp
 )
 target_include_directories(latent_core PUBLIC
     ${PROJECT_SOURCE_DIR}
@@ -126,7 +127,22 @@ if(BUILD_TESTING)
 
     set_tests_properties(nn_layer PROPERTIES
         LABELS "nn;core"
-)
+    )
+    
+    # NN.1.02 — FP64 Linear Layer.
+    add_executable(test_nn_linear
+        tests/nn/test_linear.cpp
+    )
+
+    target_link_libraries(test_nn_linear PRIVATE
+        latent_core
+    )
+
+    add_test(NAME nn_linear COMMAND test_nn_linear)
+
+    set_tests_properties(nn_linear PROPERTIES
+        LABELS "nn;core"
+    )
 
 
 endif()

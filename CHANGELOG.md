@@ -12,6 +12,13 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### NN.1.03C Activation numerical validation (20 November 2026, pending test confirmation)
+
+- Added `tests/nn/test_activation_validation.cpp`, independently checking ReLU and SiLU backward gradients with central finite differences (excluding the nondifferentiable point for ReLU).
+- Added boundary and extreme-value checks, rank-4 shape tests and tests proving invalid forward inputs do not corrupt cached valid state.
+- Registered `nn_activation_validation` under the `nn` CTest label; production activation code unchanged.
+- Awaiting user-run NN, P0 and full CPU regression results; no unverified test pass is claimed.
+
 ### NN.1.03B SiLU activation (20 November 2026, CPU Debug validated)
 
 - Added Doxygen-documented FP64 SiLU (Swish) forward/backward to existing `Activation.hpp` and `Activation.cpp`, using overflow-safe sigmoid branches.

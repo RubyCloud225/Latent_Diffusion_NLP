@@ -17,6 +17,7 @@ add_library(latent_core STATIC
     src/nn/Linear.cpp
     src/nn/Activation.cpp
     src/nn/Conv2D.cpp
+    src/nn/AdamFP64.cpp
 )
 target_include_directories(latent_core PUBLIC
     ${PROJECT_SOURCE_DIR}
@@ -205,6 +206,27 @@ if(BUILD_TESTING)
         nn_conv2d_backward
         PROPERTIES LABELS "nn"
     )
+
+    # NN.1.06 — Production FP64 Adam optimiser.
+    add_executable(test_nn_adam_fp64
+        tests/nn/test_adam_fp64.cpp
+    )
+
+    target_link_libraries(
+        test_nn_adam_fp64
+        PRIVATE latent_core
+    )
+
+    add_test(
+        NAME nn_adam_fp64
+        COMMAND test_nn_adam_fp64
+    )
+
+    set_tests_properties(
+        nn_adam_fp64
+        PROPERTIES LABELS "nn"
+    )
+
 endif()
 
 option(BUILD_METAL_TESTS "Build tests requiring the Xcode Metal Toolchain" ${APPLE})

@@ -15,13 +15,22 @@ brew install doxygen
 From the repository root:
 
 ```bash
-cmake -S . -B build -DBUILD_DOCS=ON -DBUILD_METAL_TESTS=OFF
-cmake --build build --target docs
-open build/docs/html/index.html
+bash scripts/run_documentation.sh
+bash scripts/run_documentation.sh --open
 ```
 
-For users of an existing build directory, rerunning CMake with
-`-DBUILD_DOCS=OFF` disables the documentation target.
+The script uses a dedicated `build-docs/` CMake directory so your
+ordinary `build/` and `scripts/test.sh` configuration remain unchanged.
+The HTML output is at `build-docs/docs/html/index.html`.
+
+For advanced/manual use:
+
+```bash
+cmake -S . -B build-docs -DBUILD_DOCS=ON -DBUILD_TESTING=OFF -DBUILD_METAL_TESTS=OFF
+cmake --build build-docs --target docs
+```
+
+Use `DOCS_BUILD_DIR` to choose a different documentation build directory.
 
 ## Scope
 

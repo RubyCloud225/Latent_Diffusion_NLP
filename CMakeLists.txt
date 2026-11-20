@@ -19,6 +19,7 @@ add_library(latent_core STATIC
     src/nn/Conv2D.cpp
     src/nn/AdamFP64.cpp
     src/nn/training/TrainingPolicy.cpp
+    src/nn/training/Initialisation.cpp
 )
 target_include_directories(latent_core PUBLIC
     ${PROJECT_SOURCE_DIR}
@@ -236,6 +237,14 @@ if(BUILD_TESTING)
     target_link_libraries(test_nn_training_policy PRIVATE latent_core)
     add_test(NAME nn_training_policy COMMAND test_nn_training_policy)
     set_tests_properties(nn_training_policy PROPERTIES LABELS "nn")
+    # NN.1.07B — Parameter initialisation.
+    add_executable(test_initialisation
+        tests/nn/test_initialisation.cpp
+        src/nn/training/Initialisation.cpp
+    )
+    target_link_libraries(test_initialisation PRIVATE latent_core)
+    add_test(NAME nn_initialisation COMMAND test_initialisation)
+    set_tests_properties(nn_initialisation PROPERTIES LABELS "nn")
 
 endif()
 

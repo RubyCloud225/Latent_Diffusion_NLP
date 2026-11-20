@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BUILD_TYPE="${BUILD_TYPE:-Debug}"
 BUILD_DIR="${BUILD_DIR:-${ROOT_DIR}/build}"
-BUILD_METAL_TESTS="${BUILD_METAL_TESTS:-}"
+BUILD_METAL_TESTS="${BUILD_METAL_TESTS:-OFF}"
 
 case "${BUILD_TYPE}" in
     Debug|Release|RelWithDebInfo|MinSizeRel) ;;
@@ -19,9 +19,7 @@ cmake_args=(
     -DCMAKE_BUILD_TYPE="${BUILD_TYPE}"
     -DBUILD_TESTING=ON
 )
-if [[ -n "${BUILD_METAL_TESTS}" ]]; then
-    cmake_args+=(-DBUILD_METAL_TESTS="${BUILD_METAL_TESTS}")
-fi
+cmake_args+=(-DBUILD_METAL_TESTS="${BUILD_METAL_TESTS}")
 cmake "${cmake_args[@]}"
 
 echo "==> Building"

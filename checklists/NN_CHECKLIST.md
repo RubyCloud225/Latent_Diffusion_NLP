@@ -53,9 +53,14 @@ gradient and optimiser tests.
 
 **Validation:** User confirms full CPU suite PASS (13/13), including the `nn_activation_validation` test registered under the `nn` label. Numerical-gradient, edge-case, rank-4 and forward-cache validation cases passed as part of that suite. Individual `--nn` / `--p0` counts and timings not supplied for this run; Doxygen, Release and Metal remain separately unverified.
 
-#### NN.1.04 — Conv2D forward
-- [ ] Define NCHW convolution shape, kernel, stride and padding contracts.
-- [ ] Implement FP64 Conv2D forward and independent `nn_conv2d_forward` test.
+#### NN.1.04 — Conv2D forward (CPU Debug signed off 20 November 2026)
+- [x] Define NCHW convolution shape, kernel, stride and padding contracts.
+- [x] Implement FP64 Conv2D forward and independent `nn_conv2d_forward` test.
+- [x] Validate multi-channel, multi-output, batch, stride, padding and known-answer convolution results.
+- [x] Correct the header filename from `Cov2D.hpp` to `Conv2D.hpp`.
+- [x] Run `bash scripts/test.sh --nn`, `--p0` and `--all` after the header fix.
+
+**Validation:** User confirms all three CPU test suites passed after correcting the header filename. Expected registered counts were 6 NN, 7 P0 and 14 total CPU; exact output/timings were not supplied. Doxygen generation, Release and Metal remain separately unverified. Backpropagation is tracked in NN.1.05.
 
 #### NN.1.05 — Conv2D backward
 - [ ] Implement gradients for input, kernel and bias.

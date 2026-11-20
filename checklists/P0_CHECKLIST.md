@@ -22,16 +22,22 @@
 
 ## P0.3 — Test Harness
 
-- [ ] Add production-core test targets
-- [ ] Add core test directory
-- [ ] Add diffusion test directory
-- [ ] Add CTest labels
-- [ ] Add `p0` label
-- [ ] Add `core` label
-- [ ] Add `diffusion` label
-- [ ] Keep experimental tests separately labelled
-- [ ] Keep Metal tests separately labelled
-- [ ] Allow P0 tests to run independently
+- [x] Add production-core test targets (existing FP16 target)
+- [x] Add core test directory (existing `tests/core/`)
+- [x] Add diffusion test directory
+- [x] Add CTest labels
+- [x] Add `p0` label
+- [x] Add `core` label
+- [x] Add `diffusion` label
+- [x] Keep experimental tests separately labelled
+- [x] Keep Metal tests separately labelled
+- [x] Allow P0 tests to run independently using `ctest --test-dir build -L p0 --output-on-failure`
+
+**Validation pending:** CMake/CTest has not been executed against this commit.
+`diffusion_harness` tests reference fixtures and test-runner wiring only; it
+does not test an implementation of forward/reverse diffusion. Production API
+tests are required under P0.6–P0.9. The P0.2 `latent_core` checklist entry
+also requires reconciliation with the currently committed root CMake file.
 
 ## P0.4 — Tensor
 

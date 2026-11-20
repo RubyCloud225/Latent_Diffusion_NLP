@@ -24,6 +24,16 @@ Aligned with [ROADMAP.md](../ROADMAP.md), especially Milestones 3, 4, 5, 6 and 7
 **Exit criterion:** A small CPU network trains reproducibly and passes numerical
 gradient and optimiser tests.
 
+**NN.1.02 — FP64 Linear Layer (signed off 20 November 2026)**
+
+- [x] Implement rank-1 and batched rank-2 `Linear` forward propagation (`y = Wx + b`).
+- [x] Implement input, weight and bias backward gradients.
+- [x] Validate deterministic known answers, batch shapes and gradients.
+- [x] Validate finite-difference numerical gradients, accumulation and `zero_grad()`.
+- [x] Register `test_nn_linear` under `nn;core` and add public Doxygen API comments.
+
+**Validation:** User reports the NN, P0 and full CPU test suites passed after NN.1.02. Source, tests and CMake wiring verified on GitHub. Exact counts, durations and Doxygen build output not supplied; Release, Metal and clean-clone unverified. The combined activation-and-linear NN.1 item remains open until activation is implemented.
+
 **NN.1.01 validation (20 November 2026, macOS CPU Debug):** User confirmed `bash scripts/test.sh --nn`, `--p0` and `--all` passed. The Layer/Parameter headers, `test_nn_layer` registration and `--nn` runner option were verified on GitHub. Counts, times, Release and Metal validation were not supplied; NN.1 remains in progress.
 
 ## NN.2 — Spatial epsilon-prediction network (Roadmap Milestone 5)

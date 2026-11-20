@@ -15,6 +15,7 @@ add_library(latent_core STATIC
     src/diffusion/NoiseSchedule.cpp
     src/diffusion/GaussianDiffusion.cpp
     src/nn/Linear.cpp
+    src/nn/Activation.cpp
 )
 target_include_directories(latent_core PUBLIC
     ${PROJECT_SOURCE_DIR}
@@ -129,6 +130,12 @@ if(BUILD_TESTING)
         LABELS "nn;core"
     )
     
+    # NN.1.03A — FP64 ReLU activation.
+    add_executable(test_nn_relu tests/nn/test_relu.cpp)
+    target_link_libraries(test_nn_relu PRIVATE latent_core)
+    add_test(NAME nn_relu COMMAND test_nn_relu)
+    set_tests_properties(nn_relu PROPERTIES LABELS "nn")
+
     # NN.1.02 — FP64 Linear Layer.
     add_executable(test_nn_linear
         tests/nn/test_linear.cpp
@@ -226,6 +233,7 @@ if(BUILD_DOCS)
     doxygen_add_docs(docs
         "${PROJECT_SOURCE_DIR}/latent/core"
         "${PROJECT_SOURCE_DIR}/latent/diffusion"
+        "${PROJECT_SOURCE_DIR}/latent/nn"
         COMMENT "Generate Doxygen production-core API documentation"
     )
 endif()

@@ -33,7 +33,7 @@
 - [x] Keep Metal tests separately labelled
 - [x] Allow P0 tests to run independently using `ctest --test-dir build -L p0 --output-on-failure`
 
-**Validation pending:** CMake/CTest has not been executed against this commit.
+**Validation (20 November 2026, macOS, Debug):** `bash scripts/test.sh --p0` PASS (2/2, 0.27 s); `bash scripts/test.sh --all` PASS (3/3, 0.13 s). Metal excluded owing to missing optional Metal toolchain.
 `diffusion_harness` tests reference fixtures and test-runner wiring only; it
 does not test an implementation of forward/reverse diffusion. Production API
 tests are required under P0.6–P0.9. The P0.2 `latent_core` checklist entry

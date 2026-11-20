@@ -44,14 +44,14 @@ gradient and optimiser tests.
 
 **Validation:** User reports all NN, P0 and full CPU regression suites passed after integration of `nn_silu`. The expected registered counts are 4 NN, 7 P0 and 12 total CPU; exact logs/timings were not supplied. Doxygen generation, Release, Metal and clean-clone validation remain unverified.
 
-#### NN.1.03C — Activation numerical validation (implemented, awaiting validation)
-- [ ] Validate independent central finite differences for ReLU away from zero and SiLU across negative, zero and positive inputs.
-- [ ] Verify ReLU's documented zero-subgradient convention.
-- [ ] Validate SiLU extreme-value gradients and rank-4 shape preservation.
-- [ ] Confirm failed forward calls do not corrupt the cached valid input.
-- [ ] Run `bash scripts/test.sh --nn`, `--p0`, and `--all`.
+#### NN.1.03C — Activation numerical validation (CPU Debug validated 20 November 2026)
+- [x] Validate independent central finite differences for ReLU away from zero and SiLU across negative, zero and positive inputs.
+- [x] Verify ReLU's documented zero-subgradient convention.
+- [x] Validate SiLU extreme-value gradients and rank-4 shape preservation.
+- [x] Confirm failed forward calls do not corrupt the cached valid input.
+- [x] Run `bash scripts/test.sh --nn`, `--p0`, and `--all`.
 
-**Implementation:** Added `tests/nn/test_activation_validation.cpp` and registered `nn_activation_validation` in CMake (label `nn`). Awaiting user-reported CPU test evidence.
+**Validation:** User confirms full CPU suite PASS (13/13), including the `nn_activation_validation` test registered under the `nn` label. Numerical-gradient, edge-case, rank-4 and forward-cache validation cases passed as part of that suite. Individual `--nn` / `--p0` counts and timings not supplied for this run; Doxygen, Release and Metal remain separately unverified.
 
 #### NN.1.04 — Conv2D forward
 - [ ] Define NCHW convolution shape, kernel, stride and padding contracts.

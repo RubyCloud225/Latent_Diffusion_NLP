@@ -105,6 +105,14 @@ if(BUILD_TESTING)
     add_test(NAME forward_diffusion COMMAND test_forward_diffusion)
     set_tests_properties(forward_diffusion PROPERTIES LABELS "p0;diffusion")
 
+    # P0.8 — Deterministic reverse diffusion mathematics.
+    add_executable(test_reverse_diffusion
+        tests/diffusion/test_reverse_diffusion.cpp
+    )
+    target_link_libraries(test_reverse_diffusion PRIVATE latent_core)
+    add_test(NAME reverse_diffusion COMMAND test_reverse_diffusion)
+    set_tests_properties(reverse_diffusion PROPERTIES LABELS "p0;diffusion")
+
 endif()
 
 option(BUILD_METAL_TESTS "Build tests requiring the Xcode Metal Toolchain" ${APPLE})
@@ -171,4 +179,21 @@ if(APPLE AND BUILD_TESTING AND BUILD_METAL_TESTS)
         COMMAND test_clifford_projection_metal
     )
     set_tests_properties(clifford_projection_metal PROPERTIES LABELS "experimental;metal")
+endif()
+
+# Optional API documentation: normal configure/build/test does not require Doxygen.
+option(BUILD_DOCS "Enable Doxygen API documentation target" OFF)
+if(BUILD_DOCS)
+    find_package(Doxygen REQUIRED)
+    set(DOXYGEN_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/docs")
+    set(DOXYGEN_GENERATE_HTML YES)
+    set(DOXYGEN_GENERATE_LATEX NO)
+    set(DOXYGEN_EXTRACT_ALL NO)
+    set(DOXYGEN_WARN_IF_UNDOCUMENTED YES)
+    set(DOXYGEN_QUIET NO)
+    doxygen_add_docs(docs
+        "${PROJECT_SOURCE_DIR}/latent/core"
+        "${PROJECT_SOURCE_DIR}/latent/diffusion"
+        COMMENT "Generate Doxygen production-core API documentation"
+    )
 endif()

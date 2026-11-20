@@ -12,12 +12,12 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
-### NN.1.03B SiLU activation (20 November 2026, awaiting validation)
+### NN.1.03B SiLU activation (20 November 2026, CPU Debug validated)
 
 - Added Doxygen-documented FP64 SiLU (Swish) forward/backward to existing `Activation.hpp` and `Activation.cpp`, using overflow-safe sigmoid branches.
 - Added `tests/nn/test_silu.cpp` to check known answers, extreme values, tensor shapes, non-finite inputs and invalid backwards calls.
 - Registered `nn_silu` in CMake with CTest label `nn`; existing ReLU behaviour retained.
-- NN.1.03B remains pending user-run NN, P0 and full CPU regression suites. Doxygen generation, Release and Metal results not independently verified.
+- User reports `--nn`, `--p0` and `--all` CPU test suites all passed following SiLU integration; expected registered counts 4 NN / 7 P0 / 12 total, exact logs/timing not supplied. Doxygen generation, Release and Metal results not independently verified.
 
 ### NN.1.03A ReLU activation (20 November 2026, CPU Debug validated)
 

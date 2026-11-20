@@ -35,9 +35,14 @@ gradient and optimiser tests.
 
 **Validation:** User reports `bash scripts/test.sh --nn`, `--p0`, and `--all` passed after the ReLU integration. Expected registered test counts: 3 NN / 7 P0 / 11 total CPU; exact test output and timings not supplied. Doxygen generation was not separately confirmed.
 
-#### NN.1.03B — SiLU (Swish)
-- [ ] Implement stable SiLU forward and backward.
-- [ ] Add independent `nn_silu` test.
+#### NN.1.03B — SiLU (Swish) (implemented, awaiting validation)
+- [ ] Validate stable FP64 SiLU forward and backward against known answers.
+- [ ] Validate output and gradient shapes and preservation of input.
+- [ ] Validate extreme-value and invalid-input behaviour.
+- [ ] Run independent `nn_silu` plus `--nn`, `--p0`, and `--all` suites.
+- [ ] Confirm optional Doxygen generation separately.
+
+**Implementation:** Added SiLU to `Activation.hpp`/`Activation.cpp`, with Doxygen public API documentation and `tests/nn/test_silu.cpp` registered under the `nn` CTest label. No user-confirmed test results yet.
 
 #### NN.1.03C — Activation numerical validation
 - [ ] Add finite-difference activation gradients away from ReLU's nondifferentiable zero.

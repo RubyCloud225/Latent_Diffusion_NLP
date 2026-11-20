@@ -5,7 +5,7 @@ P0.8 and P0.9 accept **externally supplied predicted epsilon**: they implement
 mathematically correct reverse steps, not a trained model. An actual learned
 epsilon predictor is required before end-to-end image generation.
 
-Aligned with [ROADMAP.md](../ROADMAP.md), especially Milestones 3, 4, 5, 6 and 7.
+Aligned with [ROADMAP.md](../ROADMAP.md), especially Milestones 3, 4, 5, 6 and 7. Image encoding, decoding, reconstruction training and latent handoff are separately tracked in [AUTOENCODER_CHECKLIST.md](AUTOENCODER_CHECKLIST.md).
 
 ## NN.1 — Trainable neural operations (Roadmap Milestone 3)
 
@@ -50,7 +50,7 @@ can be trained to reduce held-out epsilon-prediction error.
 - [ ] Test deterministic checkpoint resume.
 - [ ] Add a reverse loop calling the trained denoiser at each timestep.
 - [ ] Verify reverse-step ordering and non-finite trajectory guards.
-- [ ] Integrate trained latent autoencoder decoder (Roadmap Milestone 4).
+- [ ] Integrate trained latent autoencoder decoder (Roadmap Milestone 4; see [AE.8](AUTOENCODER_CHECKLIST.md)).
 - [ ] Demonstrate seeded end-to-end output from trained model checkpoints.
 - [ ] Record CPU numerical and regression evidence; Metal separately.
 

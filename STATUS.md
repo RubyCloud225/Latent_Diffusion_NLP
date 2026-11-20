@@ -42,7 +42,9 @@ Productionisation has now begun.
 
 ## Neural-network foundation
 
-- [ ] NN.1.07A: Versioned C++17 FP64 training policy, canonical parser/serializer, Doxygen comments and independent `nn_training_policy` CTest added; awaiting user NN/P0/full CPU regression evidence (20 November 2026). Execution remains disabled.
+- [ ] NN.1.07B: User reports local full CPU regression PASS (18/18, 20 November 2026). NN.1.07B initialisation header, source and test not found on GitHub default branch during verification; awaiting source push/review before implementation sign-off. Doxygen, Release and Metal remain unverified.
+- [x] NN.1.07A initial implementation: Versioned C++17 FP64 policy schema, canonical parser/serializer and independent `nn_training_policy` CTest; user confirms 17/17 full CPU regression passed (20 November 2026). Execution remains disabled.
+- [ ] NN.1.07A remaining scope: complete the broader objective, dataset/run metadata, update-constraint and checkpoint-policy contracts; optional Doxygen generation, Release and Metal validation not confirmed.
 - [x] NN.1.06: Production AdamFP64 optimiser with deterministic updates, atomic failure validation, reset, parameter integration; user confirms full CPU suite PASS (16/16, 20 November 2026).
 - [x] NN.1.05: Conv2D input/weight/bias backpropagation, finite-difference gradients, batched accumulation and zero_grad() validated in user-reported NN/P0/full CPU test runs (20 November 2026).
 - [x] NN.1.04 FP64 NCHW Conv2D forward, stride/padding/channel/batch validation and corrected header name; user confirms NN/P0/full CPU suites passed (20 November 2026).

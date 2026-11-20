@@ -10,15 +10,15 @@ Aligned with [ROADMAP.md](../ROADMAP.md), especially Milestones 3, 4, 5, 6 and 7
 ## NN.1 — Trainable neural operations (Roadmap Milestone 3)
 
 - [x] Define a production `Layer` interface with shape contracts.
-- [ ] Implement or port Conv2D with forward and backward propagation.
-- [ ] Implement activation and linear layers with correct backward passes.
+- [x] Implement FP64 Conv2D forward and backward propagation (NN.1.04–05).
+- [x] Implement FP64 ReLU, SiLU and Linear with validated backward passes (NN.1.02–03C).
 - [ ] Implement spatial upsampling/transposed convolution as required.
 - [x] Define parameter, gradient and zero-grad interfaces.
-- [ ] Integrate Adam with model parameters and deterministic initialisation.
-- [ ] Add gradient clipping and finite-value checks.
-- [ ] Test layer shapes, invalid inputs and input immutability as applicable.
-- [ ] Validate analytical gradients against finite differences.
-- [ ] Demonstrate loss reduction on a deterministic toy mapping.
+- [x] Integrate production AdamFP64 with model Parameters (NN.1.06); deterministic initialisation is separately pending in NN.1.07B.
+- [ ] Implement policy-governed, opt-in gradient geometry controls (NN.1.07C/D); existing layer/optimiser finite-value guards are validated.
+- [x] Test validated NN.1.01–06 layer shapes, invalid inputs and immutability where applicable.
+- [x] Validate Linear, ReLU/SiLU and Conv2D gradients against finite differences.
+- [ ] Demonstrate deterministic loss reduction as an NN.1.07F smoke test under the reviewed training policy.
 - [ ] Add Doxygen public API documentation.
 
 **Exit criterion:** A small CPU network trains reproducibly and passes numerical
@@ -173,7 +173,7 @@ can be trained to reduce held-out epsilon-prediction error.
 - [ ] Define the boundary between `Sampler::sample_step` and the denoiser.
 - [ ] Build training samples using `q_sample(z0, t, epsilon)`.
 - [ ] Train on known injected Gaussian noise without placeholder predictions.
-- [ ] Implement/checkpoint model and optimiser state, seed and configuration.
+- [ ] Implement/checkpoint model and optimiser state, RNG seed and NN.1.07A policy/configuration via the NN.1.07E shared training lifecycle.
 - [ ] Test deterministic checkpoint resume.
 - [ ] Add a reverse loop calling the trained denoiser at each timestep.
 - [ ] Verify reverse-step ordering and non-finite trajectory guards.

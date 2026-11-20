@@ -24,6 +24,39 @@ Aligned with [ROADMAP.md](../ROADMAP.md), especially Milestones 3, 4, 5, 6 and 7
 **Exit criterion:** A small CPU network trains reproducibly and passes numerical
 gradient and optimiser tests.
 
+### NN.1.03–NN.1.07 — Small-ticket implementation plan
+
+#### NN.1.03A — ReLU forward and backward (implemented, awaiting validation)
+- [ ] Verify ReLU known-answer forward and backward for negative, zero, positive inputs.
+- [ ] Verify Tensor shape preservation, no parameters and input immutability.
+- [ ] Verify invalid-shape, missing-forward, NaN/Inf rejection.
+- [ ] Run `bash scripts/test.sh --nn`, `--p0`, and `--all`.
+- [ ] Record Doxygen generation and regression results when run.
+
+#### NN.1.03B — SiLU (Swish)
+- [ ] Implement stable SiLU forward and backward.
+- [ ] Add independent `nn_silu` test.
+
+#### NN.1.03C — Activation numerical validation
+- [ ] Add finite-difference activation gradients away from ReLU's nondifferentiable zero.
+- [ ] Add boundary/extreme-value checks and `nn_activation_validation` test.
+
+#### NN.1.04 — Conv2D forward
+- [ ] Define NCHW convolution shape, kernel, stride and padding contracts.
+- [ ] Implement FP64 Conv2D forward and independent `nn_conv2d_forward` test.
+
+#### NN.1.05 — Conv2D backward
+- [ ] Implement gradients for input, kernel and bias.
+- [ ] Add known-answer and finite-difference `nn_conv2d_backward` test.
+
+#### NN.1.06 — FP64 Adam
+- [ ] Adapt or replace isolated FP32 Adam to work with production FP64 Parameters.
+- [ ] Add seeded/known-answer, optimiser-state and validation tests.
+
+#### NN.1.07 — Initialisation and training
+- [ ] Implement reproducible nonzero parameter initialisation and gradient clipping.
+- [ ] Show a deterministic tiny NN learns a toy mapping and add `nn_training` test.
+
 **NN.1.02 — FP64 Linear Layer (signed off 20 November 2026)**
 
 - [x] Implement rank-1 and batched rank-2 `Linear` forward propagation (`y = Wx + b`).

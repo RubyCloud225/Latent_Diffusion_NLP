@@ -14,6 +14,9 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ### P0.3 test harness (20 November 2026)
 
+- Fixed CPU-only script builds to default `BUILD_METAL_TESTS=OFF` explicitly, preventing cached or Apple-default Metal targets from breaking P0 validation when the optional Metal toolchain is absent. The `--metal` test selection enables Metal explicitly.
+- Observed user's C++ CPU targets build, but the optional shader compilation failed because the Apple Metal toolchain was missing; P0 CTest execution still pending.
+
 - Registered existing FP16 test as `p0;core` in CTest.
 - Added a diffusion reference-fixture executable under `tests/diffusion` and registered it as `p0;diffusion`.
 - Labelled Clifford tests `experimental` and Apple Metal tests `experimental;metal` to keep them out of the P0-only selection.

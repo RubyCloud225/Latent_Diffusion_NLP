@@ -59,14 +59,16 @@ tests are required under P0.6–P0.9. The `latent_core` target has since been de
 
 ## P0.5 — Random Generator
 
-- [ ] Implement seeded `RandomGenerator`
-- [ ] Implement deterministic uniform sampling
-- [ ] Implement deterministic Gaussian sampling
-- [ ] Implement Gaussian Tensor generation
-- [ ] Validate identical seeds reproduce identical sequences
-- [ ] Validate different seeds produce different sequences
-- [ ] Validate generated values are finite
-- [ ] Add RNG unit tests
+- [x] Implement seeded `RandomGenerator`
+- [x] Implement deterministic uniform sampling
+- [x] Implement deterministic Gaussian sampling
+- [x] Implement Gaussian Tensor generation
+- [x] Validate identical seeds reproduce identical sequences
+- [x] Validate different seeds produce different sequences
+- [x] Validate generated values are finite
+- [x] Add RNG unit tests
+
+**Validation (20 November 2026, macOS, Debug):** user-reported `bash scripts/test.sh --p0` PASS (4/4; 0.28 s) and `bash scripts/test.sh --all` PASS (5/5; 0.02 s). `Random.hpp`, `Random.cpp`, `test_random.cpp`, and CMake test registration were subsequently verified on GitHub. Release, Metal, and clean-clone not validated.
 
 ## P0.6 — Noise Schedule
 

@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblatent_experimental.a CMakeFiles/latent_experimental.dir/nn/Adam.cpp.o CMakeFiles/latent_experimental.dir/experimental/CliffordProjection.cpp.o
+/usr/bin/ranlib liblatent_experimental.a

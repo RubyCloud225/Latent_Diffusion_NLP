@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/test_nn_adam_fp64.dir/test_adam_fp64.cpp.o -o test_nn_adam_fp64  ../../src/liblatent_core.a

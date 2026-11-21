@@ -1,0 +1,18 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/cmake_install.cmake",
+		"/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/src/cmake_install.cmake",
+		"/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/src/core/cmake_install.cmake",
+		"/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/src/diffusion/cmake_install.cmake",
+		"/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/src/nn/cmake_install.cmake",
+		"/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/src/nn/training/cmake_install.cmake",
+		"/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/src/experimental/cmake_install.cmake",
+		"/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/cmake_install.cmake",
+		"/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/core/cmake_install.cmake",
+		"/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/diffusion/cmake_install.cmake",
+		"/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn/cmake_install.cmake",
+		"/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/experimental/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

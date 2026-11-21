@@ -1,0 +1,20 @@
+fp16 1 0.279496
+tensor 1 0.113779
+random 1 0.122826
+diffusion_harness 1 0.127223
+noise_schedule 1 0.119723
+forward_diffusion 1 0.118752
+reverse_diffusion 1 0.118726
+nn_layer 1 0.117042
+nn_relu 1 0.117293
+nn_silu 1 0.135657
+nn_activation_validation 1 0.130505
+nn_linear 1 0.117961
+nn_conv2d_forward 1 0.11835
+nn_conv2d_backward 1 0.119883
+nn_adam_fp64 1 0.118867
+nn_training_policy 1 0.136177
+nn_initialisation 1 0.124309
+nn_gradient_controller 1 0.11853
+clifford_projection 1 0.120747
+---

@@ -1,0 +1,404 @@
+Start testing: Nov 21 10:40 GMT
+----------------------------------------------------------
+1/19 Testing: fp16
+1/19 Test: fp16
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/core/test_fp16"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/core
+"fp16" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+FP16 tests passed.
+<end of output>
+Test time =   0.28 sec
+----------------------------------------------------------
+Test Passed.
+"fp16" end time: Nov 21 10:40 GMT
+"fp16" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/19 Testing: tensor
+2/19 Test: tensor
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/core/test_tensor"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/core
+"tensor" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] P0.4 Tensor tests
+<end of output>
+Test time =   0.11 sec
+----------------------------------------------------------
+Test Passed.
+"tensor" end time: Nov 21 10:40 GMT
+"tensor" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/19 Testing: random
+3/19 Test: random
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/core/test_random"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/core
+"random" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] Uniform range
+[PASS] Uniform repeatability
+[PASS] Gaussian repeatability
+[PASS] Different seeds
+[PASS] Gaussian finite values
+[PASS] Gaussian distribution statistics
+[PASS] Gaussian Tensor generation
+[PASS] Gaussian Tensor repeatability
+[PASS] Reseeding clears cached state
+[PASS] Invalid Tensor dimensions
+[PASS] P0.5 RandomGenerator
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"random" end time: Nov 21 10:40 GMT
+"random" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/19 Testing: diffusion_harness
+4/19 Test: diffusion_harness
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/diffusion/test_diffusion_harness"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/diffusion
+"diffusion_harness" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] P0.3 diffusion reference fixtures (harness only)
+<end of output>
+Test time =   0.13 sec
+----------------------------------------------------------
+Test Passed.
+"diffusion_harness" end time: Nov 21 10:40 GMT
+"diffusion_harness" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/19 Testing: noise_schedule
+5/19 Test: noise_schedule
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/diffusion/test_noise_schedule"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/diffusion
+"noise_schedule" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] P0.6 NoiseSchedule tests
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"noise_schedule" end time: Nov 21 10:40 GMT
+"noise_schedule" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/19 Testing: forward_diffusion
+6/19 Test: forward_diffusion
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/diffusion/test_forward_diffusion"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/diffusion
+"forward_diffusion" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] P0.7 Forward Diffusion tests
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"forward_diffusion" end time: Nov 21 10:40 GMT
+"forward_diffusion" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/19 Testing: reverse_diffusion
+7/19 Test: reverse_diffusion
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/diffusion/test_reverse_diffusion"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/diffusion
+"reverse_diffusion" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] P0.8 Reverse Diffusion Mathematics
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"reverse_diffusion" end time: Nov 21 10:40 GMT
+"reverse_diffusion" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/19 Testing: nn_layer
+8/19 Test: nn_layer
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn/test_nn_layer"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn
+"nn_layer" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] NN.1.01 Layer interface
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"nn_layer" end time: Nov 21 10:40 GMT
+"nn_layer" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/19 Testing: nn_relu
+9/19 Test: nn_relu
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn/test_nn_relu"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn
+"nn_relu" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] NN.1.03A ReLU
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"nn_relu" end time: Nov 21 10:40 GMT
+"nn_relu" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/19 Testing: nn_silu
+10/19 Test: nn_silu
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn/test_nn_silu"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn
+"nn_silu" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] NN.1.03B SiLU
+<end of output>
+Test time =   0.14 sec
+----------------------------------------------------------
+Test Passed.
+"nn_silu" end time: Nov 21 10:40 GMT
+"nn_silu" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/19 Testing: nn_activation_validation
+11/19 Test: nn_activation_validation
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn/test_nn_activation_validation"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn
+"nn_activation_validation" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] NN.1.03C Activation numerical validation
+<end of output>
+Test time =   0.13 sec
+----------------------------------------------------------
+Test Passed.
+"nn_activation_validation" end time: Nov 21 10:40 GMT
+"nn_activation_validation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+12/19 Testing: nn_linear
+12/19 Test: nn_linear
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn/test_nn_linear"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn
+"nn_linear" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] NN.1.02 Linear Layer
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"nn_linear" end time: Nov 21 10:40 GMT
+"nn_linear" time elapsed: 00:00:00
+----------------------------------------------------------
+
+13/19 Testing: nn_conv2d_forward
+13/19 Test: nn_conv2d_forward
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn/test_nn_conv2d_forward"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn
+"nn_conv2d_forward" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] NN.1.04 Conv2D Forward
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"nn_conv2d_forward" end time: Nov 21 10:40 GMT
+"nn_conv2d_forward" time elapsed: 00:00:00
+----------------------------------------------------------
+
+14/19 Testing: nn_conv2d_backward
+14/19 Test: nn_conv2d_backward
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn/test_nn_conv2d_backward"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn
+"nn_conv2d_backward" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] NN.1.05 Conv2D Backward
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"nn_conv2d_backward" end time: Nov 21 10:40 GMT
+"nn_conv2d_backward" time elapsed: 00:00:00
+----------------------------------------------------------
+
+15/19 Testing: nn_adam_fp64
+15/19 Test: nn_adam_fp64
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn/test_nn_adam_fp64"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn
+"nn_adam_fp64" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] NN.1.06 AdamFP64
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"nn_adam_fp64" end time: Nov 21 10:40 GMT
+"nn_adam_fp64" time elapsed: 00:00:00
+----------------------------------------------------------
+
+16/19 Testing: nn_training_policy
+16/19 Test: nn_training_policy
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn/test_nn_training_policy"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn
+"nn_training_policy" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] NN.1.07A Training Policy
+<end of output>
+Test time =   0.14 sec
+----------------------------------------------------------
+Test Passed.
+"nn_training_policy" end time: Nov 21 10:40 GMT
+"nn_training_policy" time elapsed: 00:00:00
+----------------------------------------------------------
+
+17/19 Testing: nn_initialisation
+17/19 Test: nn_initialisation
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn/test_initialisation"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn
+"nn_initialisation" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] NN.1.07B Deterministic Initialisation
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"nn_initialisation" end time: Nov 21 10:40 GMT
+"nn_initialisation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+18/19 Testing: nn_gradient_controller
+18/19 Test: nn_gradient_controller
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn/test_gradient_controller"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/nn
+"nn_gradient_controller" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+[PASS] NN.1.07C Euclidean Gradient Controller
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"nn_gradient_controller" end time: Nov 21 10:40 GMT
+"nn_gradient_controller" time elapsed: 00:00:00
+----------------------------------------------------------
+
+19/19 Testing: clifford_projection
+19/19 Test: clifford_projection
+Command: "/Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/experimental/test_clifford_projection"
+Directory: /Users/catherinepemblington/Documents/GitHub/Latient_Diffusion_NLP/build-cmake-refactor/tests/experimental
+"clifford_projection" start time: Nov 21 10:40 GMT
+Output:
+----------------------------------------------------------
+
+=== Known Projection Test ===
+blade[0] actual=1.00000000 expected=1.00000000
+blade[1] actual=2.00000000 expected=2.00000000
+blade[2] actual=3.00000000 expected=3.00000000
+blade[3] actual=4.00000000 expected=4.00000000
+blade[4] actual=5.00000000 expected=5.00000000
+blade[5] actual=6.00000000 expected=6.00000000
+blade[6] actual=7.00000000 expected=7.00000000
+blade[7] actual=8.00000000 expected=8.00000000
+
+=== FP16 Coefficient Test ===
+blade[0] fp32=1.00000000 fp16-restored=1.00000000 diff=0.00000000
+blade[1] fp32=2.00000000 fp16-restored=2.00000000 diff=0.00000000
+blade[2] fp32=3.00000000 fp16-restored=3.00000000 diff=0.00000000
+blade[3] fp32=4.00000000 fp16-restored=4.00000000 diff=0.00000000
+blade[4] fp32=5.00000000 fp16-restored=5.00000000 diff=0.00000000
+blade[5] fp32=6.00000000 fp16-restored=6.00000000 diff=0.00000000
+blade[6] fp32=7.00000000 fp16-restored=7.00000000 diff=0.00000000
+blade[7] fp32=8.00000000 fp16-restored=8.00000000 diff=0.00000000
+
+=== Reconstruction Test ===
+reconstructed[0] actual=1.00000000 expected=1.00000000
+reconstructed[1] actual=2.00000000 expected=2.00000000
+reconstructed[2] actual=3.00000000 expected=3.00000000
+reconstructed[3] actual=4.00000000 expected=4.00000000
+reconstructed[4] actual=5.00000000 expected=5.00000000
+reconstructed[5] actual=6.00000000 expected=6.00000000
+reconstructed[6] actual=7.00000000 expected=7.00000000
+reconstructed[7] actual=8.00000000 expected=8.00000000
+Remaining dimensions correctly reconstructed as 0.
+
+=== Invalid Input Test ===
+Caught expected exception: CliffordProjection::forward expected a 64-dimensional input.
+
+=== Numerical Gradient Test ===
+
+Weight gradients
+Parameter     Analytical        Numerical         Difference        
+--------------------------------------------------------------------
+weight[0]     0.01000000        0.01000240        0.00000240        
+weight[1]     0.02000000        0.02000108        0.00000108        
+weight[63]    0.63999999        0.64000112        0.00000113        
+weight[64]    -0.00500000       -0.00500306       0.00000306        
+weight[127]   -0.31999999       -0.31999868       0.00000131        
+weight[255]   -0.47999999       -0.47999990       0.00000009        
+weight[511]   0.08000000        0.07999874        0.00000126        
+
+Input gradients
+Parameter     Analytical        Numerical         Difference        
+--------------------------------------------------------------------
+input[0]      1.00000000        0.99999827        0.00000173        
+input[1]      -0.50000000       -0.49999726       0.00000274        
+input[7]      0.12500000        0.12500025        0.00000025        
+input[8]      0.00000000        0.00000000        0.00000000        
+input[31]     0.00000000        0.00000000        0.00000000        
+input[63]     0.00000000        0.00000000        0.00000000        
+
+Seeded initialisation passed.
+
+=== Xavier Initialisation Test ===
+limit=0.28867513
+min_weight=-0.28837469
+max_weight=0.28737062
+
+=== Adam Training Test ===
+initial_loss=1.55546498
+step=1 loss=1.37992251
+step=50 loss=0.00473597
+step=100 loss=0.00002187
+step=200 loss=0.00000000
+final_loss=0.00000000
+Adam optimisation reduced loss successfully.
+
+=================================
+All CliffordProjection tests passed.
+=================================
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"clifford_projection" end time: Nov 21 10:40 GMT
+"clifford_projection" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 21 10:40 GMT
+
+core =   0.75 sec*proc
+
+diffusion =   0.48 sec*proc
+
+experimental =   0.12 sec*proc
+
+nn =   1.35 sec*proc
+
+p0 =   1.00 sec*proc
+

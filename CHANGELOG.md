@@ -12,6 +12,13 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### NN.1.07E.06 versioned AdamFP64 state snapshot (21 November 2026; CPU validation pending)
+
+- Added `AdamSnapshot` v1 with exact FP64 hyperparameters, successful step counter, stable parameter IDs and ordered first/second moment Tensors, preserving existing Adam constructor call sites.
+- Implemented validated `AdamFP64::snapshot()` and all-or-nothing `restore()` with schema/configuration/shape/ID/finite/nonnegative-second-moment validation. Restore does not modify model parameter values or accumulated gradients.
+- Registered `nn_adam_snapshot` CTest with 10 uninterrupted versus 5+restore+5 optimiser replay, moment/weight parity and corruption/compatibility rejection. Expected **18 NN / 26 full CPU** tests; user-local results pending. No checkpoint file codec or whole-session restart claimed yet.
+
+
 ### NN.1.07E.05 common gradient control and diagnostics (21 November 2026; CPU validated)
 
 - Implemented `TrainingGradientControl` to select no clipping, Euclidean L2 or versioned block-metric radial clipping using already validated NN.1.07C/D controllers, without changing underlying numerical implementations.

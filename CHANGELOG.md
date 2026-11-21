@@ -12,11 +12,11 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
-### NN.1.07E.03 sample-weighted image gradient accumulation (21 November 2026; CPU validation pending)
+### NN.1.07E.03 sample-weighted image gradient accumulation (21 November 2026; CPU validated)
 
 - Added `GradientAccumulator` with `sum(n_j*gradient(mean_loss_j))/sum(n_j)`, finite/count checks, explicit zero-gradient boundary requirement, staged normalisation, and correct handling of full and partial image microbatch windows.
 - Snapshots registered model values and gradients plus complete deterministic dataset source before each window, restores them through noexcept moves on failure, and invalidates task transient state. Does not step Adam or claim whole-session transaction.
-- Added `nn_gradient_accumulator` regression covering 128-image full window, unequal microbatches, per-sample MSE/gradient known answers, seeded replay, empty end-of-epoch, invalid starting state and injected failure rollback. Registered source and CTest in directory-level CMake; expected **15 NN / 23 CPU** tests, not yet locally validated.
+- Added `nn_gradient_accumulator` regression covering 128-image full window, unequal microbatches, per-sample MSE/gradient known answers, seeded replay, empty end-of-epoch, invalid starting state and injected failure rollback. Registered source and CTest in directory-level CMake; user-confirmed full CPU regression **23/23 PASS** (15 NN-labelled tests), including the new accumulator test. No per-test log was supplied for this run; Release, Doxygen and Metal remain unverified.
 
 
 ### NN.1.07E.02 toy image reconstruction training task (21 November 2026; CPU validated)

@@ -42,8 +42,8 @@ Productionisation has now begun.
 
 ## Neural-network foundation
 
-- [ ] BUILD-01 hierarchical CMake refactor committed (21 November 2026): root delegates to `src/` and `tests/`; registered NN.1.07C gradient controller; preserves existing CTest names/labels and optional Metal/Doxygen logic. Awaiting local clean configure/build and CPU regression evidence (19 tests expected).
-- [ ] NN.1.07C Euclidean gradient controller source, header and independent test present and now registered in build; implementation unvalidated until user-run tests.
+- [x] BUILD-01 hierarchical CMake refactor (21 November 2026): root delegates to `src/` and `tests/`; preserves previous CTest names and labels; user confirms clean-build full CPU regression PASS (19/19). Metal and Doxygen builds are unverified.
+- [x] NN.1.07C FP64 Euclidean gradient controller and registered known-answer/edge-case tests; user reports clean-build full CPU regression PASS (19/19, 21 November 2026). Session logging and additional atomicity/post-norm refinements remain open.
 - [x] NN.1.07B: He/Xavier seeded FP64 Linear/Conv2D parameter initialisation, per-layer seed derivation and 12-case test present on GitHub default branch; user confirms full CPU regression PASS (18/18, 20 November 2026). Doxygen generation, Release, Metal and clean-clone remain unverified.
 - [x] NN.1.07B build follow-up: removed redundant compilation of Initialisation.cpp in test_initialisation as part of BUILD-01 (build verification pending); checkpoint integration tracked with NN.1.07E.
 - [x] NN.1.07A initial implementation: Versioned C++17 FP64 policy schema, canonical parser/serializer and independent `nn_training_policy` CTest; user confirms 17/17 full CPU regression passed (20 November 2026). Execution remains disabled.

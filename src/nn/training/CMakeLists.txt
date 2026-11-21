@@ -5,4 +5,5 @@ target_sources(latent_core PRIVATE
     GradientController.cpp
     MetricGradientController.cpp
     ImageDataset.cpp
+    ToyImageReconstructionTask.cpp
 )

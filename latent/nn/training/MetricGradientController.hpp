@@ -35,7 +35,15 @@ struct MetricGradientReport {
  *
  * The controller performs one global radial scaling,
  * preserving the full gradient direction subject to
- * FP64 rounding and underflow.
+ * FP64 rounding. Any weighting or clipping that rounds
+ * a nonzero component all the way to zero is rejected
+ * before modification; nonzero subnormal rounding is
+ * still subject to FP64 precision limits.
+ *
+ * @note Metric-radial scaling is not generally the
+ * Euclidean closest-point projection onto an ellipsoid.
+ * This v1 metric is fixed, diagonal and block-weighted;
+ * it is not a Fisher or natural-gradient approximation.
  *
  * @warning Parameters must outlive the controller.
  * @warning Not thread-safe.

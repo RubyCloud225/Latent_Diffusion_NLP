@@ -157,13 +157,13 @@ gradient and optimiser tests.
 - [x] **Validation gate:** User-supplied Debug test log confirms `bash scripts/test.sh --nn` **14/14 PASS** and `bash scripts/test.sh --all` **22/22 PASS** (21 November 2026). `nn_image_reconstruction_task` passed in both runs; no build warnings reported.
 - [ ] Actual image autoencoder architecture, learned encoder/decoder and visible reconstructions remain in AE track.
 
-##### NN.1.07E.03 — Sample-weighted gradient accumulation (implemented; CPU validation pending)
+##### NN.1.07E.03 — Sample-weighted gradient accumulation (CPU validated, 21 November 2026)
 - [x] Implement `GradientAccumulator`: calls `train_microbatch(batch,n_j)` and normalises the resulting gradient tensors once by `N=sum_j n_j`. Uses the actual final partial-batch sample count and reports a sample-weighted mean loss.
 - [x] Reject nonzero incoming gradients, unsupported/empty parameter registration, duplicate/null parameters, non-finite values, sample count overflow and non-representable FP64 counts before committing a window.
 - [x] Snapshot entire deterministic `ImageBatchSource` and registered parameter values/gradients, then restore using noexcept move operations if a microbatch, model, loss or normalisation fails. `reset_transient_state()` called after failure.
 - [x] Leave optimiser stepping, global clipping, epoch advancement and full training-session transactions for E.04–E.07; a successful E.03 window produces only normalised gradients and diagnostics.
 - [x] Add `nn_gradient_accumulator` CTest: eight 16-image microbatches (128 images), 2+2+1 sample-weighted partial window, short last batch with full microbatch count, zero-window end-of-epoch, seeded replay, nonzero initial gradients, and deliberate mid-window failures (exception, invalid loss, non-finite gradient, model mutation) with cursor/parameter rollback.
-- [ ] **Validation gate:** Run `bash scripts/test.sh --nn` and `bash scripts/test.sh --all` after these commits; expected **15 NN and 23 full CPU** tests. No PASS claimed prior to user-reported output.
+- [x] **Validation gate:** User confirms full CPU regression **23/23 PASS** (21 November 2026), including registered `nn_gradient_accumulator` and 15 NN-labelled tests. The exact per-test log and separate Release/Metal/Doxygen validation were not supplied.
 - [ ] Broader task-owned RNG, external side effects and cross-component Adam transaction are deferred to E.07; E.03 rollback covers registered parameters and deterministic in-memory batch source only.
 
 ##### NN.1.07E.04 — Policy/runtime gate

@@ -136,12 +136,78 @@ gradient and optimiser tests.
 - [ ] Perform fixed-seed Euclidean-vs-metric training comparison as part of NN.1.07F; baseline remains independent and unchanged.
 - [ ] Doxygen, Release and Metal validation remain separately unverified.
 
-#### NN.1.07E — Training execution lifecycle and checkpoints
-- [ ] Define batch/epoch/step state transitions: zero_grad, forward, objective, backward, gradient controller, optimiser, validation and checkpoint.
-- [ ] Ensure invalid loss/gradients/metrics/updates reject an entire step without partially changing model or optimiser state.
-- [ ] Store model parameters, optimiser moments and step count, policy/schema version, data manifest, RNG state and code revision.
-- [ ] Test checkpoint integrity, incompatible-version rejection, deterministic resume and interrupted-step recovery.
-- [ ] Keep dataset-specific autoencoder and denoiser objectives in their own tracks; use this shared execution policy for both.
+#### NN.1.07E — Image-first training execution lifecycle and checkpoints
+
+**Design:** [IMAGE_TRAINING_LIFECYCLE_NN_1_07E.md](../docs/IMAGE_TRAINING_LIFECYCLE_NN_1_07E.md) (21 November 2026). Target: C++17 CPU FP64 reference, **images first**. No executable trainer, checkpoint codec, real image AE or denoiser is implemented by this documentation milestone. Video uses a separate future temporal track.
+
+##### NN.1.07E.01 — Image tensor, source and provenance
+- [ ] Specify `ImageBatch` as rank-four NCHW FP64 Tensor; reject invalid rank, non-finite pixels, invalid channel/range/resolution configurations.
+- [ ] Define deterministic batch source API, stable sample IDs, train/validation/test dataset manifest and actual split-overlap verification.
+- [ ] Define serialisable dataset ordering, epoch cursor and seed/RNG state; test deterministic replay and no dataset leakage.
+- [ ] Create small synthetic image fixture with known expected values; leave actual image decoding for the AE/data track.
+
+##### NN.1.07E.02 — Task interface and toy image-reconstruction fixture
+- [ ] Define a Doxygen-documented non-owning `ImageTrainingTask` adapter with parameter registration, unscaled mean loss, explicitly scaled gradient accumulation and read-only validation.
+- [ ] Implement deterministic tiny-image reconstruction using existing trainable layers only as a training-engine fixture; no claim of a finished image model.
+- [ ] Test loss/gradient known answers, deterministic backward, cache reset and non-finite input/loss rejection.
+
+##### NN.1.07E.03 — Correct accumulation
+- [ ] Implement `sum(n_j * grad(mean_loss_j)) / sum(n_j)` before clipping; do not assume all microbatches have the configured batch size.
+- [ ] Test full 8x16 accumulation (128 images), partial windows, no early Adam step, correct loss reduction and overflow handling.
+- [ ] Prove a failure during accumulation does not leave a partial committed optimiser step, cursor or RNG advancement.
+
+##### NN.1.07E.04 — Policy/runtime gate
+- [ ] Resolve existing policy-v1 `validate()` rule that rejects `execution_enabled=true`; define a backward-compatible explicit execution-validation pathway or versioned schema migration.
+- [ ] Reject unsupported objectives, invalid provenance, incompatible model resolution, dataset manifest and gradient mode before execution.
+- [ ] Preserve all NN.1.07A parser/serializer regression tests and original disabled-by-default behaviour.
+
+##### NN.1.07E.05 — Gradient control and metrics
+- [ ] Route `None`, `EuclideanGlobal` and `MetricRadial` via the existing NN.1.07C/D controllers using stable Parameter registration.
+- [ ] Record pre/post norms, clip scale, clipping boolean, controller/metric version, cumulative clipping and rejected-step counts.
+- [ ] Audit Euclidean `norm_after` semantics (currently threshold-assigned) and clearly distinguish diagnostic measurements from requested bounds.
+- [ ] Ensure clipping mutation cannot persist when a later Adam proposal fails.
+
+##### NN.1.07E.06 — AdamFP64 serialisable state
+- [ ] Add versioned, Doxygen-documented Adam snapshot containing both moment tensors, step count and hyperparameter compatibility fields.
+- [ ] Implement atomic validated restore: stable parameter order/shapes, all finite moments, nonnegative second moments and step invariant.
+- [ ] Test moment+step round-trip, resumed next-step parity and rejection without partial mutation on corrupt/incompatible snapshots.
+
+##### NN.1.07E.07 — Training session state machine and failure boundaries
+- [ ] Implement explicit Created/Ready/Accumulating/Updating/Validating/Checkpointing/Failed/Completed states with guarded transitions.
+- [ ] Define and test whole-window rollback/fail-closed handling across task, gradients, controller, Adam, cursor and RNG streams.
+- [ ] Enforce that only successful Adam commits increment successful steps; explicitly test failure injection at each phase.
+- [ ] Implement deterministic validation cadence that leaves train parameters/gradients, optimiser moments, train cursor and RNG state unchanged.
+
+##### NN.1.07E.08 — Versioned checkpoint codec and filesystem atomicity
+- [ ] Store exact stable parameter IDs/shapes/values, both Adam moments, step, canonical policy, run/task identifiers, dataset digest, code revision, metric ID, full RNG engine states, data cursor, counters and best validation metric.
+- [ ] Checkpoint only at a committed optimiser boundary with zero pending gradients for v1; reject incompatible/partial states.
+- [ ] Implement bounded and integrity-checked canonical FP64 serialization with schema/version/shape/truncation/non-finite validation.
+- [ ] Save via same-directory temporary file, flush/sync and atomic rename; retain previous valid checkpoint and test interruption/corruption.
+- [ ] Restore with parse/validate/stage/commit and failure atomicity; test task/dataset/parameter/policy/metric mismatches.
+
+##### NN.1.07E.09 — Deterministic restart proof
+- [ ] Compare 10 continuous optimiser steps with 5 + checkpoint/save/load + 5 steps using identical ordered synthetic image batches.
+- [ ] Require bit-identical (where same backend deterministic operations permit) parameter tensors, Adam moments, step counters, cursor and RNG state; otherwise record justified FP64 tolerance.
+- [ ] Test interrupted-window replay from last committed checkpoint and correct handling of resumed validation cadence.
+
+##### NN.1.07E.10 — Fault-injection regression
+- [ ] Fail deliberately during batch fetch, forward, backward, loss validation, gradient constraint, Adam update, checkpoint write and checkpoint load.
+- [ ] Verify no false successful-step count, no partially committed parameter or optimiser state and no incorrectly advanced persisted cursor.
+- [ ] Verify failed checkpoint write preserves the previously committed checkpoint and reports failure distinctly.
+
+##### NN.1.07E.11 — Build, documentation and evidence
+- [ ] Register new production files in `src/nn/training/CMakeLists.txt` and each CTest in `tests/nn/CMakeLists.txt` without duplicate compilation.
+- [ ] Document all new public C++ APIs with Doxygen and check the optional docs build.
+- [ ] Run `bash scripts/test.sh --nn`, `--p0` and `--all`, then a clean Release build; separately validate Metal if supported.
+- [ ] Add exact observed test output, commit SHA and reproducibility metadata to checklist, STATUS and CHANGELOG only after evidence.
+
+##### NN.1.07E.12 — Image-first demonstration and handoff
+- [ ] Train the deterministic toy reconstruction fixture and demonstrate decreasing held-out MSE without train/val leakage.
+- [ ] Produce an exact reproducibility report with dataset synthetic fixture, seed, policy, code revision, optimiser and checkpoint file hashes.
+- [ ] Hand off model architecture, image decoding/real datasets and visual reconstruction to AE tickets; hand off epsilon prediction to NN.2–NN.3.
+- [ ] Reserve rank-five temporal video tensors and compute/parameter scaling decisions for a future video ticket; make no video capability claim now.
+
+**Exit criteria:** All E.01–E.12 gates relevant to the approved v1 scope are reviewed, implemented and user-validated. This milestone delivers image-training infrastructure, **not** a complete generative image model.
 
 #### NN.1.07F — Reproducible training and validation experiments
 - [ ] Demonstrate deterministic loss reduction on a small controlled mapping as a **smoke test only**.

@@ -12,14 +12,14 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
-### NN.1.07D metric-gradient controller numerical finalisation (21 November 2026, regression correction pending verification)
+### NN.1.07D metric-gradient controller numerical finalisation (21 November 2026, CPU validated)
 
 - User reports NN suite PASS (12/12), compared with 11 NN tests before the block-metric controller.
 - Direct GitHub inspection confirms MetricGradientController header/source/test and source/test CMake registration on main; prior 404 lookups were misleading. No additional push required.
 - Replaced provisional post-clipping threshold reporting with independently measured norm on staged replacement gradients, before nonthrowing commit.
 - Reject destructive gradient-weighting and clipping underflow, invalid clipping scale and unexpected metric-norm increase without partial mutation.
 - Expanded NN tests for diagnostics, underflow, overflow, deterministic read-only measurement, no-op and failure preservation; documented radial metric semantics and out-of-scope Fisher methods.
-- User reran Debug suites: NN 11/12 and full CPU 19/20, with sole failure in `nn_metric_gradient_controller` (`Expected rejection missing`). The extreme-value test incorrectly expected overflow for single-block RMS of equal `DBL_MAX` gradients, whose metric norm is finite. Corrected to check clipping and reported post-norm, and removed an intentional `[[nodiscard]]` warning. Await repeat of 12/12 NN and 20/20 full CPU. Doxygen, Release and Metal remain unconfirmed; fixed-seed metric comparison belongs to NN.1.07F.
+- User reran Debug suites: NN 11/12 and full CPU 19/20, with sole failure in `nn_metric_gradient_controller` (`Expected rejection missing`). The extreme-value test incorrectly expected overflow for single-block RMS of equal `DBL_MAX` gradients, whose metric norm is finite. Corrected to check clipping and reported post-norm, and removed an intentional `[[nodiscard]]` warning. User confirms corrected full CPU regression PASS (20/20), including 12 NN tests. NN.1.07D CPU sign-off complete. Doxygen, Release and Metal remain unconfirmed; fixed-seed metric comparison belongs to NN.1.07F.
 
 
 ### BUILD-01 Hierarchical CMake refactor and NN.1.07C baseline (21 November 2026, CPU validated)

@@ -42,7 +42,7 @@ Productionisation has now begun.
 
 ## Neural-network foundation
 
-- [ ] NN.1.07D: user reports local NN regression PASS (12/12, 21 November 2026). MetricGradientController header/source/test and registration were not present on GitHub default branch at verification; pending push/review and full CPU validation.
+- [ ] NN.1.07D: MetricGradientController header/source/test and both CMake registrations confirmed on GitHub main by direct directory/file inspection. User confirms NN suite PASS (12/12, 21 November 2026). Full CPU regression (20 expected) and measured post-clipping norm refinement pending; no additional push needed.
 - [x] BUILD-01 hierarchical CMake refactor (21 November 2026): root delegates to `src/` and `tests/`; preserves previous CTest names and labels; user confirms clean-build full CPU regression PASS (19/19). Metal and Doxygen builds are unverified.
 - [x] NN.1.07C FP64 Euclidean gradient controller and registered known-answer/edge-case tests; user reports clean-build full CPU regression PASS (19/19, 21 November 2026). Session logging and additional atomicity/post-norm refinements remain open.
 - [x] NN.1.07B: He/Xavier seeded FP64 Linear/Conv2D parameter initialisation, per-layer seed derivation and 12-case test present on GitHub default branch; user confirms full CPU regression PASS (18/18, 20 November 2026). Doxygen generation, Release, Metal and clean-clone remain unverified.

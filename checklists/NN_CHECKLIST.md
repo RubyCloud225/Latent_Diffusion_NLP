@@ -138,13 +138,15 @@ gradient and optimiser tests.
 
 #### NN.1.07E — Image-first training execution lifecycle and checkpoints
 
-**Design:** [IMAGE_TRAINING_LIFECYCLE_NN_1_07E.md](../docs/IMAGE_TRAINING_LIFECYCLE_NN_1_07E.md) (21 November 2026). Target: C++17 CPU FP64 reference, **images first**. No executable trainer, checkpoint codec, real image AE or denoiser is implemented by this documentation milestone. Video uses a separate future temporal track.
+**Design:** [IMAGE_TRAINING_LIFECYCLE_NN_1_07E.md](../docs/IMAGE_TRAINING_LIFECYCLE_NN_1_07E.md) (21 November 2026). Target: C++17 CPU FP64 reference, **images first**. E.01 deterministic image data source is now implemented and registered; no executable trainer, checkpoint codec, real image AE or denoiser is implemented yet. Video uses a separate future temporal track.
 
-##### NN.1.07E.01 — Image tensor, source and provenance
-- [ ] Specify `ImageBatch` as rank-four NCHW FP64 Tensor; reject invalid rank, non-finite pixels, invalid channel/range/resolution configurations.
-- [ ] Define deterministic batch source API, stable sample IDs, train/validation/test dataset manifest and actual split-overlap verification.
-- [ ] Define serialisable dataset ordering, epoch cursor and seed/RNG state; test deterministic replay and no dataset leakage.
-- [ ] Create small synthetic image fixture with known expected values; leave actual image decoding for the AE/data track.
+##### NN.1.07E.01 — Image tensor, source and provenance (implementation committed; CPU test pending)
+- [x] Implement `ImageBatch` as rank-four NCHW FP64 Tensor with ID-count match, finite [0,1] pixels and positive dimensions inherited from `Tensor`; verify in registered test.
+- [x] Implement in-memory `ImageDataset` with uniform 1/3-channel CHW samples, globally unique IDs, mandatory nonempty train/validation/test splits and deterministic content fingerprint. Current fingerprint is FNV-1a (mismatch detection, **not** authenticated provenance or a saved file manifest).
+- [x] Implement deterministic `ImageBatchSource` with fixed SplitMix64 Fisher–Yates per train epoch, held-out canonical ordering, partial final batches, validated versioned cursor restore and no cursor advancement before batch assembly succeeds.
+- [x] Add synthetic known-pixel fixture and registered `nn_image_dataset` CTest covering sample mapping, seeded replay, restored cursor, split isolation, malformed cursors and invalid batches/datasets.
+- [ ] **Validation gate:** Run `bash scripts/test.sh --nn` and `bash scripts/test.sh --all` after latest code (expected 13 NN / 21 full CPU); verify actual outputs before sign-off.
+- [ ] **Future real-data work:** image file decoding, cryptographic content manifests, on-disk split verification and optional augmentation are outside E.01's in-memory reference scope.
 
 ##### NN.1.07E.02 — Task interface and toy image-reconstruction fixture
 - [ ] Define a Doxygen-documented non-owning `ImageTrainingTask` adapter with parameter registration, unscaled mean loss, explicitly scaled gradient accumulation and read-only validation.

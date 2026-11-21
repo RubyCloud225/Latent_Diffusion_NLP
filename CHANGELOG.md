@@ -12,11 +12,11 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
-### NN.1.07E.05 common gradient control and diagnostics (21 November 2026; CPU tests pending)
+### NN.1.07E.05 common gradient control and diagnostics (21 November 2026; CPU validated)
 
 - Implemented `TrainingGradientControl` to select no clipping, Euclidean L2 or versioned block-metric radial clipping using already validated NN.1.07C/D controllers, without changing underlying numerical implementations.
 - Standardised mode/norm/metric diagnostics and measured actual post-clipping norm from resulting gradients. Added counters for successful, clipped and rejected control applications; counters are not Adam commit counters.
-- Added gradient snapshot/restore on controller or post-measure failure; whole-optimiser-step rollback remains E.07. Registered `nn_training_gradient_control` CTest with analytical and numerical-failure fixtures; expected **17 NN / 25 full CPU** tests, awaiting user validation.
+- Added gradient snapshot/restore on controller or post-measure failure; whole-optimiser-step rollback remains E.07. Registered `nn_training_gradient_control` CTest with analytical and numerical-failure fixtures; user-confirmed full CPU regression **25/25 PASS**, with 17 NN-labelled CTest registrations. Separate Release, Metal and Doxygen runs remain unverified.
 
 
 ### NN.1.07E.04 image-training runtime authorisation (21 November 2026; CPU validated)

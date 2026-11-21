@@ -12,6 +12,13 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### NN.1.07E.04 image-training runtime authorisation (21 November 2026; CPU validation pending)
+
+- Added `TrainingExecutionGate` to authorise explicitly enabled image reconstruction policies after validating all established TrainingPolicy-v1 fields, dataset fingerprint, canonical split labels, task/image shape and parameter registration.
+- Preserved the v1 disabled-only `validate()`/`parse()`/`serialize()` contract and canonical serialization unchanged; the gate does not run the model or create an optimiser. Added immutable image shape accessor to `ImageDataset`.
+- Added independent `nn_training_execution_gate` regression for allowed configurations and rejected mismatch/disabled cases, updated hierarchical CMake and image-training design document. Expected **16 NN / 24 full CPU** CTests, pending user-local results.
+
+
 ### NN.1.07E.03 sample-weighted image gradient accumulation (21 November 2026; CPU validated)
 
 - Added `GradientAccumulator` with `sum(n_j*gradient(mean_loss_j))/sum(n_j)`, finite/count checks, explicit zero-gradient boundary requirement, staged normalisation, and correct handling of full and partial image microbatch windows.

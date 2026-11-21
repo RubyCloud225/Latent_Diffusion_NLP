@@ -12,6 +12,14 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### NN.1.07E.01 deterministic image data foundation (21 November 2026; CPU verification pending)
+
+- Added Doxygen-documented NCHW FP64 image microbatch contract, validated synthetic/in-memory dataset and globally unique disjoint train/validation/test identities.
+- Added deterministic SplitMix64/Fisher–Yates training ordering, held-out canonical order, final partial batches, versioned checked cursor restore and a stable non-cryptographic content fingerprint.
+- Added `nn_image_dataset` CTest covering known-pixel fixture, replay, resume, split isolation, invalid data and cursor atomicity; updated hierarchical source/test CMake. Expected registration is 13 NN / 21 full CPU tests.
+- Only the image dataset foundation is committed. User-local CPU validation, real image decoding, task adapters, session execution, Adam checkpointing and generative image modelling remain pending.
+
+
 ### NN.1.07E image-first training lifecycle design (21 November 2026; documentation only)
 
 - Added `docs/IMAGE_TRAINING_LIFECYCLE_NN_1_07E.md` specifying deterministic image microbatch training, sample-weighted accumulation, transaction/failure boundaries, dataset provenance, versioned checkpoint integrity and full Adam/RNG/cursor resume.

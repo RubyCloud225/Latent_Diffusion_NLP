@@ -17,6 +17,7 @@ add_nn_test(test_nn_adam_fp64 test_adam_fp64.cpp nn_adam_fp64)
 add_nn_test(test_nn_training_policy test_training_policy.cpp nn_training_policy)
 add_nn_test(test_initialisation test_initialisation.cpp nn_initialisation)
 add_nn_test(test_metric_gradient_controller test_metric_gradient_controller.cpp nn_metric_gradient_controller)
+add_nn_test(test_image_dataset test_image_dataset.cpp nn_image_dataset)
 
 # NN.1.07C was committed as source/test files but not previously registered.
 add_nn_test(test_gradient_controller test_gradient_controller.cpp nn_gradient_controller)

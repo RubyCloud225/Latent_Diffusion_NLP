@@ -4,9 +4,31 @@
 #include "latent/nn/Parameter.hpp"
 
 #include <cstddef>
+#include <cstdint>
+#include <string>
 #include <vector>
 
 namespace latent::nn {
+
+/**
+ * @brief Complete, versioned, in-memory FP64 Adam optimiser state.
+ *
+ * @details Contains moments and successful step count only, not
+ * model parameter values/gradients. A full model checkpoint is E.08.
+ * Parameter IDs and shapes are stored in registration order.
+ */
+struct AdamSnapshot final {
+    static constexpr std::uint32_t schema_version = 1;
+    std::uint32_t version = schema_version;
+    std::size_t step_count = 0;
+    double learning_rate = 0.0;
+    double beta1 = 0.0;
+    double beta2 = 0.0;
+    double epsilon = 0.0;
+    std::vector<std::string> parameter_ids;
+    std::vector<latent::core::Tensor> first_moments;
+    std::vector<latent::core::Tensor> second_moments;
+};
 
 /**
  * @brief Production FP64 Adam optimiser.
@@ -46,7 +68,8 @@ public:
         double learning_rate = 1e-3,
         double beta1 = 0.9,
         double beta2 = 0.999,
-        double epsilon = 1e-8
+        double epsilon = 1e-8,
+        std::vector<std::string> parameter_ids = {}
     );
 
     /**
@@ -77,6 +100,27 @@ public:
      */
     void reset();
 
+    /**
+     * @brief Copy the complete, ordered optimiser state into a snapshot.
+     *
+     * @throws std::invalid_argument If registered parameter shapes or
+     *         gradients are incompatible, or state contains non-finite data.
+     */
+    [[nodiscard]] AdamSnapshot snapshot() const;
+
+    /**
+     * @brief Replace moments and step count as one validated transaction.
+     *
+     * @details Checks schema, optimiser hyperparameters, stable parameter
+     * IDs, shapes, finite moments and nonnegative second moments before
+     * committing. Never modifies Parameter values or gradients.
+     *
+     * @warning Default-generated positional IDs guard against count and
+     * shape mismatches but not permutation of equal-shaped parameters.
+     * Supply explicit stable unique IDs for persistent checkpoints.
+     */
+    void restore(const AdamSnapshot& snapshot);
+
     /** @return Number of successful optimisation steps. */
     std::size_t step_count() const noexcept;
 
@@ -92,6 +136,7 @@ private:
     };
 
     std::vector<Parameter*> parameters_;
+    std::vector<std::string> parameter_ids_;
     std::vector<State> states_;
 
     double learning_rate_;

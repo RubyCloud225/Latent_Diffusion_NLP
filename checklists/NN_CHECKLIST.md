@@ -123,17 +123,18 @@ gradient and optimiser tests.
 
 **Validation:** User reports clean-build full CPU CTest PASS (19/19, 21 November 2026) after hierarchical CMake refactor. `GradientController` and `nn_gradient_controller` are included in `latent_core` and the NN CTest label respectively. This establishes the Euclidean reference baseline for NN.1.07D, but not validation of the future metric-radial controller.
 
-#### NN.1.07D — Diagonal and block-metric gradient controller (NN tests passed; additional review pending)
+#### NN.1.07D — Diagonal and block-metric gradient controller (implementation complete; updated regression pending)
 
-**Evidence (21 November 2026):** User confirms NN suite PASS (12/12). Direct GitHub directory and file checks confirm `MetricGradientController.hpp`, `MetricGradientController.cpp`, `test_metric_gradient_controller.cpp`, and both hierarchical CMake registrations on `main`. Earlier 404 checks were misleading; no new push is required.
+**Evidence:** User confirmed NN 12/12 PASS on 21 November 2026 before the final numerical corrections. GitHub `main` contains the controller, tests and hierarchical CMake registrations. The post-norm and edge-case corrections below have since been committed but not yet executed in a confirmed build.
 
-- [x] Implement a fixed positive-definite equal-block-RMS metric with stable parameter registration, shape checks and versioned metric identifier.
-- [x] Implement metric-norm radial scaling using `sqrt(g^T M g)`, with FP64 scaled norm accumulation and non-finite checks; NN suite reports PASS (12/12).
-- [ ] Replace provisional `norm_after = max_norm` with independently measured post-clipping norm of staged gradients; review weighted underflow handling and boundary tests.
-- [ ] Explicitly document that radial clipping is **not generally the Euclidean closest-point projection onto an ellipsoid**.
-- [ ] Compare against the Euclidean baseline under identical parameter initialisation, batches, seeds and optimiser settings (NN.1.07F).
-- [ ] Run full CPU regression (20 expected); Doxygen, Release and Metal checks separately pending.
-- [ ] Keep approximate Fisher/natural-gradient methods out of scope until separately designed and empirically justified.
+- [x] Define fixed positive-definite equal-block-RMS diagonal metric `M_b = I/(B*d_b)`, stable parameter ownership/shape registration and metric version `equal_block_rms_v1`.
+- [x] Implement opt-in metric-norm radial scaling using `sqrt(g^T M g)` with scaled sum-of-squares accumulation and overflow checks.
+- [x] Measure actual staged post-clipping metric norm before the nonthrowing gradient commit; reject weighted-zero underflow, clipping-scale underflow, clipping-to-zero underflow and non-finite values without changing registered gradients.
+- [x] Extend independent NN test to cover measured post-norm, read-only measurement, no-op, validation failures, underflow, overflow, large finite inputs and atomic failure preservation.
+- [x] Document that metric-radial scaling is **not generally the Euclidean closest-point projection onto an ellipsoid**; Fisher/natural-gradient approximations remain out of scope.
+- [ ] Re-run `bash scripts/test.sh --nn`, `--p0` and `--all` against the revised source (12 NN and 20 full CPU tests expected); record actual output before test sign-off.
+- [ ] Perform fixed-seed Euclidean-vs-metric training comparison as part of NN.1.07F; baseline remains independent and unchanged.
+- [ ] Doxygen, Release and Metal validation remain separately unverified.
 
 #### NN.1.07E — Training execution lifecycle and checkpoints
 - [ ] Define batch/epoch/step state transitions: zero_grad, forward, objective, backward, gradient controller, optimiser, validation and checkpoint.

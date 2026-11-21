@@ -40,7 +40,7 @@ void same_snapshot(const AdamSnapshot& a, const AdamSnapshot& b)
           "Adam snapshot metadata mismatch");
 
     for (std::size_t k = 0; k < a.first_moments.size(); ++k) {
-        for (const auto* pair : {
+        for (const auto& pair : {
                 std::make_pair(&a.first_moments[k], &b.first_moments[k]),
                 std::make_pair(&a.second_moments[k], &b.second_moments[k])}) {
             const auto& x = *pair.first;

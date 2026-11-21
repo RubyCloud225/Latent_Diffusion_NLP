@@ -73,9 +73,13 @@ public:
 
     /** @return Mutable weight parameter. */
     Parameter& weights() noexcept;
+    /** @return Read-only weight parameter. */
+    const Parameter& weights() const noexcept;
 
     /** @return Mutable bias parameter. */
     Parameter& bias() noexcept;
+    /** @return Read-only bias parameter. */
+    const Parameter& bias() const noexcept;
 
     /** @return Number of input features. */
     std::size_t in_features() const noexcept;

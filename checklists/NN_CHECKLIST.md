@@ -125,14 +125,14 @@ gradient and optimiser tests.
 
 #### NN.1.07D — Diagonal and block-metric gradient controller (implementation complete; updated regression pending)
 
-**Evidence:** User confirmed NN 12/12 PASS on 21 November 2026 before the final numerical corrections. GitHub `main` contains the controller, tests and hierarchical CMake registrations. The post-norm and edge-case corrections below have since been committed but not yet executed in a confirmed build.
+**Evidence:** Earlier NN 12/12 PASS predates final numerical corrections. After corrections user ran Debug `--nn` (11/12 PASS) and `--all` (19/20 PASS) on 21 November 2026; only `nn_metric_gradient_controller` failed with `Expected rejection missing`. Root cause: the extreme-value test incorrectly expected an overflow for a single block RMS of `[DBL_MAX, DBL_MAX]`, which is mathematically finite. Corrected to assert successful finite clipping; also silenced an intentional `[[nodiscard]]` rejection test. Updated test awaits rerun.
 
 - [x] Define fixed positive-definite equal-block-RMS diagonal metric `M_b = I/(B*d_b)`, stable parameter ownership/shape registration and metric version `equal_block_rms_v1`.
 - [x] Implement opt-in metric-norm radial scaling using `sqrt(g^T M g)` with scaled sum-of-squares accumulation and overflow checks.
 - [x] Measure actual staged post-clipping metric norm before the nonthrowing gradient commit; reject weighted-zero underflow, clipping-scale underflow, clipping-to-zero underflow and non-finite values without changing registered gradients.
 - [x] Extend independent NN test to cover measured post-norm, read-only measurement, no-op, validation failures, underflow, overflow, large finite inputs and atomic failure preservation.
 - [x] Document that metric-radial scaling is **not generally the Euclidean closest-point projection onto an ellipsoid**; Fisher/natural-gradient approximations remain out of scope.
-- [ ] Re-run `bash scripts/test.sh --nn`, `--p0` and `--all` against the revised source (12 NN and 20 full CPU tests expected); record actual output before test sign-off.
+- [ ] Re-run `bash scripts/test.sh --nn` and `--all` after the corrected extreme-value test (12 NN and 20 full CPU tests expected); record actual output before final test sign-off.
 - [ ] Perform fixed-seed Euclidean-vs-metric training comparison as part of NN.1.07F; baseline remains independent and unchanged.
 - [ ] Doxygen, Release and Metal validation remain separately unverified.
 

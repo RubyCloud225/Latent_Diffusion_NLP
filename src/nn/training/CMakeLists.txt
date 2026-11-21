@@ -8,4 +8,5 @@ target_sources(latent_core PRIVATE
     ToyImageReconstructionTask.cpp
     GradientAccumulator.cpp
     TrainingExecutionGate.cpp
+    TrainingGradientControl.cpp
 )

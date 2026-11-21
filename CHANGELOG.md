@@ -12,12 +12,12 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
-### NN.1.07E.02 toy image reconstruction training task (21 November 2026; CPU verification pending)
+### NN.1.07E.02 toy image reconstruction training task (21 November 2026; CPU validated)
 
 - Implemented `ImageTrainingTask` interface and `ToyImageReconstructionTask` using existing FP64 Linear layer on flattened NCHW data, with unscaled image MSE and explicitly scaled analytical backward gradients.
 - Added const Linear parameter accessors to make held-out validation read-only and avoid corrupting the forward cache. A failing training microbatch restores prior weight/bias gradients; this does not yet provide full optimiser-window rollback.
 - Added `nn_image_reconstruction_task` CTest for numerical fixtures, accumulation, deterministic replay, read-only validation and exception handling; registered production and test sources in the directory CMake files.
-- Expected CTest registrations: 14 NN / 22 full CPU. User-local test results pending. No learned autoencoder, denoiser, image export or video training claimed.
+- User-provided Debug run confirms 14/14 NN tests and 22/22 full CPU tests passed, including `nn_image_reconstruction_task` in both. No learned autoencoder, denoiser, image export or video training claimed. Release, Metal and Doxygen verification remain separate.
 
 
 ### NN.1.07E.01 deterministic image data foundation (21 November 2026; CPU validated)

@@ -19,6 +19,7 @@ add_nn_test(test_initialisation test_initialisation.cpp nn_initialisation)
 add_nn_test(test_metric_gradient_controller test_metric_gradient_controller.cpp nn_metric_gradient_controller)
 add_nn_test(test_image_dataset test_image_dataset.cpp nn_image_dataset)
 add_nn_test(test_image_reconstruction_task test_image_reconstruction_task.cpp nn_image_reconstruction_task)
+add_nn_test(test_gradient_accumulator test_gradient_accumulator.cpp nn_gradient_accumulator)
 
 # NN.1.07C was committed as source/test files but not previously registered.
 add_nn_test(test_gradient_controller test_gradient_controller.cpp nn_gradient_controller)

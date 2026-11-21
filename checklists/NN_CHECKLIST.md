@@ -148,13 +148,13 @@ gradient and optimiser tests.
 - [x] **Validation gate:** User confirms full CPU regression **21/21 PASS** on 21 November 2026, including registered `nn_image_dataset` and the 13 NN-labelled tests. Individual suite output and Release/Metal/Doxygen were not separately supplied.
 - [ ] **Future real-data work:** image file decoding, cryptographic content manifests, on-disk split verification and optional augmentation are outside E.01's in-memory reference scope.
 
-##### NN.1.07E.02 — Task interface and toy image-reconstruction fixture (implementation committed; CPU tests pending)
+##### NN.1.07E.02 — Task interface and toy image-reconstruction fixture (CPU validated, 21 November 2026)
 - [x] Add Doxygen-documented `ImageTrainingTask` interface: task ID, stable registered Parameters, unscaled microbatch mean loss with explicit gradient scaling, read-only held-out validation and cache-reset hook.
 - [x] Add `ToyImageReconstructionTask`: flatten validated NCHW into [N, C*H*W], train an existing FP64 `Linear` layer with image-element mean-squared error, accumulate scaled analytical gradients and report unscaled loss. This is a linear reconstruction **fixture**, not an autoencoder or generative image model.
 - [x] Provide non-mutating held-out validation that reads parameter values through newly added const `Linear` accessors without changing training forward-cache or gradients.
 - [x] Add guarded microbatch exception path: snapshot gradients before backward, restore both weight and bias gradients when a failure occurs. This is not yet a whole-window / optimiser transaction.
 - [x] Add independent `nn_image_reconstruction_task` CTest: one-pixel analytical weight/bias known answer, multi-image/multi-feature loss/gradient, accumulating scales, deterministic replay, validation immutability and invalid config/failure atomicity.
-- [ ] **Validation gate:** User runs `bash scripts/test.sh --nn` and `bash scripts/test.sh --all` on these commits. Expected registrations **14 NN and 22 full CPU**, not yet confirmed.
+- [x] **Validation gate:** User-supplied Debug test log confirms `bash scripts/test.sh --nn` **14/14 PASS** and `bash scripts/test.sh --all` **22/22 PASS** (21 November 2026). `nn_image_reconstruction_task` passed in both runs; no build warnings reported.
 - [ ] Actual image autoencoder architecture, learned encoder/decoder and visible reconstructions remain in AE track.
 
 ##### NN.1.07E.03 — Correct accumulation

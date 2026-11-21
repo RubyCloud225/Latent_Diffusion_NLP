@@ -12,11 +12,11 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
-### NN.1.07E.06 versioned AdamFP64 state snapshot (21 November 2026; CPU validation pending)
+### NN.1.07E.06 versioned AdamFP64 state snapshot (21 November 2026; CPU validated)
 
 - Added `AdamSnapshot` v1 with exact FP64 hyperparameters, successful step counter, stable parameter IDs and ordered first/second moment Tensors, preserving existing Adam constructor call sites.
 - Implemented validated `AdamFP64::snapshot()` and all-or-nothing `restore()` with schema/configuration/shape/ID/finite/nonnegative-second-moment validation. Restore does not modify model parameter values or accumulated gradients.
-- Registered `nn_adam_snapshot` CTest with 10 uninterrupted versus 5+restore+5 optimiser replay, moment/weight parity and corruption/compatibility rejection. Expected **18 NN / 26 full CPU** tests; user-local results pending. No checkpoint file codec or whole-session restart claimed yet.
+- Registered `nn_adam_snapshot` CTest with 10 uninterrupted versus 5+restore+5 optimiser replay, moment/weight parity and corruption/compatibility rejection. User confirms **26/26 full CPU PASS**, including 18 NN-labelled CTests. Detailed per-test logs not supplied; Release, Metal and Doxygen remain unverified. No checkpoint file codec or whole-session restart claimed yet.
 
 
 ### NN.1.07E.05 common gradient control and diagnostics (21 November 2026; CPU validated)

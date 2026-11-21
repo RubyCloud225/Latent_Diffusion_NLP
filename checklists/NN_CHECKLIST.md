@@ -184,11 +184,11 @@ gradient and optimiser tests.
 - [x] **Validation gate:** User confirms full CPU suite **25/25 PASS** on 21 November 2026, including registered `nn_training_gradient_control` (17 NN-labelled tests registered). The detailed CTest output and separate Release/Metal/Doxygen checks were not supplied.
 - [ ] **Deferred to E.07:** full rollback when an Adam proposal fails *after successful gradient control*; cross-component step commit and cumulative metrics must be tied to the training session, not claimed by E.05.
 
-##### NN.1.07E.06 — AdamFP64 serialisable state (implementation committed; CPU validation pending)
+##### NN.1.07E.06 — AdamFP64 serialisable state (CPU validated, 21 November 2026)
 - [x] Add Doxygen-documented `AdamSnapshot` v1 with successful step count, Adam learning rate/beta1/beta2/epsilon, stable ordered parameter IDs and both first/second FP64 moment tensors. Existing 5-argument AdamFP64 construction remains compatible; optional explicit parameter IDs protect equal-shaped tensors from accidental reorder.
 - [x] Add `AdamFP64::snapshot()` and transactional `restore()`: validate version, exact hyperparameter identity, ordered ID identity, tensor count/shape, finite model state/moments, nonnegative second moments, and then commit staged moment tensors and step count via noexcept move. Model parameter values and gradients remain unchanged by restore.
 - [x] Add independent `nn_adam_snapshot` CTest: 10 continuous steps vs 5 + in-memory state/model-value restore + 5 steps, exact FP64 parameter/moment parity, invalid schema/hyperparameters/IDs/order/moments/shapes and rejection without mutation.
-- [ ] **Validation gate:** user runs `bash scripts/test.sh --nn` and `bash scripts/test.sh --all`. Expected **18 NN and 26 full CPU** CTests; results not yet received.
+- [x] **Validation gate:** User confirms full CPU regression **26/26 PASS** (21 November 2026), including registered `nn_adam_snapshot` (18 NN-labelled CTests). Detailed per-test log and separate Release/Metal/Doxygen checks not supplied.
 - [ ] **E.08 boundary:** snapshot is an in-memory state object, not a file codec. Its stored ordered IDs must be supplied by the training session and checked against model state. Full checkpoint payload, integrity, atomic disk writes, RNG and dataset cursor remain E.08.
 - [ ] **E.07 boundary:** complete transactional rollback if a later optimiser update follows clipping or accumulation remains a separate training-session responsibility.
 

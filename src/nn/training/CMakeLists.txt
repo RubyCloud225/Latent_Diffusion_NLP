@@ -4,4 +4,5 @@ target_sources(latent_core PRIVATE
     Initialisation.cpp
     GradientController.cpp
     MetricGradientController.cpp
+    ImageDataset.cpp
 )

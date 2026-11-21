@@ -12,10 +12,11 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
-### NN.1.07D local NN test report (21 November 2026, source verification pending)
+### NN.1.07D metric-gradient controller (21 November 2026, NN tests validated)
 
 - User reports NN suite PASS (12/12), compared with 11 NN tests before the block-metric controller.
-- New metric controller header/source/test and CMake registration were not visible on the GitHub default branch when checked. Local results are recorded without claiming repository sign-off, full CPU regression, Doxygen, Release or Metal verification.
+- Direct GitHub inspection confirms MetricGradientController header/source/test and source/test CMake registration on main; prior 404 lookups were misleading. No additional push required.
+- Implementation retains provisional post-clipping norm reporting; measured staged-gradient norm refinement and numerical edge-case review remain pending. Full CPU, Doxygen, Release and Metal checks not confirmed.
 
 
 ### BUILD-01 Hierarchical CMake refactor and NN.1.07C baseline (21 November 2026, CPU validated)

@@ -174,11 +174,15 @@ gradient and optimiser tests.
 - [x] **Validation gate:** User confirms full CPU regression **24/24 PASS**, including the new `nn_training_execution_gate` (16 NN CTest registrations). Separate Release, Metal and Doxygen verification remain unconfirmed.
 - [ ] **Follow-up:** Executable policy checkpoint format/version, arbitrary image model support and full training-session execution belong to E.07–E.08. This E.04 gate is an immutable compatibility record, **not** a claim that a full runtime is available.
 
-##### NN.1.07E.05 — Gradient control and metrics
-- [ ] Route `None`, `EuclideanGlobal` and `MetricRadial` via the existing NN.1.07C/D controllers using stable Parameter registration.
-- [ ] Record pre/post norms, clip scale, clipping boolean, controller/metric version, cumulative clipping and rejected-step counts.
-- [ ] Audit Euclidean `norm_after` semantics (currently threshold-assigned) and clearly distinguish diagnostic measurements from requested bounds.
-- [ ] Ensure clipping mutation cannot persist when a later Adam proposal fails.
+##### NN.1.07E.05 — Gradient control and metrics (implemented; CPU validation pending)
+- [x] Add Doxygen-documented `TrainingGradientControl` with stable, distinct non-owning parameter registration and mode selection: `None`, `EuclideanGlobal`, and `MetricRadial` with `equal_block_rms_v1`.
+- [x] Reuse existing NN.1.07C/D implementations unchanged. A unified `TrainingGradientMetrics` records mode, norm kind, versioned metric ID, pre/post norms, applied scale, clipping flag, parameter-block count and scalar-element count.
+- [x] Measure **actual final** post-clipping norm by rereading gradients after application, including Euclidean mode where the underlying NN.1.07C `GradientReport::norm_after` currently reports the target threshold. The `None` mode reports unchanged Euclidean L2 norm.
+- [x] Count successful controller applications, clipped applications and rejected applications separately; these are not optimiser commits.
+- [x] Stage previous gradients and restore on control/post-measure failure, with noexcept Tensor move verification. Stable registration validates shapes and finite model/gradient values.
+- [x] Add independent `nn_training_gradient_control` CTest for the three modes, mathematical fixtures, actual post-norm, controller metadata, invalid configurations, non-finite gradients, destructive underflow rejection and counter behaviour.
+- [ ] **Validation gate:** user runs `bash scripts/test.sh --nn` and `bash scripts/test.sh --all`; expected **17 NN and 25 full CPU** tests. Results not yet received.
+- [ ] **Deferred to E.07:** full rollback when an Adam proposal fails *after successful gradient control*; cross-component step commit and cumulative metrics must be tied to the training session, not claimed by E.05.
 
 ##### NN.1.07E.06 — AdamFP64 serialisable state
 - [ ] Add versioned, Doxygen-documented Adam snapshot containing both moment tensors, step count and hyperparameter compatibility fields.

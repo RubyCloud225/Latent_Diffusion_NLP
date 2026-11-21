@@ -166,12 +166,12 @@ gradient and optimiser tests.
 - [x] **Validation gate:** User confirms full CPU regression **23/23 PASS** (21 November 2026), including registered `nn_gradient_accumulator` and 15 NN-labelled tests. The exact per-test log and separate Release/Metal/Doxygen validation were not supplied.
 - [ ] Broader task-owned RNG, external side effects and cross-component Adam transaction are deferred to E.07; E.03 rollback covers registered parameters and deterministic in-memory batch source only.
 
-##### NN.1.07E.04 — TrainingPolicy/runtime execution gate (implemented; CPU validation pending)
+##### NN.1.07E.04 — TrainingPolicy/runtime execution gate (CPU validated, 21 November 2026)
 - [x] Preserve policy-v1 `TrainingPolicy::validate()`, `serialize()` and `parse()` disabled-only contract and canonical field format. Enabled requests are validated by the new separate `TrainingExecutionGate`; the gate performs **no** execution or optimiser operation.
 - [x] Require `execution_enabled=true`, otherwise reject; validate every pre-existing numeric, enum, policy metadata and metric constraint through a disabled clone of the same policy before authorising.
 - [x] Match requested manifest fingerprint to actual `ImageDataset`, require canonical `train`/`validation`/`test` roles, validate supported `ReconstructionMSE` objective, matching `ToyImageReconstructionTask` class/task ID and `[C,H,W]` shape, and ensure non-null distinct finite registered parameters.
 - [x] Add Doxygen contracts and `nn_training_execution_gate` CTest covering enabled/disabled policy, unchanged policy-v1 roundtrip, supported gradient modes, dataset/split/task/shape mismatches, invalid hyperparameters and non-finite parameters.
-- [ ] **Validation gate:** Run `bash scripts/test.sh --nn` and `bash scripts/test.sh --all`; expected **16 NN and 24 full CPU** tests. Do not sign off without user-reported results.
+- [x] **Validation gate:** User confirms full CPU regression **24/24 PASS**, including the new `nn_training_execution_gate` (16 NN CTest registrations). Separate Release, Metal and Doxygen verification remain unconfirmed.
 - [ ] **Follow-up:** Executable policy checkpoint format/version, arbitrary image model support and full training-session execution belong to E.07–E.08. This E.04 gate is an immutable compatibility record, **not** a claim that a full runtime is available.
 
 ##### NN.1.07E.05 — Gradient control and metrics

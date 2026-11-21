@@ -1,0 +1,4 @@
+add_executable(test_clifford_projection test_clifford_projection.cpp)
+target_link_libraries(test_clifford_projection PRIVATE latent_experimental)
+add_test(NAME clifford_projection COMMAND test_clifford_projection)
+set_tests_properties(clifford_projection PROPERTIES LABELS "experimental")

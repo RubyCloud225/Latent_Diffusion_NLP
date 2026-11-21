@@ -44,6 +44,10 @@ public:
     /** @return Number of samples in the requested split. */
     [[nodiscard]] std::size_t split_size(ImageSplit split) const noexcept;
 
+    /** @return Validated reference image shape [C,H,W]. */
+    [[nodiscard]] const latent::core::Tensor::Shape&
+    image_shape() const noexcept;
+
     /**
      * @brief Create a batch source with explicit fixed seed and size.
      * @warning The dataset must outlive the returned source.

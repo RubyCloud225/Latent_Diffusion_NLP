@@ -1,6 +1,5 @@
 #pragma once
 
-#include "latent/nn/GradientController.hpp"
 #include "latent/nn/training/GradientController.hpp"
 #include "latent/nn/training/MetricGradientController.hpp"
 #include "latent/nn/training/TrainingPolicy.hpp"

@@ -28,6 +28,10 @@ No image model, loader, VAE, learned denoiser, text-conditioning, guidance, GPU 
 - `GradientController::apply(parameters)` and `MetricGradientController::apply()` mutate accumulated gradients. Any transactional session must prevent a controller mutation from surviving a failed optimiser step.
 - Image model architecture (encoder, latent channels, resolution, decoder) remains in the AE and denoiser tracks; NN.1.07E orchestrates it, without inventing production image layers.
 
+### NN.1.07E.04 runtime policy authorisation (implemented, CPU validation pending)
+
+`TrainingPolicy` schema v1 remains immutable and intentionally disabled-only: `validate()`, `serialize()` and `parse()` reject `execution_enabled=true` exactly as specified by NN.1.07A. A separate `TrainingExecutionGate` copies the explicitly enabled request, validates all pre-existing policy fields through a disabled clone and verifies it against the actual `ImageDataset` manifest, canonical split roles, `ToyImageReconstructionTask` identity, image shape and parameter registration. The gate does not run training, create Adam state, serialise an enabled policy or mutate model state. Full-session checkpoint encoding and authorised execution belong to later E tickets; do not misrepresent the gate as a production trainer.
+
 ## 3. Architecture
 
 ```mermaid

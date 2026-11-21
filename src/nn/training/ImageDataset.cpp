@@ -180,6 +180,12 @@ const std::string& ImageDataset::manifest_id() const noexcept
     return manifest_id_;
 }
 
+const latent::core::Tensor::Shape&
+ImageDataset::image_shape() const noexcept
+{
+    return samples_.front().image.shape();
+}
+
 std::size_t ImageDataset::split_size(ImageSplit split) const noexcept
 {
     switch (split) {

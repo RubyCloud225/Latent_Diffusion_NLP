@@ -238,7 +238,7 @@ void test_weighted_underflow_atomic()
     MetricGradientController controller({&first}, 1.0);
 
     rejects<std::underflow_error>([&] {
-        controller.measure();
+        (void)controller.measure();
     });
 
     rejects<std::underflow_error>([&] {
@@ -289,7 +289,7 @@ void test_large_finite_gradient()
     near(first.gradients()[1], 1.0);
 }
 
-void test_overflow_atomic()
+void test_maximum_finite_gradient()
 {
     Parameter first({2});
     const double maximum =
@@ -299,16 +299,28 @@ void test_overflow_atomic()
 
     MetricGradientController controller({&first}, 1.0);
 
-    rejects<std::overflow_error>([&] {
-        controller.apply();
-    });
-
-    if (first.gradients()[0] != maximum ||
-        first.gradients()[1] != maximum) {
+    // For one block containing equal elements, the metric is
+    // RMS, not an unnormalised Euclidean norm. Hence the
+    // metric norm of [DBL_MAX, DBL_MAX] is representable.
+    const auto before = controller.measure();
+    if (!std::isfinite(before.norm_before) ||
+        before.norm_before <= 0.0) {
         throw std::runtime_error(
-            "Overflow changed gradients"
+            "Finite RMS metric norm was rejected"
         );
     }
+
+    const auto after = controller.apply();
+    if (!after.clipped ||
+        !std::isfinite(after.norm_after)) {
+        throw std::runtime_error(
+            "Maximum finite gradient was not clipped"
+        );
+    }
+
+    near(after.norm_after, controller.measure().norm_before);
+    near(first.gradients()[0], 1.0);
+    near(first.gradients()[1], 1.0);
 }
 
 void test_invalid_configuration()
@@ -351,7 +363,7 @@ int main()
         test_weighted_underflow_atomic();
         test_clipping_underflow_atomic();
         test_large_finite_gradient();
-        test_overflow_atomic();
+        test_maximum_finite_gradient();
         test_invalid_configuration();
 
         std::cout

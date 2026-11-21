@@ -112,11 +112,16 @@ gradient and optimiser tests.
 
 **Validation:** User reports full CPU regression PASS (18/18, 20 November 2026). Header `latent/nn/training/Initialisation.hpp`, implementation `src/nn/training/Initialisation.cpp`, test `tests/nn/test_initialisation.cpp`, and CMake registration were verified present on the GitHub default branch. NN.1.07B core implementation is CPU validated; checkpoint integration and the CMake cleanup remain open. The full suite was user-run; no independent CI evidence was supplied.
 
-#### NN.1.07C — Gradient geometry interface and Euclidean reference
-- [ ] Implement a gradient measurement and constraint interface for registered `Parameter` tensors; measure the global norm without altering gradients.
-- [ ] Implement FP64 Euclidean global-norm radial clipping as an opt-in baseline, with zero-norm and non-finite safeguards.
-- [ ] Validate direction preservation, threshold boundary, no-op behaviour, deterministic results and no partial mutation on error.
-- [ ] Log pre/post gradient norms, clipping scale, clipping frequency and rejected steps.
+#### NN.1.07C — Gradient geometry interface and Euclidean reference (CPU validated 21 November 2026)
+- [x] Implement read-only FP64 global L2 gradient measurement for registered `Parameter` tensors in `GradientController`.
+- [x] Implement opt-in global-norm radial clipping with zero-norm, non-finite, invalid registration and numerical overflow safeguards.
+- [x] Add `nn_gradient_controller` known-answer, multi-parameter, threshold, read-only measurement, failure preservation and large-value tests; user confirms full CPU regression PASS (19/19).
+- [x] Expose per-application diagnostics including pre/post norm, scale, clipped flag, parameter count and block count.
+- [ ] Integrate session-level clipping frequency and rejected-step logging with the future training lifecycle (NN.1.07E).
+- [ ] Review/refine post-clipping measured norm and stage/commit exception guarantees before treating the controller as production-atomic beyond the covered tests.
+- [ ] Verify Doxygen generation, Release and Metal separately.
+
+**Validation:** User reports clean-build full CPU CTest PASS (19/19, 21 November 2026) after hierarchical CMake refactor. `GradientController` and `nn_gradient_controller` are included in `latent_core` and the NN CTest label respectively. This establishes the Euclidean reference baseline for NN.1.07D, but not validation of the future metric-radial controller.
 
 #### NN.1.07D — Diagonal and block-metric gradient controller
 - [ ] Define and validate positive-definite diagonal/block metrics, parameter ownership/order, weights and metric versioning.

@@ -90,6 +90,9 @@ public:
     [[nodiscard]] std::size_t epoch() const noexcept;
     [[nodiscard]] std::size_t position() const noexcept;
 
+    /** @return Configured maximum images per batch. */
+    [[nodiscard]] std::size_t batch_size() const noexcept { return batch_size_; }
+
 private:
     friend class ImageDataset;
     ImageBatchSource(const ImageDataset& dataset, ImageSplit split,

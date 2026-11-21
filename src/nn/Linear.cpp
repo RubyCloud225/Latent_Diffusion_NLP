@@ -194,7 +194,17 @@ Parameter& Linear::weights() noexcept
     return weights_;
 }
 
+const Parameter& Linear::weights() const noexcept
+{
+    return weights_;
+}
+
 Parameter& Linear::bias() noexcept
+{
+    return bias_;
+}
+
+const Parameter& Linear::bias() const noexcept
 {
     return bias_;
 }

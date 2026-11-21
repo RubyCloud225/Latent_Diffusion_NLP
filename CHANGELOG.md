@@ -12,6 +12,13 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
+### NN.1.07E image-first training lifecycle design (21 November 2026; documentation only)
+
+- Added `docs/IMAGE_TRAINING_LIFECYCLE_NN_1_07E.md` specifying deterministic image microbatch training, sample-weighted accumulation, transaction/failure boundaries, dataset provenance, versioned checkpoint integrity and full Adam/RNG/cursor resume.
+- Expanded `checklists/NN_CHECKLIST.md` into twelve implementable E.01–E.12 subtickets, with explicit evidence gates and image-first handoff; video training deferred due to temporal and resource demands.
+- Documented current runtime blockers: TrainingPolicy v1 validation rejects execution and AdamFP64 provides no moment snapshot/restore contract. No executable trainer, checkpoints or image generator claimed.
+
+
 ### NN.1.07D metric-gradient controller numerical finalisation (21 November 2026, CPU validated)
 
 - User reports NN suite PASS (12/12), compared with 11 NN tests before the block-metric controller.

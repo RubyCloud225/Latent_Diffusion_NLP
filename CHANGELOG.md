@@ -12,11 +12,14 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
-### NN.1.07D metric-gradient controller (21 November 2026, NN tests validated)
+### NN.1.07D metric-gradient controller numerical finalisation (21 November 2026, revalidation pending)
 
 - User reports NN suite PASS (12/12), compared with 11 NN tests before the block-metric controller.
 - Direct GitHub inspection confirms MetricGradientController header/source/test and source/test CMake registration on main; prior 404 lookups were misleading. No additional push required.
-- Implementation retains provisional post-clipping norm reporting; measured staged-gradient norm refinement and numerical edge-case review remain pending. Full CPU, Doxygen, Release and Metal checks not confirmed.
+- Replaced provisional post-clipping threshold reporting with independently measured norm on staged replacement gradients, before nonthrowing commit.
+- Reject destructive gradient-weighting and clipping underflow, invalid clipping scale and unexpected metric-norm increase without partial mutation.
+- Expanded NN tests for diagnostics, underflow, overflow, deterministic read-only measurement, no-op and failure preservation; documented radial metric semantics and out-of-scope Fisher methods.
+- The earlier user-reported NN 12/12 PASS predates these final numerical changes: repeat the NN and complete CPU regression (20 expected) before final validation. Doxygen, Release and Metal checks remain unconfirmed; fixed-seed metric comparison belongs to NN.1.07F.
 
 
 ### BUILD-01 Hierarchical CMake refactor and NN.1.07C baseline (21 November 2026, CPU validated)

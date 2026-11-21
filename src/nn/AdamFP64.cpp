@@ -2,6 +2,8 @@
 #include "latent/nn/AdamFP64.hpp"
 
 #include <cmath>
+#include <string>
+#include <type_traits>
 #include <limits>
 #include <stdexcept>
 #include <unordered_set>
@@ -50,9 +52,11 @@ AdamFP64::AdamFP64(
     double learning_rate,
     double beta1,
     double beta2,
-    double epsilon
+    double epsilon,
+    std::vector<std::string> parameter_ids
 )
     : parameters_(std::move(parameters)),
+      parameter_ids_(std::move(parameter_ids)),
       learning_rate_(learning_rate),
       beta1_(beta1),
       beta2_(beta2),
@@ -75,6 +79,31 @@ AdamFP64::AdamFP64(
         throw std::invalid_argument(
             "AdamFP64 requires at least one parameter"
         );
+    }
+
+    // Existing call sites may omit IDs. Those instances remain
+    // usable in memory but explicit names are required for reliable
+    // cross-process identity across equal-shaped parameter blocks.
+    if (parameter_ids_.empty()) {
+        parameter_ids_.reserve(parameters_.size());
+        for (std::size_t i = 0; i < parameters_.size(); ++i) {
+            parameter_ids_.push_back("position:" + std::to_string(i));
+        }
+    }
+    if (parameter_ids_.size() != parameters_.size()) {
+        throw std::invalid_argument("AdamFP64 parameter ID count mismatch");
+    }
+
+    std::unordered_set<std::string> id_seen;
+    for (const auto& id : parameter_ids_) {
+        if (id.empty() || !id_seen.insert(id).second) {
+            throw std::invalid_argument("AdamFP64 requires unique nonempty parameter IDs");
+        }
+        for (unsigned char c : id) {
+            if (c < 32 || c == 127) {
+                throw std::invalid_argument("AdamFP64 invalid parameter ID");
+            }
+        }
     }
 
     std::unordered_set<Parameter*> seen;
@@ -248,6 +277,93 @@ void AdamFP64::reset()
     }
 
     step_ = 0;
+}
+
+AdamSnapshot AdamFP64::snapshot() const
+{
+    AdamSnapshot result;
+    result.step_count = step_;
+    result.learning_rate = learning_rate_;
+    result.beta1 = beta1_;
+    result.beta2 = beta2_;
+    result.epsilon = epsilon_;
+    result.parameter_ids = parameter_ids_;
+    result.first_moments.reserve(states_.size());
+    result.second_moments.reserve(states_.size());
+
+    for (std::size_t i = 0; i < states_.size(); ++i) {
+        const auto& values = parameters_[i]->values();
+        const auto& gradients = parameters_[i]->gradients();
+        const auto& state = states_[i];
+        if (!values.same_shape(gradients) ||
+            !values.same_shape(state.first) ||
+            !values.same_shape(state.second) ||
+            !values.all_finite() || !gradients.all_finite() ||
+            !state.first.all_finite() || !state.second.all_finite()) {
+            throw std::invalid_argument("AdamFP64 snapshot invalid state");
+        }
+        for (std::size_t j = 0; j < state.second.size(); ++j) {
+            if (state.second[j] < 0.0) {
+                throw std::invalid_argument("AdamFP64 snapshot negative second moment");
+            }
+        }
+        result.first_moments.push_back(state.first);
+        result.second_moments.push_back(state.second);
+    }
+    return result;
+}
+
+void AdamFP64::restore(const AdamSnapshot& snapshot)
+{
+    if (snapshot.version != AdamSnapshot::schema_version) {
+        throw std::invalid_argument("AdamFP64 unsupported snapshot schema");
+    }
+    if (snapshot.learning_rate != learning_rate_ ||
+        snapshot.beta1 != beta1_ ||
+        snapshot.beta2 != beta2_ ||
+        snapshot.epsilon != epsilon_) {
+        throw std::invalid_argument("AdamFP64 snapshot hyperparameter mismatch");
+    }
+    if (snapshot.parameter_ids != parameter_ids_ ||
+        snapshot.first_moments.size() != states_.size() ||
+        snapshot.second_moments.size() != states_.size()) {
+        throw std::invalid_argument("AdamFP64 snapshot parameter identity mismatch");
+    }
+
+    // Prepare complete state using deep copies. No persistent mutation
+    // takes place until the final noexcept vector move assignment.
+    std::vector<State> proposed;
+    proposed.reserve(states_.size());
+    for (std::size_t i = 0; i < states_.size(); ++i) {
+        const auto& parameter = *parameters_[i];
+        const auto& first = snapshot.first_moments[i];
+        const auto& second = snapshot.second_moments[i];
+        if (!parameter.values().same_shape(parameter.gradients()) ||
+            !parameter.values().same_shape(states_[i].first) ||
+            !parameter.values().same_shape(states_[i].second) ||
+            !parameter.values().same_shape(first) ||
+            !parameter.values().same_shape(second) ||
+            !parameter.values().all_finite() ||
+            !parameter.gradients().all_finite() ||
+            !first.all_finite() || !second.all_finite()) {
+            throw std::invalid_argument("AdamFP64 snapshot tensor shape or finiteness mismatch");
+        }
+        for (std::size_t j = 0; j < second.size(); ++j) {
+            if (second[j] < 0.0) {
+                throw std::invalid_argument("AdamFP64 negative second moment");
+            }
+        }
+
+        State next(first.shape());
+        next.first = first;
+        next.second = second;
+        proposed.push_back(std::move(next));
+    }
+    static_assert(std::is_nothrow_move_assignable<
+                  std::vector<State>>::value,
+                  "AdamFP64 restore must commit state without throwing");
+    states_ = std::move(proposed);
+    step_ = snapshot.step_count;
 }
 
 std::size_t AdamFP64::step_count() const noexcept

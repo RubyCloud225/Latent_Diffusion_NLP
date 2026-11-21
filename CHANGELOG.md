@@ -12,13 +12,13 @@ Format is based broadly on Keep a Changelog principles, while version numbers re
 
 ## [Unreleased]
 
-### BUILD-01 Hierarchical CMake refactor (21 November 2026, awaiting local build)
+### BUILD-01 Hierarchical CMake refactor and NN.1.07C baseline (21 November 2026, CPU validated)
 
 - Reduced root `CMakeLists.txt` to project-wide C++17, CTest, documentation and optional Metal configuration with delegation to `src/` and `tests/`.
 - Added directory-owned `CMakeLists.txt` files for core, diffusion, NN/training, experimental sources, tests and optional Metal fixtures; preserved existing library names and all prior CTest names/labels.
-- Included the already committed NN.1.07C `GradientController.cpp` in `latent_core` and registered `nn_gradient_controller` with the `nn` label (expected 19 CPU tests; not yet run).
+- Included NN.1.07C `GradientController.cpp` in `latent_core` and registered `nn_gradient_controller` under `nn`, covering global Euclidean FP64 gradient measurement/clipping, threshold and edge-case cases.
 - Removed duplicate compilation of `Initialisation.cpp` from the `test_initialisation` target.
-- Static file verification completed on GitHub. No clean configure/build, full CPU run, Doxygen or Apple Metal build verified; local test evidence required.
+- User reports clean-build full CPU regression PASS (19/19) following refactor; confirms BUILD-01 CPU compatibility and NN.1.07C controller test integration. Doxygen, Release and Apple Metal remain separately unverified. NN.1.07C session telemetry and extended atomicity/post-norm checks remain pending.
 
 
 ### NN.1.07B deterministic initialisation (20 November 2026, CPU validated)
